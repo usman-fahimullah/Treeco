@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="en" data-era="modern" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tree Co. — Your Pokémon Companion</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+
+  <style>
+    @font-face { font-family: 'MomoTrustDisplay'; src: url('fonts/MomoTrustDisplay-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('fonts/MomoTrustSans-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('fonts/MomoTrustSans-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('fonts/MomoTrustSans-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+    @font-face { font-family: 'GeistPixel-Square'; src: url('fonts/GeistPixel-Square.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'GeistPixel-Line'; src: url('fonts/GeistPixel-Line.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'GeistPixel-Circle'; src: url('fonts/GeistPixel-Circle.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'GeistPixel-Grid'; src: url('fonts/GeistPixel-Grid.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'GeistPixel-Triangle'; src: url('fonts/GeistPixel-Triangle.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'GeistMono'; src: url('fonts/GeistMono-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+
+    /* ── MODERN LIGHT (default) ── */
+    :root, [data-era="modern"][data-theme="light"] {
+      --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
+      --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
+      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent-on: #fff;
+      --r: 16px; --r-lg: 24px; --r-pill: 100px; --bw: 0px;
+      --display: 'MomoTrustDisplay', Georgia, serif;
+      --body: 'MomoTrustSans', -apple-system, sans-serif;
+      --mono: 'GeistMono', monospace;
+      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.06);
+      --scanline: none;
+    }
+    /* ── MODERN DARK ── */
+    [data-era="modern"][data-theme="dark"] {
+      --bg: #080C0A; --surface: #121B17; --border: #182320;
+      --ink: #E6EDE9; --ink2: #8A9990; --ink3: #586660;
+      --accent: #34D399; --accent-hi: #6EE7B7; --accent-lo: rgba(52,211,153,0.12); --accent-on: #080C0A;
+      --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 8px 32px rgba(0,0,0,0.2);
+    }
+    /* ── GAME BOY (DMG) ── */
+    [data-era="gameboy"][data-theme="light"] {
+      --bg: #C5D080; --surface: #D8E494; --border: #8BAC0F;
+      --ink: #0F380F; --ink2: #306230; --ink3: #306230;
+      --accent: #0F380F; --accent-hi: #306230; --accent-lo: rgba(15,56,15,0.12); --accent-on: #C5D080;
+      --r: 0px; --r-lg: 0px; --r-pill: 0px; --bw: 2px;
+      --display: 'GeistPixel-Square', monospace; --body: 'GeistPixel-Square', monospace;
+      --shadow: none; --scanline: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(15,56,15,0.06) 2px, rgba(15,56,15,0.06) 4px);
+    }
+    [data-era="gameboy"][data-theme="dark"] {
+      --bg: #1A2310; --surface: #2E3B1C; --border: #3D4E28;
+      --ink: #9BBC0F; --ink2: #7A9A0E; --ink3: #5A7A0A;
+      --accent: #9BBC0F; --accent-hi: #C5D080; --accent-lo: rgba(155,188,15,0.15); --accent-on: #1A2310;
+      --r: 0px; --r-lg: 0px; --r-pill: 0px; --bw: 2px;
+      --display: 'GeistPixel-Square', monospace; --body: 'GeistPixel-Square', monospace;
+      --shadow: none; --scanline: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(155,188,15,0.04) 2px, rgba(155,188,15,0.04) 4px);
+    }
+    /* ── GAME BOY POCKET ── */
+    [data-era="pocket"][data-theme="light"] {
+      --bg: #C7CDAD; --surface: #D4DAB8; --border: #A8B090;
+      --ink: #2A2E24; --ink2: #4A5040; --ink3: #6A7060;
+      --accent: #2A2E24; --accent-hi: #4A5040; --accent-lo: rgba(42,46,36,0.1); --accent-on: #D4DAB8;
+      --r: 0px; --r-lg: 2px; --r-pill: 2px; --bw: 1.5px;
+      --display: 'GeistPixel-Line', monospace; --body: 'GeistPixel-Line', monospace;
+      --shadow: none; --scanline: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(42,46,36,0.04) 2px, rgba(42,46,36,0.04) 4px);
+    }
+    [data-era="pocket"][data-theme="dark"] {
+      --bg: #1C1C18; --surface: #282824; --border: #363630;
+      --ink: #C7CDAD; --ink2: #A8B090; --ink3: #8A9078;
+      --accent: #C7CDAD; --accent-hi: #D4DAB8; --accent-lo: rgba(199,205,173,0.12); --accent-on: #1C1C18;
+      --r: 0px; --r-lg: 2px; --r-pill: 2px; --bw: 1.5px;
+      --display: 'GeistPixel-Line', monospace; --body: 'GeistPixel-Line', monospace;
+      --shadow: none; --scanline: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(199,205,173,0.04) 2px, rgba(199,205,173,0.04) 4px);
+    }
+    /* ── GAME BOY COLOR ── */
+    [data-era="gbc"][data-theme="light"] {
+      --bg: #F5ECD7; --surface: #FFF5E1; --border: #E0D4B8;
+      --ink: #2A2218; --ink2: #5A4E3A; --ink3: #8A7E6A;
+      --accent: #8B4513; --accent-hi: #A0522D; --accent-lo: rgba(139,69,19,0.1); --accent-on: #FFF5E1;
+      --r: 3px; --r-lg: 8px; --r-pill: 10px; --bw: 1.5px;
+      --display: 'GeistPixel-Circle', monospace; --body: 'GeistPixel-Circle', monospace;
+      --shadow: none; --scanline: none;
+    }
+    [data-era="gbc"][data-theme="dark"] {
+      --bg: #1A1814; --surface: #252018; --border: #352E22;
+      --ink: #F5ECD7; --ink2: #C8BFA8; --ink3: #9A9180;
+      --accent: #D4A060; --accent-hi: #E8B878; --accent-lo: rgba(212,160,96,0.15); --accent-on: #1A1814;
+      --r: 3px; --r-lg: 8px; --r-pill: 10px; --bw: 1.5px;
+      --display: 'GeistPixel-Circle', monospace; --body: 'GeistPixel-Circle', monospace;
+      --shadow: none; --scanline: none;
+    }
+    /* ── GAME BOY ADVANCE ── */
+    [data-era="gba"][data-theme="light"] {
+      --bg: #F8F6F0; --surface: #FFFFFF; --border: #E8E4DC;
+      --ink: #1A1A1E; --ink2: #4A4A52; --ink3: #8A8A92;
+      --accent: #2563EB; --accent-hi: #3B82F6; --accent-lo: rgba(37,99,235,0.08); --accent-on: #fff;
+      --r: 6px; --r-lg: 12px; --r-pill: 16px; --bw: 1px;
+      --display: 'GeistPixel-Grid', monospace; --body: 'MomoTrustSans', sans-serif;
+      --shadow: 0 1px 2px rgba(0,0,0,0.04); --scanline: none;
+    }
+    [data-era="gba"][data-theme="dark"] {
+      --bg: #1A1A1E; --surface: #222226; --border: #32323A;
+      --ink: #E8E8EE; --ink2: #A8A8B2; --ink3: #6A6A78;
+      --accent: #60A5FA; --accent-hi: #93C5FD; --accent-lo: rgba(96,165,250,0.12); --accent-on: #1A1A1E;
+      --r: 6px; --r-lg: 12px; --r-pill: 16px; --bw: 1px;
+      --display: 'GeistPixel-Grid', monospace; --body: 'MomoTrustSans', sans-serif;
+      --shadow: 0 1px 2px rgba(0,0,0,0.2); --scanline: none;
+    }
+    /* ── NINTENDO DS ── */
+    [data-era="ds"][data-theme="light"] {
+      --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
+      --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
+      --accent: #4F46E5; --accent-hi: #6366F1; --accent-lo: rgba(79,70,229,0.08); --accent-on: #fff;
+      --r: 8px; --r-lg: 16px; --r-pill: 40px; --bw: 0.5px;
+      --display: 'GeistPixel-Triangle', monospace; --body: 'MomoTrustSans', sans-serif;
+      --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04); --scanline: none;
+    }
+    [data-era="ds"][data-theme="dark"] {
+      --bg: #080C0A; --surface: #121B17; --border: #182320;
+      --ink: #E6EDE9; --ink2: #8A9990; --ink3: #586660;
+      --accent: #A5B4FC; --accent-hi: #C7D2FE; --accent-lo: rgba(165,180,252,0.12); --accent-on: #080C0A;
+      --r: 8px; --r-lg: 16px; --r-pill: 40px; --bw: 0.5px;
+      --display: 'GeistPixel-Triangle', monospace; --body: 'MomoTrustSans', sans-serif;
+      --shadow: 0 1px 3px rgba(0,0,0,0.2), 0 4px 16px rgba(0,0,0,0.15); --scanline: none;
+    }
+
+    /* ── RESET ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--body); background: var(--bg); color: var(--ink);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      transition: background 0.6s ease, color 0.6s ease; overflow-x: hidden;
+    }
+    /* Smooth theme morphing across all elements */
+    nav, .feature-section, .extras, .cta-section, footer,
+    .feature-visual, .phone, .extra-icon, .dexter-visual,
+    .era-trigger, .era-menu, .theme-btn, .dl-btn, .hero-cta, .cta-btn {
+      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease !important;
+    }
+    body::after {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+      background: var(--scanline); transition: background 0.5s;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* Pixel fonts have no bold weight — prevent faux bold synthesis */
+    [data-era="gameboy"] *, [data-era="pocket"] *, [data-era="gbc"] *,
+    [data-era="gba"] h1, [data-era="gba"] h2, [data-era="gba"] .feature-title, [data-era="gba"] .logo,
+    [data-era="ds"] h1, [data-era="ds"] h2, [data-era="ds"] .feature-title, [data-era="ds"] .logo {
+      font-weight: 400 !important;
+      font-synthesis: none;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100; padding: 0 24px;
+      background: color-mix(in srgb, var(--bg) 85%, transparent);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+      transition: background 0.5s, border-color 0.5s;
+    }
+    .nav-inner {
+      max-width: 1080px; margin: 0 auto; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-family: var(--display); font-size: 20px; color: var(--ink);
+      letter-spacing: -0.03em; transition: font-family 0.5s, color 0.5s;
+    }
+
+    /* Nav right */
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+
+    /* Era dropdown */
+    .era-dropdown { position: relative; }
+    .era-trigger {
+      font-family: var(--mono); font-size: 11px; font-weight: 600;
+      padding: 6px 12px; border: none; border-radius: var(--r-pill);
+      background: var(--surface); color: var(--ink2); cursor: pointer;
+      transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.05em;
+      display: flex; align-items: center; gap: 6px; white-space: nowrap;
+    }
+    .era-trigger:hover { border-color: var(--accent); color: var(--ink); }
+    .era-trigger svg { width: 12px; height: 12px; transition: transform 0.3s; }
+    .era-dropdown.open .era-trigger svg { transform: rotate(180deg); }
+    .era-menu {
+      position: absolute; top: calc(100% + 8px); right: 0; min-width: 160px;
+      background: var(--surface); border: none;
+      border-radius: var(--r); box-shadow: var(--shadow);
+      padding: 4px; opacity: 0; visibility: hidden;
+      transform: translateY(-8px); transition: all 0.2s ease;
+      z-index: 200;
+    }
+    .era-dropdown.open .era-menu {
+      opacity: 1; visibility: visible; transform: translateY(0);
+    }
+    .era-menu button {
+      width: 100%; font-family: var(--body); font-size: 13px;
+      padding: 8px 12px; border: none; border-radius: calc(var(--r) - 4px);
+      background: transparent; color: var(--ink2); cursor: pointer;
+      text-align: left; transition: all 0.15s; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .era-menu button:hover { background: var(--accent-lo); color: var(--ink); }
+    .era-menu button.on { color: var(--accent); }
+    .era-menu button.on::after { content: '✓'; font-size: 12px; }
+    .era-menu .era-label { font-weight: 500; }
+    .era-menu .era-sub {
+      font-family: var(--mono); font-size: 10px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+
+    /* Theme toggle */
+    .theme-btn {
+      width: 32px; height: 32px; border: none; border-radius: 50%;
+      background: var(--border); cursor: pointer; display: flex;
+      align-items: center; justify-content: center; transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .theme-btn:hover { background: var(--accent-lo); }
+    .theme-btn svg { width: 16px; height: 16px; color: var(--ink2); transition: color 0.3s; }
+    .theme-sun, .theme-moon { display: none; }
+    [data-theme="light"] .theme-sun { display: block; }
+    [data-theme="dark"] .theme-moon { display: block; }
+
+    .dl-btn {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      padding: 6px 14px; border: none; border-radius: var(--r-pill);
+      background: var(--ink); color: var(--bg); cursor: pointer;
+      transition: all 0.3s; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .dl-btn:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero { padding: 100px 24px 80px; text-align: center; overflow: hidden; }
+    .hero-inner { max-width: 720px; margin: 0 auto; }
+    .hero-fade { display: inline-block; }
+    .hero-phone { margin-top: 64px; display: flex; justify-content: center; }
+    .hero h1 {
+      font-family: var(--display); font-size: 64px; line-height: 1.0;
+      letter-spacing: -0.045em; color: var(--ink); margin-bottom: 40px;
+      transition: font-family 0.5s, color 0.5s;
+      max-width: 600px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 .accent { color: var(--accent); transition: color 0.5s; }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 14px; font-weight: 500;
+      padding: 14px 32px; border-radius: var(--r-pill);
+      background: var(--accent); color: var(--accent-on); border: none; cursor: pointer;
+      transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .hero-cta:hover { background: var(--accent-hi); transform: translateY(-1px); }
+    .hero-cta svg { width: 20px; height: 20px; }
+    .phone {
+      width: 340px; height: 680px; border-radius: 44px;
+      background: var(--surface); border: 3px solid var(--border);
+      box-shadow: var(--shadow), 0 0 0 1px var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      transition: all 0.5s;
+    }
+    [data-era="gameboy"] .phone, [data-era="pocket"] .phone { border-radius: 0; }
+    [data-era="gbc"] .phone { border-radius: 8px; }
+    [data-era="gba"] .phone { border-radius: 12px; }
+    [data-era="ds"] .phone { border-radius: 16px; }
+    .phone::before {
+      content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 120px; height: 32px; background: var(--bg);
+      border-radius: 0 0 20px 20px; transition: all 0.5s;
+    }
+    [data-era="gameboy"] .phone::before, [data-era="pocket"] .phone::before { display: none; }
+    .phone-label {
+      font-family: var(--mono); font-size: 11px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    /* ── BIG FEATURE SECTION ── */
+    .feature-section {
+      padding: 96px 24px; border-top: none;
+      transition: border-color 0.5s;
+      min-height: 100vh; display: flex; align-items: center;
+    }
+    .feature-inner {
+      max-width: 1080px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;
+    }
+    .feature-inner.reverse { direction: rtl; }
+    .feature-inner.reverse > * { direction: ltr; }
+    .feature-tag {
+      font-family: var(--mono); font-size: 11px; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px;
+      transition: color 0.5s;
+    }
+    .feature-title {
+      font-family: var(--display); font-size: 36px; line-height: 1.1;
+      letter-spacing: -0.03em; color: var(--ink); margin-bottom: 16px;
+      transition: font-family 0.5s, color 0.5s;
+    }
+    .feature-desc { font-size: 17px; color: var(--ink2); line-height: 1.65; margin-bottom: 24px; transition: color 0.5s; }
+    .feature-detail {
+      font-family: var(--mono); font-size: 13px; color: var(--ink3);
+      display: flex; gap: 20px; flex-wrap: wrap; transition: color 0.5s;
+    }
+    .feature-detail span { display: flex; align-items: center; gap: 6px; }
+    .feature-detail svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+    .feature-visual {
+      width: 280px; height: 560px; border-radius: 36px;
+      background: var(--surface); border: 3px solid var(--border);
+      box-shadow: var(--shadow), 0 0 0 1px var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.5s; overflow: hidden; margin: 0 auto;
+      position: relative;
+    }
+    .feature-visual::before {
+      content: ''; position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 26px; background: var(--bg);
+      border-radius: 0 0 16px 16px; transition: all 0.5s;
+    }
+    [data-era="gameboy"] .feature-visual, [data-era="pocket"] .feature-visual { border-radius: 0; }
+    [data-era="gameboy"] .feature-visual::before, [data-era="pocket"] .feature-visual::before { display: none; }
+    [data-era="gbc"] .feature-visual { border-radius: 8px; }
+    [data-era="gba"] .feature-visual { border-radius: 10px; }
+    [data-era="ds"] .feature-visual { border-radius: 14px; }
+    .feature-visual span {
+      font-family: var(--mono); font-size: 12px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    /* ── DEXTER SECTION ── */
+    .dexter-section {
+      padding: 96px 24px; text-align: center;
+      background: transparent;
+      overflow: hidden; position: relative;
+      min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    }
+    .dexter-inner { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+
+    /* Dexter Sphere Canvas */
+    .dexter-sphere-wrap {
+      margin-bottom: 40px; display: flex; justify-content: center;
+      position: relative;
+    }
+    .dexter-sphere-canvas { image-rendering: pixelated; }
+    /* Ambient glow behind sphere */
+    .dexter-sphere-wrap::after {
+      content: ''; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 180px; height: 180px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(230,56,46,0.15) 0%, rgba(51,184,209,0.1) 40%, transparent 70%);
+      filter: blur(20px); z-index: -1;
+      animation: sphere-glow 4s ease-in-out infinite alternate;
+    }
+    @keyframes sphere-glow {
+      0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.15); }
+    }
+
+    .dexter-section .feature-tag { color: var(--ink3); }
+
+    /* Part 1: The Promise — side by side like other features */
+    .dexter-promise {
+      max-width: 1080px; margin: 0 auto 80px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+      text-align: left;
+    }
+    .dexter-promise-text { }
+    .dexter-sphere-inline { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+    .dexter-title {
+      font-family: var(--display); font-size: 36px; line-height: 1.1;
+      letter-spacing: -0.03em; color: var(--ink); margin-bottom: 12px;
+      transition: font-family 0.5s, color 0.5s;
+    }
+    .dexter-oneliner {
+      font-size: 17px; color: var(--ink2); line-height: 1.6; transition: color 0.5s;
+    }
+
+    /* Part 2: Agent Timeline */
+    .dexter-how {
+      max-width: 600px; margin: 0 auto 48px;
+    }
+
+    /* Part 3: Trust signals */
+    .dexter-trust {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      font-family: var(--mono); font-size: 13px; color: var(--ink3);
+      margin-top: 48px; transition: color 0.5s;
+    }
+    .dexter-trust span { display: flex; align-items: center; gap: 6px; }
+    .dexter-trust svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
+
+    @media (max-width: 768px) {
+      .dexter-promise { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .dexter-sphere-inline { justify-content: center; }
+      .dexter-pipeline { flex-direction: column; gap: 8px; }
+      .pipeline-arrow { transform: rotate(90deg); }
+    }
+
+    /* Agent Timeline */
+    .agents-label {
+      font-family: var(--mono); font-size: 11px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px;
+      text-align: center; transition: color 0.5s;
+    }
+    .agent-timeline {
+      position: relative; padding-left: 40px;
+    }
+    /* Vertical line */
+    .agent-timeline::before {
+      content: ''; position: absolute; left: 19px; top: 0; bottom: 0;
+      width: 2px; background: var(--ink3); opacity: 0.2;
+      transition: background 0.5s;
+    }
+    .timeline-step {
+      position: relative; display: flex; gap: 20px; align-items: flex-start;
+      margin-bottom: 40px; padding: 20px 24px;
+      background: var(--surface); border-radius: var(--r-lg);
+      box-shadow: var(--shadow); overflow: hidden;
+      transition: all 0.5s;
+    }
+    .timeline-step:last-child { margin-bottom: 0; }
+    /* Gradient tint */
+    .timeline-step::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.04; z-index: 0;
+    }
+    .timeline-step[data-color="ruby"]::before { background: linear-gradient(135deg, #E61E1E, #FF9E08); }
+    .timeline-step[data-color="sapphire"]::before { background: linear-gradient(135deg, #2626E6, #00D9D9); }
+    .timeline-step[data-color="topaz"]::before { background: linear-gradient(135deg, #CC4D00, #A6F000); }
+    .timeline-step[data-color="emerald"]::before { background: linear-gradient(135deg, #006B2A, #80F019); }
+    .timeline-step[data-color="dexter"]::before { background: linear-gradient(135deg, #E61E1E, #33B8D1); }
+    .timeline-step > * { position: relative; z-index: 1; }
+    /* Dot on the line */
+    .timeline-step::after {
+      content: ''; position: absolute; left: -29px; top: 28px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); z-index: 2;
+      transition: background 0.5s;
+    }
+    .timeline-step canvas { image-rendering: pixelated; flex-shrink: 0; margin-top: 4px; }
+    .timeline-text { flex: 1; }
+    .timeline-name {
+      font-family: var(--display); font-size: 18px; color: var(--ink);
+      margin-bottom: 2px; transition: font-family 0.5s, color 0.5s;
+    }
+    .timeline-role {
+      font-family: var(--mono); font-size: 10px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
+      transition: color 0.5s;
+    }
+    .timeline-desc {
+      font-size: 14px; color: var(--ink2); line-height: 1.55;
+      transition: color 0.5s;
+    }
+    /* Dexter step at bottom — highlighted */
+    .timeline-step.dexter-step {
+      background: var(--accent-lo);
+    }
+    .timeline-step.dexter-step::after {
+      width: 14px; height: 14px; left: -31px; top: 26px;
+    }
+
+    /* ── WIDGETS BENTO ── */
+    .widgets-section {
+      padding: 96px 24px; border-top: none;
+      transition: background 0.6s ease, border-color 0.5s;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    }
+    .widgets-header { max-width: 1080px; margin: 0 auto 48px; text-align: center; }
+    .widgets-header h2 {
+      font-family: var(--display); font-size: 36px; letter-spacing: -0.03em;
+      color: var(--ink); transition: font-family 0.5s, color 0.5s;
+    }
+    .widgets-header p {
+      font-size: 17px; color: var(--ink2); margin-top: 12px; max-width: 480px;
+      margin-left: auto; margin-right: auto; transition: color 0.5s;
+    }
+    /* Widget segmented controller — iOS style */
+    .widget-seg-wrap { text-align: center; margin-bottom: 32px; }
+    .widget-segments {
+      display: inline-flex; gap: 0;
+      background: var(--surface); border-radius: var(--r);
+      padding: 4px; box-shadow: var(--shadow);
+      transition: all 0.5s;
+    }
+    .widget-seg {
+      font-family: var(--body); font-size: 13px; font-weight: 500;
+      padding: 8px 20px; border: none; border-radius: calc(var(--r) - 4px);
+      background: transparent; color: var(--ink3); cursor: pointer;
+      transition: all 0.25s; white-space: nowrap; position: relative;
+    }
+    .widget-seg.active {
+      background: var(--accent); color: #fff;
+      transition: background 0.4s ease, color 0.25s;
+    }
+    .widget-seg:hover:not(.active) { color: var(--ink); background: var(--accent-lo); }
+
+    /* Widget segment active colors per tab */
+    .widgets-section[data-widget-bg="spotlight"] .widget-seg.active { background: #EE8130; }
+    .widgets-section[data-widget-bg="livingdex"] .widget-seg.active { background: #7AC74C; }
+    .widgets-section[data-widget-bg="roster"] .widget-seg.active { background: #6390F0; }
+    .widgets-section[data-widget-bg="health"] .widget-seg.active { background: #A33EA1; }
+
+    /* White text when body has type color bg */
+    body.widget-bg-active .widgets-section .widgets-header h2,
+    body.widget-bg-active .widgets-section .widgets-header p,
+    body.widget-bg-active .widgets-section .widget-info h3,
+    body.widget-bg-active .widgets-section .widget-info p,
+    body.widget-bg-active .widgets-section .feature-tag,
+    body.widget-bg-active .widgets-section .widget-phone-label {
+      color: #fff;
+    }
+    body.widget-bg-active .widgets-section .widgets-header p,
+    body.widget-bg-active .widgets-section .widget-info p {
+      color: rgba(255,255,255,0.8);
+    }
+    body.widget-bg-active .widgets-section .feature-tag {
+      color: rgba(255,255,255,0.6);
+    }
+    body.widget-bg-active .widgets-section .w-tag {
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Widget phone + description */
+    .widget-showcase {
+      display: flex; align-items: center; justify-content: center; gap: 48px;
+      max-width: 800px; margin: 0 auto;
+    }
+    .widget-phone {
+      width: 280px; height: 560px; border-radius: 36px; flex-shrink: 0;
+      background: var(--surface); border: 3px solid var(--border);
+      box-shadow: var(--shadow), 0 0 0 1px var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; transition: all 0.5s;
+    }
+    .widget-phone::before {
+      content: ''; position: absolute; top: 7px; left: 50%; transform: translateX(-50%);
+      width: 100px; height: 26px; background: var(--bg);
+      border-radius: 0 0 16px 16px; transition: all 0.5s;
+    }
+    [data-era="gameboy"] .widget-phone, [data-era="pocket"] .widget-phone { border-radius: 0; }
+    [data-era="gameboy"] .widget-phone::before, [data-era="pocket"] .widget-phone::before { display: none; }
+    .widget-phone-label {
+      font-family: var(--mono); font-size: 10px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .widget-info { max-width: 300px; }
+    .widget-info h3 {
+      font-family: var(--display); font-size: 24px; color: var(--ink);
+      margin-bottom: 8px; transition: font-family 0.5s, color 0.5s;
+    }
+    .widget-info p { font-size: 15px; color: var(--ink2); line-height: 1.6; margin-bottom: 12px; }
+    .widget-info .w-tag {
+      font-family: var(--mono); font-size: 10px; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    /* Hide inactive widget info panels */
+    .widget-info-panel { display: none; }
+    .widget-info-panel.active { display: block; }
+
+    @media (max-width: 768px) {
+      .widget-showcase { flex-direction: column; gap: 32px; text-align: center; }
+      .widget-segments { max-width: 100%; overflow-x: auto; }
+      .widget-seg { font-size: 10px; padding: 5px 12px; }
+    }
+
+    .dexter-visual {
+      width: 300px; height: 600px; border-radius: 40px;
+      background: var(--surface); border: 3px solid var(--border);
+      box-shadow: var(--shadow), 0 0 0 1px var(--border);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden; transition: all 0.5s;
+    }
+    .dexter-visual::before {
+      content: ''; position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+      width: 110px; height: 30px; background: var(--bg);
+      border-radius: 0 0 18px 18px; transition: all 0.5s;
+    }
+    [data-era="gameboy"] .dexter-visual, [data-era="pocket"] .dexter-visual { border-radius: 0; }
+    [data-era="gbc"] .dexter-visual { border-radius: 8px; }
+    [data-era="gba"] .dexter-visual { border-radius: 12px; }
+    [data-era="ds"] .dexter-visual { border-radius: 16px; }
+    [data-era="gameboy"] .dexter-visual::before, [data-era="pocket"] .dexter-visual::before { display: none; }
+    .dexter-visual span {
+      font-family: var(--mono); font-size: 12px; color: var(--ink3);
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+
+    /* ── INTERACTIVE SPRITES ── */
+    .sprite-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 10; overflow: hidden;
+      transition: none;
+    }
+    /* When orbiting: reposition all sprites into a circle around center and spin */
+    .sprite-layer.orbiting {
+      animation: orbit-spin 8s linear infinite;
+    }
+    .sprite-layer.orbiting .poke-sprite {
+      transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1), top 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    }
+    @keyframes orbit-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .poke-sprite {
+      position: absolute; pointer-events: all; cursor: pointer;
+      image-rendering: pixelated; user-select: none; -webkit-user-select: none;
+      z-index: 11; opacity: 0; transition: opacity 0.4s ease, transform 0.15s ease;
+    }
+    .poke-sprite.visible { opacity: 1; animation: sprite-float var(--float-dur, 3s) ease-in-out infinite var(--float-delay, 0s); }
+    .poke-sprite:hover { animation-play-state: paused; transform: scale(1.15); }
+    @keyframes sprite-float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(var(--float-y, -6px)); }
+    }
+    .poke-sprite img { image-rendering: pixelated; pointer-events: none; }
+    .poke-sprite.catching {
+      animation: catch-shake 0.5s ease;
+    }
+    @keyframes catch-shake {
+      0%, 100% { transform: rotate(0deg); }
+      15% { transform: rotate(-20deg) scale(0.9); }
+      30% { transform: rotate(15deg) scale(0.9); }
+      45% { transform: rotate(-10deg) scale(0.95); }
+      60% { transform: rotate(5deg); }
+    }
+    .poke-sprite.flying {
+      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+      opacity: 0.8; z-index: 200;
+    }
+    /* Sparkle burst on catch */
+    .catch-sparkle {
+      position: absolute; top: 50%; left: 50%; pointer-events: none;
+      width: 4px; height: 4px; background: gold;
+      transform: translate(-50%, -50%);
+      animation: sparkle-burst 0.4s ease-out forwards;
+    }
+    @keyframes sparkle-burst {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(calc(-50% + var(--sx)), calc(-50% + var(--sy))) scale(0); }
+    }
+    /* Tooltip */
+    .sprite-tooltip {
+      position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translateX(-50%);
+      background: var(--surface); color: var(--ink); box-shadow: var(--shadow);
+      border-radius: var(--r); padding: 8px 12px; white-space: nowrap;
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.04em;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s, background-color 0.5s, color 0.5s;
+      z-index: 52;
+    }
+    .sprite-tooltip .tt-name { font-weight: 600; color: var(--ink); }
+    .sprite-tooltip .tt-num { color: var(--ink3); }
+    .sprite-tooltip .tt-type {
+      display: inline-block; padding: 1px 6px; border-radius: 4px;
+      font-size: 9px; text-transform: uppercase; margin-left: 4px;
+      color: #fff;
+    }
+    .poke-sprite:hover .sprite-tooltip { opacity: 1; }
+    /* Catch counter */
+    .catch-counter {
+      position: fixed; bottom: 24px; right: 24px; z-index: 60;
+      font-family: var(--mono); font-size: 12px; color: var(--ink);
+      background: var(--surface); box-shadow: var(--shadow);
+      border-radius: var(--r-pill); padding: 8px 16px;
+      display: none; gap: 6px; align-items: center;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    .catch-counter.visible { display: flex; }
+    .catch-counter span { color: var(--accent); font-weight: 600; }
+    .catch-bar { width: 80px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+    .catch-bar-fill { height: 100%; width: 0%; background: var(--accent); border-radius: 2px; transition: width 0.3s ease; }
+
+    /* Cursor particles */
+    #cursorCanvas {
+      position: fixed; inset: 0; pointer-events: none; z-index: 45;
+    }
+
+    /* ── SMALLER FEATURES GRID ── */
+    .extras {
+      padding: 96px 24px; border-top: none; transition: border-color 0.5s;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    }
+    .extras-header { max-width: 1080px; margin: 0 auto 48px; text-align: center; }
+    .extras-header .feature-tag { margin-bottom: 12px; }
+    .extras-header h2 {
+      font-family: var(--display); font-size: 32px; letter-spacing: -0.03em;
+      color: var(--ink); transition: font-family 0.5s, color 0.5s;
+    }
+    .extras-grid {
+      max-width: 1080px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: minmax(160px, auto);
+      gap: 16px;
+    }
+    .extra-item {
+      background: var(--surface); border-radius: var(--r-lg);
+      padding: 24px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: all 0.4s; overflow: hidden; position: relative;
+    }
+    .extra-item:hover { transform: translateY(-2px); }
+    .extra-item.bento-hero { grid-column: span 2; grid-row: span 2; padding: 32px; }
+    .extra-item.bento-wide { grid-column: span 2; }
+    .extra-icon {
+      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      background: var(--accent-lo); display: flex; align-items: center; justify-content: center;
+      transition: all 0.5s;
+    }
+    .bento-hero .extra-icon { width: 56px; height: 56px; border-radius: 14px; }
+    .extra-icon svg { width: 24px; height: 24px; color: var(--accent); transition: color 0.5s; }
+    .bento-hero .extra-icon svg { width: 28px; height: 28px; }
+    .extra-item h3 {
+      font-family: var(--display); font-size: 17px; color: var(--ink);
+      transition: font-family 0.5s, color 0.5s;
+    }
+    .bento-hero h3 { font-size: 24px; }
+    .extra-item p { font-size: 13px; color: var(--ink2); line-height: 1.55; }
+    .bento-hero p { font-size: 15px; }
+    .extra-item .extra-tag {
+      font-family: var(--mono); font-size: 9px; color: var(--accent);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto;
+    }
+    @media (max-width: 768px) {
+      .extras-grid { grid-template-columns: repeat(2, 1fr); }
+      .extra-item.bento-hero { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .extras-grid { grid-template-columns: 1fr; }
+      .extra-item.bento-hero, .extra-item.bento-wide { grid-column: span 1; }
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 96px 24px; text-align: center;
+      border-top: none; transition: border-color 0.5s;
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .cta-section h2 {
+      font-family: var(--display); font-size: 40px; letter-spacing: -0.03em;
+      color: var(--ink); margin-bottom: 16px; transition: font-family 0.5s, color 0.5s;
+    }
+    .cta-section p { font-size: 17px; color: var(--ink2); margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 14px; font-weight: 500;
+      padding: 16px 40px; border-radius: var(--r-pill);
+      background: var(--accent); color: var(--accent-on); border: none; cursor: pointer;
+      transition: all 0.3s; text-transform: uppercase; letter-spacing: 0.06em;
+    }
+    .cta-btn:hover { background: var(--accent-hi); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+    .cta-btn svg { width: 20px; height: 20px; }
+    .cta-sub { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--ink3); letter-spacing: 0.04em; }
+
+    /* ── FOOTER ── */
+    footer { border-top: none; padding: 32px 24px 20px; transition: border-color 0.5s; }
+    .footer-row {
+      max-width: 1080px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .footer-left { display: flex; align-items: center; gap: 24px; }
+    .footer-left .logo { font-size: 16px; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { font-size: 13px; font-weight: 500; color: var(--ink3); }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 12px; color: var(--ink3); }
+    .footer-legal {
+      max-width: 1080px; margin: 12px auto 0; padding: 12px 0 0;
+      border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      font-size: 11px; color: var(--ink3); text-align: center;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 52px; }
+      .hero { padding: 72px 24px 56px; }
+      .feature-inner { grid-template-columns: 1fr; gap: 40px; }
+      .feature-inner.reverse { direction: ltr; }
+      .feature-title { font-size: 28px; }
+      .extras-grid { grid-template-columns: 1fr; gap: 24px; }
+      .cta-section h2 { font-size: 32px; }
+      .footer-row { flex-direction: column; text-align: center; }
+      .footer-left { flex-direction: column; gap: 12px; }
+      /* Agent tabs: horizontal scroll on mobile instead of wrapping */
+      .agents-tab-bar {
+        flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
+        -webkit-overflow-scrolling: touch; padding-bottom: 4px;
+        gap: 6px;
+      }
+      .agent-tab { flex-shrink: 0; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 40px; }
+      .phone { width: 280px; height: 560px; }
+      .dl-btn { display: none; }
+      .cta-section h2 { font-size: 28px; }
+      /* Reduce hero pin duration on mobile */
+      .hero { padding: 72px 16px 56px; }
+      /* Smaller catch counter */
+      .catch-counter { font-size: 10px; padding: 6px 12px; bottom: 16px; right: 16px; }
+      .catch-bar { width: 60px; }
+      /* Touch-friendly sprites */
+      .poke-sprite img { min-width: 40px; min-height: 40px; }
+      /* Stack widget cards */
+      .widgets-bento { gap: 12px; }
+      /* Dexter section */
+      .dexter-title { font-size: 32px; }
+      .dexter-desc { font-size: 15px; }
+      /* CTA */
+      .cta-section { padding: 64px 16px; }
+      /* Feature sections */
+      .feature-section { padding: 64px 16px; }
+      .feature-title { font-size: 26px; }
+      .feature-desc { font-size: 15px; }
+      /* Extras */
+      .extras { padding: 64px 16px; }
+      /* Hide sprites on very small screens */
+      .sprite-layer { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cursorCanvas"></canvas>
+
+  <div class="catch-counter" id="catchCounter">
+    <span id="catchCount">0</span> / 151
+    <div class="catch-bar"><div class="catch-bar-fill" id="catchBarFill"></div></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">🌿 Tree Co.</div>
+      <div class="nav-right">
+        <div class="era-dropdown">
+          <button class="era-trigger" aria-haspopup="true" aria-expanded="false">
+            <span class="era-current">Modern</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="era-menu" role="listbox" aria-label="Visual era">
+            <button data-era="modern" class="on" role="option"><span class="era-label">Modern</span></button>
+            <button data-era="gameboy" role="option"><span class="era-label">Game Boy</span></button>
+            <button data-era="pocket" role="option"><span class="era-label">GB Pocket</span></button>
+            <button data-era="gbc" role="option"><span class="era-label">GB Color</span></button>
+            <button data-era="gba" role="option"><span class="era-label">GB Advance</span></button>
+            <button data-era="ds" role="option"><span class="era-label">Nintendo DS</span></button>
+          </div>
+        </div>
+        <button class="theme-btn" aria-label="Toggle light/dark mode">
+          <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+        </button>
+        <button class="dl-btn">Download App</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" style="position:relative;">
+      <div class="sprite-layer" id="spriteLayerHero"></div>
+      <div class="hero-inner">
+        <div class="hero-fade">
+          <h1 data-gsap="hero-title">The Pokédex you <span class="accent">actually</span> want to use.</h1>
+          <button class="hero-cta" data-gsap="hero-cta">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            Download for iOS
+          </button>
+        </div>
+        <div class="hero-phone" data-gsap="hero-phone">
+          <div class="phone"><span class="phone-label">Screenshot</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 1: POKÉDEX -->
+    <section class="feature-section">
+      <div class="feature-inner wrap">
+        <div class="feature-text">
+          <div class="feature-tag">Complete Pokédex</div>
+          <h2 class="feature-title">Every Pokémon.<br>Every generation.</h2>
+          <p class="feature-desc">Browse all 1,025 Pokémon with full stats, abilities, movesets, evolution chains, and type matchups. Switch between official artwork, pixel sprites, and Showdown sprites.</p>
+          <div class="feature-detail">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Offline-ready</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>9 generations</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>3 sprite styles</span>
+          </div>
+        </div>
+        <div class="feature-visual"><span>Pokédex screenshot</span></div>
+      </div>
+    </section>
+
+    <!-- WIDGETS BENTO -->
+    <section class="widgets-section" data-widget-bg="spotlight">
+      <div class="widgets-header">
+        <div class="feature-tag">Home Screen Widgets</div>
+        <h2>Your Pokédex, always visible.</h2>
+        <p>Glanceable widgets that keep your team, progress, and favorite Pokémon right on your home screen.</p>
+      </div>
+      <div class="widget-seg-wrap">
+        <div class="widget-segments">
+          <button class="widget-seg active" data-widget="spotlight">Spotlight</button>
+          <button class="widget-seg" data-widget="livingdex">Living Dex</button>
+          <button class="widget-seg" data-widget="roster">Roster</button>
+          <button class="widget-seg" data-widget="health">Health</button>
+        </div>
+      </div>
+      <div class="widget-showcase">
+        <div class="widget-phone">
+          <span class="widget-phone-label" id="widgetPhoneLabel">Spotlight widget</span>
+        </div>
+        <div class="widget-info">
+          <div class="widget-info-panel active" data-widget-panel="spotlight">
+            <h3>Pokémon Spotlight</h3>
+            <p>Your daily featured Pokémon with artwork, type badge, and quick stats. Tap to jump straight into the detail view. Choose between daily random, your favorite, or a surprise discovery.</p>
+            <div class="w-tag">Small + Medium</div>
+          </div>
+          <div class="widget-info-panel" data-widget-panel="livingdex">
+            <h3>Living Dex</h3>
+            <p>Track your collection progress at a glance. See your catch count, completion percentage, and how close you are to completing each generation.</p>
+            <div class="w-tag">Small + Medium</div>
+          </div>
+          <div class="widget-info-panel" data-widget-panel="roster">
+            <h3>Team Roster</h3>
+            <p>See your active competitive team with sprites, types, and roles. Tap any member to jump into their detail view. Updates automatically when you edit your team.</p>
+            <div class="w-tag">Medium + Large</div>
+          </div>
+          <div class="widget-info-panel" data-widget-panel="health">
+            <h3>Team Health</h3>
+            <p>Monitor your team's defensive coverage. See type weaknesses and resistances at a glance so you know where your team is vulnerable before battle.</p>
+            <div class="w-tag">Medium + Large</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE 2: TEAM BUILDER -->
+    <section class="feature-section">
+      <div class="feature-inner reverse wrap">
+        <div class="feature-text">
+          <div class="feature-tag">Team Builder</div>
+          <h2 class="feature-title">Build teams that<br>actually win.</h2>
+          <p class="feature-desc">See your team's weaknesses at a glance with the heatmap view. Get tier context from Smogon, coverage analysis, and best partner suggestions. Export to Pokémon Showdown in one tap.</p>
+          <div class="feature-detail">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>VGC + Smogon</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Weakness heatmap</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Showdown export</span>
+          </div>
+        </div>
+        <div class="feature-visual"><span>Team Builder screenshot</span></div>
+      </div>
+    </section>
+
+    <!-- FEATURE 3: ASK DEXTER (hero + timeline) -->
+    <section class="dexter-section">
+      <div class="dexter-inner">
+
+        <!-- Hero: Sphere + headline -->
+        <div style="text-align:center; margin-bottom: 64px;">
+          <div class="dexter-sphere-wrap">
+            <canvas class="dexter-sphere-canvas" width="120" height="120" style="width:120px;height:120px;"></canvas>
+          </div>
+          <div class="feature-tag">Ask Dexter</div>
+          <h2 class="dexter-title" style="font-size:48px;">Ask anything.<br>Dexter knows.</h2>
+          <p class="dexter-oneliner" style="max-width:440px; margin: 0 auto;">Your AI Pokédex assistant — powered by specialized agents that research every question before answering.</p>
+        </div>
+
+        <!-- Screenshot -->
+        <div style="display:flex; justify-content:center; margin-bottom: 80px;">
+          <div class="dexter-visual"><span>Ask Dexter screenshot</span></div>
+        </div>
+
+        <!-- Agent Timeline -->
+        <div class="dexter-how">
+          <div class="agents-label">How Dexter answers your questions</div>
+          <div class="agent-timeline">
+            <div class="timeline-step" data-color="ruby">
+              <canvas class="agent-sphere" data-agent="typeScanner" width="48" height="48" style="width:48px;height:48px;"></canvas>
+              <div class="timeline-text">
+                <div class="timeline-name">Type Scanner</div>
+                <div class="timeline-role">Type Effectiveness</div>
+                <p class="timeline-desc">Calculates matchups, resistances, and immunities across all 18 types. Identifies 4x weaknesses and coverage gaps.</p>
+              </div>
+            </div>
+            <div class="timeline-step" data-color="sapphire">
+              <canvas class="agent-sphere" data-agent="dataScout" width="48" height="48" style="width:48px;height:48px;"></canvas>
+              <div class="timeline-text">
+                <div class="timeline-name">Data Scout</div>
+                <div class="timeline-role">Data Retrieval</div>
+                <p class="timeline-desc">Fetches real-time stats, moves, abilities, and evolution data. Cross-references with your local cache for offline access.</p>
+              </div>
+            </div>
+            <div class="timeline-step" data-color="topaz">
+              <canvas class="agent-sphere" data-agent="strategyEngine" width="48" height="48" style="width:48px;height:48px;"></canvas>
+              <div class="timeline-text">
+                <div class="timeline-name">Strategy Engine</div>
+                <div class="timeline-role">Competitive Analysis</div>
+                <p class="timeline-desc">Analyzes Smogon tier data, usage stats, and damage calcs. Recommends optimal movesets and partner suggestions.</p>
+              </div>
+            </div>
+            <div class="timeline-step" data-color="emerald">
+              <canvas class="agent-sphere" data-agent="loreReader" width="48" height="48" style="width:48px;height:48px;"></canvas>
+              <div class="timeline-text">
+                <div class="timeline-name">Lore Reader</div>
+                <div class="timeline-role">Lore &amp; Trivia</div>
+                <p class="timeline-desc">Researches design origins, etymology, and cultural references. Surfaces facts most players never discover.</p>
+              </div>
+            </div>
+            <div class="timeline-step dexter-step" data-color="dexter">
+              <canvas class="dexter-sphere-canvas" width="48" height="48" style="width:48px;height:48px;"></canvas>
+              <div class="timeline-text">
+                <div class="timeline-name">Dexter</div>
+                <div class="timeline-role">Lead Analyst</div>
+                <p class="timeline-desc">Cross-validates all agent findings, resolves conflicts, and delivers a clear, accurate answer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust signals -->
+        <div class="dexter-trust">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>On-device AI</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Privacy-first</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>3 free daily</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SMALLER FEATURES -->
+    <section class="extras">
+      <div class="extras-header">
+        <div class="feature-tag">And more</div>
+        <h2>Everything else a trainer needs.</h2>
+      </div>
+      <div class="extras-grid">
+        <!-- Hero: Type Chart (2x2) -->
+        <div class="extra-item bento-hero">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+          <h3>Type Chart</h3>
+          <p>Interactive 18x18 type effectiveness grid. Instantly see what's super effective, what resists, and what's immune. Compare dual-type matchups and find the best counters for any Pokémon.</p>
+          <div class="extra-tag">18 types</div>
+        </div>
+        <!-- Living Dex (2x1 wide) -->
+        <div class="extra-item bento-wide">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
+          <h3>Living Dex Tracker</h3>
+          <p>Track every catch. Hunt shinies with streak counters and CSV export.</p>
+          <div class="extra-tag">Shiny hunting</div>
+        </div>
+        <!-- Card Binder (2x1 wide) -->
+        <div class="extra-item bento-wide">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <h3>Card Binder</h3>
+          <p>Scan and catalog your TCG collection with the camera.</p>
+          <div class="extra-tag">Camera scan</div>
+        </div>
+        <!-- Nuzlocke (1x1) -->
+        <div class="extra-item">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <h3>Nuzlocke Mode</h3>
+          <p>Track encounters and party for hardcore challenge runs.</p>
+          <div class="extra-tag">Challenge runs</div>
+        </div>
+        <!-- Visual Eras (1x1) -->
+        <div class="extra-item">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <h3>Visual Eras</h3>
+          <p>Modern, Game Boy, GBC, GBA, and DS styles.</p>
+          <div class="extra-tag">6 eras</div>
+        </div>
+        <!-- Zero Tracking (1x1) -->
+        <div class="extra-item">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><circle cx="12" cy="17" r=".5" fill="currentColor"/></svg></div>
+          <h3>Zero Tracking</h3>
+          <p>No ads, no analytics, no accounts.</p>
+          <div class="extra-tag">Privacy-first</div>
+        </div>
+        <!-- Offline (1x1) -->
+        <div class="extra-item">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg></div>
+          <h3>Offline Mode</h3>
+          <p>Full Pokédex available without internet.</p>
+          <div class="extra-tag">200MB cache</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" style="position:relative;">
+      <div class="sprite-layer" id="spriteLayerCTA"></div>
+      <h2>Ready to start your journey?</h2>
+      <p>Free to download. No account required. Your Pokémon adventure starts now.</p>
+      <button class="cta-btn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Download for iOS
+      </button>
+      <div class="cta-sub">iOS 26+ required. Free with optional premium features.</div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-row">
+      <div class="footer-left">
+        <div class="logo">🌿 Tree Co.</div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="mailto:fahimullahusman@gmail.com">Support</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2026 Usman Fahimullah</div>
+    </div>
+    <div class="footer-legal">Pokémon and all related names are trademarks of Nintendo / Creatures Inc. / GAME FREAK inc.</div>
+  </footer>
+
+  <script>
+    // ── ERA DROPDOWN + THEME TOGGLE ──
+    (function() {
+      var eraNames = { modern:'Modern', gameboy:'Game Boy', pocket:'GB Pocket', gbc:'GB Color', gba:'GB Advance', ds:'Nintendo DS' };
+      var eraBtns = document.querySelectorAll('.era-menu button');
+      var dropdown = document.querySelector('.era-dropdown');
+      var trigger = document.querySelector('.era-trigger');
+      var currentLabel = document.querySelector('.era-current');
+      var themeBtn = document.querySelector('.theme-btn');
+      var root = document.documentElement;
+
+      function setEra(era) {
+        root.dataset.era = era;
+        localStorage.setItem('treeco-era', era);
+        currentLabel.textContent = eraNames[era] || era;
+        eraBtns.forEach(function(b) { b.classList.toggle('on', b.dataset.era === era); });
+      }
+      function setTheme(theme) {
+        root.dataset.theme = theme;
+        localStorage.setItem('treeco-theme', theme);
+      }
+      function toggleDropdown() {
+        var open = dropdown.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', open);
+      }
+      function closeDropdown() {
+        dropdown.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      // Restore saved state
+      var savedEra = localStorage.getItem('treeco-era');
+      if (savedEra) setEra(savedEra);
+      var savedTheme = localStorage.getItem('treeco-theme');
+      if (savedTheme) {
+        setTheme(savedTheme);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        setTheme('dark');
+      }
+
+      trigger.addEventListener('click', toggleDropdown);
+      eraBtns.forEach(function(b) {
+        b.addEventListener('click', function() { setEra(b.dataset.era); closeDropdown(); });
+      });
+      themeBtn.addEventListener('click', function() {
+        setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+      });
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) closeDropdown();
+      });
+    })();
+
+    // ── GSAP ANIMATIONS ──
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    var heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .fromTo('[data-gsap="hero-title"]', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9 })
+      .fromTo('[data-gsap="hero-cta"]', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6 }, '-=0.4')
+      .fromTo('[data-gsap="hero-phone"]', { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.3');
+
+    // Orbit variables (setup runs after sprites are placed)
+    var orbitLayer = document.getElementById('spriteLayerHero');
+    var orbitPositions = [];
+    var orbitReady = false;
+    var isOrbiting = false;
+
+    // Hero scroll: pin, text fades, phone rises
+    var heroScroll = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: '+=130%',
+        pin: true,
+        scrub: 0.8
+      }
+    });
+    gsap.set('.hero-fade', { transformOrigin: 'center center' });
+    heroScroll
+      .to('.hero-fade', { scale: 0.7, opacity: 0, ease: 'power1.in', duration: 0.4 }, 0)
+      .to('.hero-phone', { y: -200, ease: 'power1.out', duration: 0.4 }, 0)
+      .to({}, { duration: 0.6 });
+
+    // Orbit control: poll the hero pin's progress (runs always, checks orbitReady)
+    setInterval(function() {
+      if (!orbitReady) return;
+      var heroPinST = ScrollTrigger.getAll()[0];
+      if (!heroPinST || !heroPinST.pin) return;
+      var p = heroPinST.progress;
+      var sprites = document.querySelectorAll('#spriteLayerHero .poke-sprite');
+      if (p > 0.35 && !isOrbiting) {
+        isOrbiting = true;
+        sprites.forEach(function(s, i) {
+          if (orbitPositions[i]) {
+            s.style.left = orbitPositions[i].x + 'px';
+            s.style.top = orbitPositions[i].y + 'px';
+          }
+        });
+        orbitLayer.classList.add('orbiting');
+      } else if (p <= 0.2 && isOrbiting) {
+        isOrbiting = false;
+        orbitLayer.classList.remove('orbiting');
+        sprites.forEach(function(s) {
+          if (s.dataset.origLeft) {
+            s.style.left = s.dataset.origLeft;
+            s.style.top = s.dataset.origTop;
+          }
+        });
+      }
+    }, 100);
+
+    // Feature sections
+    document.querySelectorAll('.feature-section').forEach(function(section) {
+      var inner = section.querySelector('.feature-inner');
+      var isReverse = inner.classList.contains('reverse');
+      var textEl = section.querySelector('.feature-text');
+      var visualEl = section.querySelector('.feature-visual');
+      var tl = gsap.timeline({
+        scrollTrigger: { trigger: section, start: 'top 75%', toggleActions: 'play none none none' }
+      });
+      tl.from(textEl.querySelector('.feature-tag'), { x: isReverse ? 40 : -40, opacity: 0, duration: 0.5 })
+        .from(textEl.querySelector('.feature-title'), { x: isReverse ? 40 : -40, opacity: 0, duration: 0.6 }, '-=0.3')
+        .from(textEl.querySelector('.feature-desc'), { y: 20, opacity: 0, duration: 0.5 }, '-=0.3')
+        .from(textEl.querySelector('.feature-detail'), { y: 20, opacity: 0, duration: 0.5 }, '-=0.2')
+        .from(visualEl, { x: isReverse ? -60 : 60, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.6');
+    });
+
+    // Scroll-driven type color accents
+    var sectionColors = {
+      light: {
+        default: '#047857',    // emerald (AA accessible)
+        pokedex: '#22C55E',    // grass green
+        widgets: '#059669',    // emerald (keep default)
+        teambuilder: '#EF4444', // fire red
+        dexter: '#34D399',
+      },
+      dark: {
+        default: '#34D399',
+        pokedex: '#4ADE80',
+        widgets: '#34D399',
+        teambuilder: '#F87171',
+        dexter: '#34D399',
+      }
+    };
+
+    // Also add widgets section color
+    ScrollTrigger.create({
+      trigger: '.widgets-section',
+      start: 'top 60%', end: 'bottom 40%',
+      onEnter: function() { var t = document.documentElement.dataset.theme; document.documentElement.style.setProperty('--accent', sectionColors[t].widgets); },
+      onLeave: function() { var t = document.documentElement.dataset.theme; document.documentElement.style.setProperty('--accent', sectionColors[t].default); },
+      onEnterBack: function() { var t = document.documentElement.dataset.theme; document.documentElement.style.setProperty('--accent', sectionColors[t].widgets); },
+      onLeaveBack: function() { var t = document.documentElement.dataset.theme; document.documentElement.style.setProperty('--accent', sectionColors[t].default); }
+    });
+
+    document.querySelectorAll('.feature-section').forEach(function(section, i) {
+      var keys = ['pokedex', 'teambuilder'];
+      var key = keys[i] || 'default';
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top 60%',
+        end: 'bottom 40%',
+        onEnter: function() {
+          var theme = document.documentElement.dataset.theme;
+          document.documentElement.style.setProperty('--accent', sectionColors[theme][key]);
+        },
+        onLeave: function() {
+          var theme = document.documentElement.dataset.theme;
+          document.documentElement.style.removeProperty('--accent');
+        },
+        onEnterBack: function() {
+          var theme = document.documentElement.dataset.theme;
+          document.documentElement.style.setProperty('--accent', sectionColors[theme][key]);
+        },
+        onLeaveBack: function() {
+          var theme = document.documentElement.dataset.theme;
+          document.documentElement.style.removeProperty('--accent');
+        }
+      });
+    });
+
+    // Widgets section — morph page background to type color on scroll
+    var widgetBgColors = {
+      spotlight: '#EE8130',
+      livingdex: '#7AC74C',
+      roster: '#6390F0',
+      health: '#A33EA1'
+    };
+    var savedBgBeforeWidgets = null;
+    ScrollTrigger.create({
+      trigger: '.widgets-section',
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter: function() {
+        savedBgBeforeWidgets = document.body.style.backgroundColor || '';
+        var active = document.querySelector('.widgets-section').dataset.widgetBg || 'spotlight';
+        document.body.style.backgroundColor = widgetBgColors[active] || '';
+        document.body.classList.add('widget-bg-active');
+      },
+      onLeave: function() {
+        document.body.style.backgroundColor = savedBgBeforeWidgets || '';
+        document.body.classList.remove('widget-bg-active');
+      },
+      onEnterBack: function() {
+        var active = document.querySelector('.widgets-section').dataset.widgetBg || 'spotlight';
+        document.body.style.backgroundColor = widgetBgColors[active] || '';
+        document.body.classList.add('widget-bg-active');
+      },
+      onLeaveBack: function() {
+        document.body.style.backgroundColor = savedBgBeforeWidgets || '';
+        document.body.classList.remove('widget-bg-active');
+      }
+    });
+
+    // Dexter section — morph entire page to dark mode on enter, back to previous on leave
+    var savedThemeBeforeDexter = null;
+    ScrollTrigger.create({
+      trigger: '.dexter-section',
+      start: 'top 60%',
+      end: 'bottom 40%',
+      onEnter: function() {
+        savedThemeBeforeDexter = document.documentElement.dataset.theme;
+        document.documentElement.dataset.theme = 'dark';
+      },
+      onLeave: function() {
+        if (savedThemeBeforeDexter) document.documentElement.dataset.theme = savedThemeBeforeDexter;
+        document.documentElement.style.removeProperty('--accent');
+      },
+      onEnterBack: function() {
+        document.documentElement.dataset.theme = 'dark';
+      },
+      onLeaveBack: function() {
+        if (savedThemeBeforeDexter) document.documentElement.dataset.theme = savedThemeBeforeDexter;
+        document.documentElement.style.removeProperty('--accent');
+      }
+    });
+    // Dexter hero entrance
+    var dexterTl = gsap.timeline({
+      scrollTrigger: { trigger: '.dexter-section', start: 'top 75%', toggleActions: 'play none none none' }
+    });
+    dexterTl
+      .fromTo('.dexter-sphere-canvas', { scale: 0, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7, ease: 'back.out(1.7)' })
+      .fromTo('.dexter-section .feature-tag', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, '-=0.3')
+      .fromTo('.dexter-title', { y: 25, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5 }, '-=0.2')
+      .fromTo('.dexter-oneliner', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4 }, '-=0.2')
+      .fromTo('.dexter-visual', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
+
+    // Timeline steps — staggered entrance
+    gsap.fromTo('.agents-label', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, scrollTrigger: { trigger: '.agent-timeline', start: 'top 85%' } });
+    gsap.fromTo('.timeline-step', { x: -30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, stagger: 0.15, ease: 'power2.out', scrollTrigger: { trigger: '.agent-timeline', start: 'top 85%' } });
+
+    // Trust
+    gsap.fromTo('.dexter-trust span', { y: 10, opacity: 0 }, { y: 0, opacity: 1, duration: 0.3, stagger: 0.1, scrollTrigger: { trigger: '.dexter-trust', start: 'top 90%' } });
+
+    // Extras
+    gsap.from('.extras-header .feature-tag', {
+      y: 20, opacity: 0, duration: 0.5,
+      scrollTrigger: { trigger: '.extras-header', start: 'top 80%' }
+    });
+    gsap.from('.extras-header h2', {
+      y: 30, opacity: 0, duration: 0.6, delay: 0.15,
+      scrollTrigger: { trigger: '.extras-header', start: 'top 80%' }
+    });
+    document.querySelectorAll('.extra-item').forEach(function(item) {
+      gsap.fromTo(item, { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: 'power2.out',
+        scrollTrigger: { trigger: item, start: 'top 90%' }
+      });
+    });
+
+    // Widgets bento
+    gsap.fromTo('.widgets-header .feature-tag', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, scrollTrigger: { trigger: '.widgets-header', start: 'top 80%' } });
+    gsap.fromTo('.widgets-header h2', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, delay: 0.1, scrollTrigger: { trigger: '.widgets-header', start: 'top 80%' } });
+    gsap.fromTo('.widgets-header p', { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, delay: 0.2, scrollTrigger: { trigger: '.widgets-header', start: 'top 80%' } });
+    gsap.fromTo('.widget-segments', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, scrollTrigger: { trigger: '.widget-segments', start: 'top 85%' } });
+    gsap.fromTo('.widget-phone', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power2.out', scrollTrigger: { trigger: '.widget-showcase', start: 'top 80%' } });
+    gsap.fromTo('.widget-info', { x: 30, opacity: 0 }, { x: 0, opacity: 1, duration: 0.5, delay: 0.2, scrollTrigger: { trigger: '.widget-showcase', start: 'top 80%' } });
+
+    // CTA
+    gsap.from('.cta-section h2', { y: 30, opacity: 0, duration: 0.6, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+    gsap.from('.cta-section p', { y: 20, opacity: 0, duration: 0.5, delay: 0.15, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+    gsap.from('.cta-btn', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+    gsap.from('.cta-sub', { opacity: 0, duration: 0.5, delay: 0.5, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+
+    // Widget segments
+    (function() {
+      var segs = document.querySelectorAll('.widget-seg');
+      var panels = document.querySelectorAll('.widget-info-panel');
+      var phoneLabel = document.getElementById('widgetPhoneLabel');
+      var labels = { spotlight: 'Spotlight widget', livingdex: 'Living Dex widget', roster: 'Team Roster widget', health: 'Team Health widget' };
+      segs.forEach(function(seg) {
+        seg.addEventListener('click', function() {
+          var w = seg.dataset.widget;
+          segs.forEach(function(s) { s.classList.toggle('active', s.dataset.widget === w); });
+          panels.forEach(function(p) { p.classList.toggle('active', p.dataset.widgetPanel === w); });
+          document.querySelector('.widgets-section').dataset.widgetBg = w;
+          if (phoneLabel) phoneLabel.textContent = labels[w] || w;
+          // Update body bg if currently viewing widgets section
+          var wColors = { spotlight:'#EE8130', livingdex:'#7AC74C', roster:'#6390F0', health:'#A33EA1' };
+          var wSection = document.querySelector('.widgets-section');
+          var rect = wSection.getBoundingClientRect();
+          if (document.body.classList.contains('widget-bg-active')) {
+            document.body.style.backgroundColor = wColors[w] || '';
+          }
+        });
+      });
+    })();
+
+    // Agent tabs
+    (function() {
+      var tabs = document.querySelectorAll('.agent-tab');
+      var panels = document.querySelectorAll('.agent-panel');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var agent = tab.dataset.agentTab;
+          tabs.forEach(function(t) { t.classList.toggle('active', t.dataset.agentTab === agent); });
+          panels.forEach(function(p) { p.classList.toggle('active', p.dataset.agentPanel === agent); });
+        });
+      });
+    })();
+
+    // ── INTERACTIVE POKEMON SPRITES (appear on hover, catch flies to bar) ──
+    (function() {
+      var gen1 = [
+        [1,'Bulbasaur','Grass','#7AC74C'],[2,'Ivysaur','Grass','#7AC74C'],[3,'Venusaur','Grass','#7AC74C'],
+        [4,'Charmander','Fire','#EE8130'],[5,'Charmeleon','Fire','#EE8130'],[6,'Charizard','Fire','#EE8130'],
+        [7,'Squirtle','Water','#6390F0'],[8,'Wartortle','Water','#6390F0'],[9,'Blastoise','Water','#6390F0'],
+        [10,'Caterpie','Bug','#A6B91A'],[11,'Metapod','Bug','#A6B91A'],[12,'Butterfree','Bug','#A6B91A'],
+        [13,'Weedle','Bug','#A6B91A'],[14,'Kakuna','Bug','#A6B91A'],[15,'Beedrill','Bug','#A6B91A'],
+        [16,'Pidgey','Normal','#A8A77A'],[17,'Pidgeotto','Normal','#A8A77A'],[18,'Pidgeot','Normal','#A8A77A'],
+        [19,'Rattata','Normal','#A8A77A'],[20,'Raticate','Normal','#A8A77A'],
+        [21,'Spearow','Normal','#A8A77A'],[22,'Fearow','Normal','#A8A77A'],
+        [23,'Ekans','Poison','#A33EA1'],[24,'Arbok','Poison','#A33EA1'],
+        [25,'Pikachu','Electric','#F7D02C'],[26,'Raichu','Electric','#F7D02C'],
+        [27,'Sandshrew','Ground','#E2BF65'],[28,'Sandslash','Ground','#E2BF65'],
+        [29,'Nidoran\u2640','Poison','#A33EA1'],[30,'Nidorina','Poison','#A33EA1'],[31,'Nidoqueen','Poison','#A33EA1'],
+        [32,'Nidoran\u2642','Poison','#A33EA1'],[33,'Nidorino','Poison','#A33EA1'],[34,'Nidoking','Poison','#A33EA1'],
+        [35,'Clefairy','Fairy','#D685AD'],[36,'Clefable','Fairy','#D685AD'],
+        [37,'Vulpix','Fire','#EE8130'],[38,'Ninetales','Fire','#EE8130'],
+        [39,'Jigglypuff','Normal','#A8A77A'],[40,'Wigglytuff','Normal','#A8A77A'],
+        [41,'Zubat','Poison','#A33EA1'],[42,'Golbat','Poison','#A33EA1'],
+        [43,'Oddish','Grass','#7AC74C'],[44,'Gloom','Grass','#7AC74C'],[45,'Vileplume','Grass','#7AC74C'],
+        [46,'Paras','Bug','#A6B91A'],[47,'Parasect','Bug','#A6B91A'],
+        [48,'Venonat','Bug','#A6B91A'],[49,'Venomoth','Bug','#A6B91A'],
+        [50,'Diglett','Ground','#E2BF65'],[51,'Dugtrio','Ground','#E2BF65'],
+        [52,'Meowth','Normal','#A8A77A'],[53,'Persian','Normal','#A8A77A'],
+        [54,'Psyduck','Water','#6390F0'],[55,'Golduck','Water','#6390F0'],
+        [56,'Mankey','Fighting','#C22E28'],[57,'Primeape','Fighting','#C22E28'],
+        [58,'Growlithe','Fire','#EE8130'],[59,'Arcanine','Fire','#EE8130'],
+        [60,'Poliwag','Water','#6390F0'],[61,'Poliwhirl','Water','#6390F0'],[62,'Poliwrath','Water','#6390F0'],
+        [63,'Abra','Psychic','#F95587'],[64,'Kadabra','Psychic','#F95587'],[65,'Alakazam','Psychic','#F95587'],
+        [66,'Machop','Fighting','#C22E28'],[67,'Machoke','Fighting','#C22E28'],[68,'Machamp','Fighting','#C22E28'],
+        [69,'Bellsprout','Grass','#7AC74C'],[70,'Weepinbell','Grass','#7AC74C'],[71,'Victreebel','Grass','#7AC74C'],
+        [72,'Tentacool','Water','#6390F0'],[73,'Tentacruel','Water','#6390F0'],
+        [74,'Geodude','Rock','#B6A136'],[75,'Graveler','Rock','#B6A136'],[76,'Golem','Rock','#B6A136'],
+        [77,'Ponyta','Fire','#EE8130'],[78,'Rapidash','Fire','#EE8130'],
+        [79,'Slowpoke','Water','#6390F0'],[80,'Slowbro','Water','#6390F0'],
+        [81,'Magnemite','Electric','#F7D02C'],[82,'Magneton','Electric','#F7D02C'],
+        [83,'Farfetchd','Normal','#A8A77A'],
+        [84,'Doduo','Normal','#A8A77A'],[85,'Dodrio','Normal','#A8A77A'],
+        [86,'Seel','Water','#6390F0'],[87,'Dewgong','Water','#6390F0'],
+        [88,'Grimer','Poison','#A33EA1'],[89,'Muk','Poison','#A33EA1'],
+        [90,'Shellder','Water','#6390F0'],[91,'Cloyster','Water','#6390F0'],
+        [92,'Gastly','Ghost','#735797'],[93,'Haunter','Ghost','#735797'],[94,'Gengar','Ghost','#735797'],
+        [95,'Onix','Rock','#B6A136'],
+        [96,'Drowzee','Psychic','#F95587'],[97,'Hypno','Psychic','#F95587'],
+        [98,'Krabby','Water','#6390F0'],[99,'Kingler','Water','#6390F0'],
+        [100,'Voltorb','Electric','#F7D02C'],[101,'Electrode','Electric','#F7D02C'],
+        [102,'Exeggcute','Grass','#7AC74C'],[103,'Exeggutor','Grass','#7AC74C'],
+        [104,'Cubone','Ground','#E2BF65'],[105,'Marowak','Ground','#E2BF65'],
+        [106,'Hitmonlee','Fighting','#C22E28'],[107,'Hitmonchan','Fighting','#C22E28'],
+        [108,'Lickitung','Normal','#A8A77A'],
+        [109,'Koffing','Poison','#A33EA1'],[110,'Weezing','Poison','#A33EA1'],
+        [111,'Rhyhorn','Ground','#E2BF65'],[112,'Rhydon','Ground','#E2BF65'],
+        [113,'Chansey','Normal','#A8A77A'],
+        [114,'Tangela','Grass','#7AC74C'],
+        [115,'Kangaskhan','Normal','#A8A77A'],
+        [116,'Horsea','Water','#6390F0'],[117,'Seadra','Water','#6390F0'],
+        [118,'Goldeen','Water','#6390F0'],[119,'Seaking','Water','#6390F0'],
+        [120,'Staryu','Water','#6390F0'],[121,'Starmie','Water','#6390F0'],
+        [122,'Mr. Mime','Psychic','#F95587'],
+        [123,'Scyther','Bug','#A6B91A'],
+        [124,'Jynx','Ice','#96D9D6'],
+        [125,'Electabuzz','Electric','#F7D02C'],
+        [126,'Magmar','Fire','#EE8130'],
+        [127,'Pinsir','Bug','#A6B91A'],
+        [128,'Tauros','Normal','#A8A77A'],
+        [129,'Magikarp','Water','#6390F0'],[130,'Gyarados','Water','#6390F0'],
+        [131,'Lapras','Water','#6390F0'],
+        [132,'Ditto','Normal','#A8A77A'],
+        [133,'Eevee','Normal','#A8A77A'],[134,'Vaporeon','Water','#6390F0'],
+        [135,'Jolteon','Electric','#F7D02C'],[136,'Flareon','Fire','#EE8130'],
+        [137,'Porygon','Normal','#A8A77A'],
+        [138,'Omanyte','Rock','#B6A136'],[139,'Omastar','Rock','#B6A136'],
+        [140,'Kabuto','Rock','#B6A136'],[141,'Kabutops','Rock','#B6A136'],
+        [142,'Aerodactyl','Rock','#B6A136'],
+        [143,'Snorlax','Normal','#A8A77A'],
+        [144,'Articuno','Ice','#96D9D6'],
+        [145,'Zapdos','Electric','#F7D02C'],
+        [146,'Moltres','Fire','#EE8130'],
+        [147,'Dratini','Dragon','#6F35FC'],[148,'Dragonair','Dragon','#6F35FC'],[149,'Dragonite','Dragon','#6F35FC'],
+        [150,'Mewtwo','Psychic','#F95587'],
+        [151,'Mew','Psychic','#F95587']
+      ];
+      var pokemon = gen1.map(function(p) { return { id: p[0], name: p[1], type: p[2], color: p[3] }; });
+
+      var heroLayer = document.getElementById('spriteLayerHero');
+      var ctaLayer = document.getElementById('spriteLayerCTA');
+      var counterEl = document.getElementById('catchCounter');
+      var countEl = document.getElementById('catchCount');
+      var catchBarFill = document.getElementById('catchBarFill');
+      var caught = 0;
+      var spawnedIds = {};
+      var totalSpawned = 0;
+      var maxOnPage = 40;
+      var spriteBaseUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/';
+
+      // Shuffle helper
+      function shuffle(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+        }
+        return a;
+      }
+
+      var shuffled = shuffle(pokemon);
+      var spawnIndex = 0; // tracks next pokemon to spawn from shuffled list
+
+      // Curated edge positions (percentage-based: [xPercent, yPercent, size])
+      var heroSlots = [
+        [3, 5, 36],   [85, 3, 32],  [15, 22, 40],  [95, 18, 34],
+        [2, 42, 38],  [78, 35, 44], [8, 62, 34],   [92, 58, 38],
+        [18, 80, 36], [88, 85, 40], [5, 95, 32],   [70, 92, 36]
+      ];
+      var ctaSlots = [
+        [3, 10, 36], [88, 5, 38],  [12, 45, 40], [92, 40, 34],
+        [5, 75, 38], [80, 80, 42]
+      ];
+
+      function placeSprite(p, container, xPct, yPct, size) {
+        if (spawnedIds[p.id]) return;
+        spawnedIds[p.id] = true;
+        totalSpawned++;
+
+        var el = document.createElement('div');
+        el.className = 'poke-sprite';
+        el.innerHTML =
+          '<img src="' + spriteBaseUrl + p.id + '.gif" alt="' + p.name + '" draggable="false" style="width:' + size + 'px;height:' + size + 'px;">' +
+          '<div class="sprite-tooltip">' +
+            '<span class="tt-name">' + p.name + '</span> ' +
+            '<span class="tt-num">#' + String(p.id).padStart(3, '0') + '</span>' +
+            '<span class="tt-type" style="background:' + p.color + '">' + p.type + '</span>' +
+          '</div>';
+
+        el.style.left = xPct + '%';
+        el.style.top = yPct + '%';
+        // Randomize float animation so each sprite bobs independently
+        el.style.setProperty('--float-dur', (2.5 + Math.random() * 2) + 's');
+        el.style.setProperty('--float-delay', (Math.random() * -3) + 's');
+        el.style.setProperty('--float-y', (-4 - Math.random() * 6) + 'px');
+        container.appendChild(el);
+
+        // Appear when cursor is nearby or when scrolled into view
+        var revealed = false;
+        function checkProximity(e) {
+          if (revealed) return;
+          var rect = el.getBoundingClientRect();
+          var cx = rect.left + rect.width / 2;
+          var cy = rect.top + rect.height / 2;
+          var dx = e.clientX - cx, dy = e.clientY - cy;
+          if (Math.sqrt(dx * dx + dy * dy) < 200) {
+            revealed = true;
+            el.classList.add('visible');
+          }
+        }
+        document.addEventListener('mousemove', checkProximity);
+        function checkScroll() {
+          if (revealed) return;
+          var rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight + 50 && rect.bottom > -50) {
+            revealed = true;
+            el.classList.add('visible');
+          }
+        }
+        window.addEventListener('scroll', checkScroll);
+        checkScroll();
+
+        // Click to catch — shake then fly to progress bar
+        var caughtFlag = false;
+        el.addEventListener('click', function() {
+          if (caughtFlag) return;
+          caughtFlag = true;
+          caught++;
+          document.getElementById('catchCounter').classList.add('visible');
+          countEl.textContent = caught;
+          catchBarFill.style.width = (caught / 151 * 100) + '%';
+
+          // Sparkles
+          for (var s = 0; s < 6; s++) {
+            var spark = document.createElement('div');
+            spark.className = 'catch-sparkle';
+            var angle = (s / 6) * Math.PI * 2;
+            spark.style.setProperty('--sx', Math.cos(angle) * 25 + 'px');
+            spark.style.setProperty('--sy', Math.sin(angle) * 25 + 'px');
+            el.appendChild(spark);
+            setTimeout(function(sp) { sp.remove(); }, 500, spark);
+          }
+
+          el.classList.add('catching');
+          setTimeout(function() {
+            el.classList.remove('catching');
+            var spriteRect = el.getBoundingClientRect();
+            var barRect = document.getElementById('catchCounter').getBoundingClientRect();
+            var tx = barRect.left + barRect.width / 2 - spriteRect.left;
+            var ty = barRect.top + barRect.height / 2 - spriteRect.top;
+            el.classList.add('flying');
+            el.style.transform = 'translate(' + tx + 'px, ' + ty + 'px) scale(0.2)';
+            el.style.opacity = '0';
+            setTimeout(function() {
+              el.remove();
+              // Respawn: place a new uncaught pokemon in the same slot
+              if (caught < 151) {
+                var next = getNextUncaught();
+                if (next) {
+                  setTimeout(function() {
+                    placeSprite(next, container, xPct, yPct, size);
+                  }, 800 + Math.random() * 1200);
+                }
+              }
+            }, 700);
+          }, 500);
+
+          document.removeEventListener('mousemove', checkProximity);
+          window.removeEventListener('scroll', checkScroll);
+        });
+      }
+
+      // Get next uncaught pokemon from the shuffled list
+      function getNextUncaught() {
+        for (var attempts = 0; attempts < 151; attempts++) {
+          spawnIndex = (spawnIndex + 1) % pokemon.length;
+          var p = shuffled[spawnIndex];
+          if (!spawnedIds[p.id]) return p;
+        }
+        return null;
+      }
+
+      // Place at curated positions
+      for (var i = 0; i < heroSlots.length && spawnIndex < shuffled.length; i++) {
+        var sl = heroSlots[i];
+        placeSprite(shuffled[spawnIndex], heroLayer, sl[0], sl[1], sl[2]);
+        spawnIndex++;
+      }
+      for (var i = 0; i < ctaSlots.length && spawnIndex < shuffled.length; i++) {
+        var sl = ctaSlots[i];
+        placeSprite(shuffled[spawnIndex], ctaLayer, sl[0], sl[1], sl[2]);
+        spawnIndex++;
+      }
+      // ── ORBIT SETUP (after sprites are placed) ──
+      var heroSprites = document.querySelectorAll('#spriteLayerHero .poke-sprite');
+      if (heroSprites.length > 0) {
+        var heroEl = document.querySelector('.hero');
+        var phoneWrap = document.querySelector('.hero-phone');
+        var phoneEl = document.querySelector('.phone');
+        var centerX = heroEl.offsetWidth / 2;
+        var centerY = phoneWrap.offsetTop + phoneEl.offsetHeight / 2 - 200;
+        var radius = 380;
+
+        orbitLayer.style.transformOrigin = centerX + 'px ' + centerY + 'px';
+
+        heroSprites.forEach(function(s, i) {
+          s.dataset.origLeft = s.style.left;
+          s.dataset.origTop = s.style.top;
+          var angle = (i / heroSprites.length) * Math.PI * 2 - Math.PI / 2;
+          orbitPositions.push({
+            x: centerX + Math.cos(angle) * radius - 24,
+            y: centerY + Math.sin(angle) * radius - 24
+          });
+        });
+        orbitReady = true;
+      }
+    })();
+
+    // ── CURSOR PARTICLE SYSTEM ──
+    (function() {
+      var canvas = document.getElementById('cursorCanvas');
+      var ctx = canvas.getContext('2d');
+      var particles = [];
+      var maxParticles = 80;
+
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      function getAccentColor() {
+        var raw = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+        // Parse hex to rgb
+        if (raw.charAt(0) === '#') {
+          var hex = raw.slice(1);
+          if (hex.length === 3) hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+          var n = parseInt(hex, 16);
+          return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+        }
+        return { r: 52, g: 211, b: 153 }; // fallback
+      }
+
+      var pixelGrid = 4; // snap to 4px grid for retro feel
+
+      document.addEventListener('mousemove', function(e) {
+        var count = 1 + Math.floor(Math.random() * 2);
+        var col = getAccentColor();
+        for (var i = 0; i < count; i++) {
+          if (particles.length >= maxParticles) particles.shift();
+          particles.push({
+            x: Math.round(e.clientX / pixelGrid) * pixelGrid,
+            y: Math.round(e.clientY / pixelGrid) * pixelGrid,
+            vx: (Math.round((Math.random() - 0.5) * 3) ) * pixelGrid * 0.3,
+            vy: (Math.round((Math.random() - 0.5) * 3) ) * pixelGrid * 0.3,
+            size: (1 + Math.floor(Math.random() * 2)) * pixelGrid, // 4px or 8px squares
+            life: 1.0,
+            decay: 1.0 / (0.6 * 60), // fade over 0.6s
+            r: col.r, g: col.g, b: col.b
+          });
+        }
+      });
+
+      document.addEventListener('touchmove', function(e) {
+        var t = e.touches[0];
+        var count = 1;
+        var col = getAccentColor();
+        if (particles.length >= maxParticles) particles.shift();
+        particles.push({
+          x: Math.round(t.clientX / pixelGrid) * pixelGrid,
+          y: Math.round(t.clientY / pixelGrid) * pixelGrid,
+          vx: (Math.round((Math.random() - 0.5) * 3)) * pixelGrid * 0.3,
+          vy: (Math.round((Math.random() - 0.5) * 3)) * pixelGrid * 0.3,
+          size: (1 + Math.floor(Math.random() * 2)) * pixelGrid,
+          life: 1.0,
+          decay: 1.0 / (0.6 * 60),
+          r: col.r, g: col.g, b: col.b
+        });
+      }, { passive: true });
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (var i = particles.length - 1; i >= 0; i--) {
+          var p = particles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vx *= 0.95; p.vy *= 0.95;
+          p.life -= p.decay;
+          if (p.life <= 0) { particles.splice(i, 1); continue; }
+          var s = p.size * Math.ceil(p.life * 3) / 3; // step-down size for pixel feel
+          var snapX = Math.round(p.x / pixelGrid) * pixelGrid;
+          var snapY = Math.round(p.y / pixelGrid) * pixelGrid;
+          ctx.fillStyle = 'rgba(' + p.r + ',' + p.g + ',' + p.b + ',' + (Math.ceil(p.life * 4) / 4) + ')';
+          ctx.fillRect(snapX - s/2, snapY - s/2, s, s);
+        }
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
+
+    // ── DITHERED SPHERE RENDERER (all agents) ──
+    (function() {
+      var agentData = {
+        dexter:         { palette: [[178,26,26],[245,56,46],[217,209,199],[56,112,235],[82,209,230]], speed: 0.9 },
+        typeScanner:    { palette: [[199,20,115],[242,31,51],[255,71,31],[255,133,38],[255,179,46]], speed: 2.2 },
+        dataScout:      { palette: [[92,20,184],[71,71,242],[31,128,255],[26,191,224],[38,235,235]], speed: 1.6 },
+        strategyEngine: { palette: [[204,77,13],[255,140,20],[255,204,31],[255,240,46],[184,245,38]], speed: 2.8 },
+        loreReader:     { palette: [[13,97,128],[20,158,117],[31,217,102],[82,240,56],[148,250,64]], speed: 1.2 }
+      };
+
+      var bayer = [
+        0.0000, 0.5000, 0.1250, 0.6250,
+        0.7500, 0.2500, 0.8750, 0.3750,
+        0.1875, 0.6875, 0.0625, 0.5625,
+        0.9375, 0.4375, 0.8125, 0.3125
+      ];
+
+      // Collect all sphere canvases
+      var spheres = [];
+      var dexterCanvas = document.querySelector('.dexter-sphere-canvas');
+      if (dexterCanvas) {
+        spheres.push({ canvas: dexterCanvas, ctx: dexterCanvas.getContext('2d'), agent: 'dexter', seed: Math.random() * Math.PI * 2, px: 2 });
+      }
+      document.querySelectorAll('.agent-sphere').forEach(function(c) {
+        spheres.push({ canvas: c, ctx: c.getContext('2d'), agent: c.dataset.agent, seed: Math.random() * Math.PI * 2, px: 2 });
+      });
+
+      function wanderingLight(t, seed) {
+        var d = 0.25;
+        var lx = 0.5 + Math.sin(t * 0.3 + seed) * d + Math.sin(t * 0.17 + seed * 1.3) * d * 0.4;
+        var ly = -0.6 + Math.cos(t * 0.2 + seed * 0.7) * d * 0.6 + Math.cos(t * 0.13 + seed * 0.4) * d * 0.3;
+        var lz = 0.6;
+        var len = Math.sqrt(lx * lx + ly * ly + lz * lz);
+        return [lx / len, ly / len, lz / len];
+      }
+
+      function drawSphere(s, time) {
+        var ad = agentData[s.agent]; if (!ad) return;
+        var t = time * 0.001 * ad.speed;
+        var W = s.canvas.width, H = s.canvas.height, px = s.px;
+        s.ctx.clearRect(0, 0, W, H);
+
+        var radius = Math.min(W, H) / 2;
+        var cx = W / 2, cy = H / 2;
+        var light = wanderingLight(t, s.seed);
+        var pal = ad.palette, maxI = pal.length - 1;
+
+        var w1 = t * 2.0 + s.seed, w2 = t * 1.4 + s.seed * 1.6, w3 = t * 0.8 + s.seed * 0.9;
+        var pcx = Math.sin(t * 0.4 + s.seed) * 0.3, pcy = Math.cos(t * 0.35 + s.seed * 0.7) * 0.2;
+        var spT = t * 0.8 + s.seed;
+
+        for (var py = 0; py < H; py += px) {
+          for (var ppx = 0; ppx < W; ppx += px) {
+            var nx = (ppx + px * 0.5 - cx) / radius;
+            var ny = (py + px * 0.5 - cy) / radius;
+            var r2 = nx * nx + ny * ny;
+            if (r2 > 1.0) continue;
+            var nz = Math.sqrt(1.0 - r2), dist = Math.sqrt(r2);
+            var shade = Math.max(0, nx * light[0] + ny * light[1] + nz * light[2]);
+            var intensity = Math.min(1.0, shade * 0.55 + 0.45);
+            var r1 = Math.sin(nx * 4 + ny * 1.5 + w1) * 0.22;
+            var r2v = Math.sin(ny * 3.5 - nx * 2 + w2) * 0.18;
+            var pd = Math.sqrt((nx - pcx) * (nx - pcx) + (ny - pcy) * (ny - pcy));
+            var r3 = Math.sin(pd * 8 - w3 * 1.8) * 0.15;
+            var ang = Math.atan2(ny, nx);
+            var sp = Math.sin(ang * 3 - dist * 6 + spT) * 0.18;
+            var v = Math.min(1, Math.max(0, intensity + r1 + r2v + r3 + sp));
+            var gp = v * maxI, lo = Math.min(Math.floor(gp), pal.length - 2), hi = lo + 1;
+            var bl = gp - lo;
+            var th = bayer[(Math.floor(py / px) % 4) * 4 + (Math.floor(ppx / px) % 4)];
+            var c = bl > th ? pal[hi] : pal[lo];
+            s.ctx.fillStyle = 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')';
+            s.ctx.fillRect(ppx, py, px, px);
+          }
+        }
+      }
+
+      function frame(time) {
+        for (var i = 0; i < spheres.length; i++) drawSphere(spheres[i], time);
+        requestAnimationFrame(frame);
+      }
+      if (spheres.length) requestAnimationFrame(frame);
+    })();
+  </script>
+</body>
+</html>
