@@ -156,16 +156,20 @@
       font-synthesis: none;
     }
 
-    /* ── NAV ── */
+    /* ── NAV (floating pill) ── */
     nav {
-      position: sticky; top: 0; z-index: 100; padding: 0 24px;
-      background: color-mix(in srgb, var(--bg) 85%, transparent);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
-      transition: background 0.5s, border-color 0.5s;
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      z-index: 100; width: calc(100% - 32px); max-width: 1080px;
+      padding: 0 20px;
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      border-radius: var(--r-pill);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04);
+      transition: background 0.5s, border-color 0.5s, box-shadow 0.5s, width 0.3s;
     }
     .nav-inner {
-      max-width: 1080px; margin: 0 auto; height: 56px;
+      max-width: 100%; margin: 0 auto; height: 52px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .logo {
@@ -241,7 +245,7 @@
     .dl-btn:hover { opacity: 0.85; }
 
     /* ── HERO ── */
-    .hero { padding: 100px 24px 80px; text-align: center; overflow: hidden; }
+    .hero { padding: 96px 24px 80px; text-align: center; overflow: hidden; }
     .hero-inner { max-width: 720px; margin: 0 auto; }
     .hero-fade { display: inline-block; }
     .hero-phone { margin-top: 64px; display: flex; justify-content: center; }
@@ -470,13 +474,14 @@
 
     /* ── WIDGETS BENTO ── */
     .widgets-section {
-      padding: 96px 24px; border-top: none;
+      padding: 96px 24px; border-top: none; position: relative;
       transition: background 0.6s ease, border-color 0.5s;
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
     }
     .widgets-header { max-width: 1080px; margin: 0 auto 48px; text-align: center; }
     .widgets-header h2 {
       font-family: var(--display); font-size: 36px; letter-spacing: -0.03em;
+      line-height: 1.05;
       color: var(--ink); transition: font-family 0.5s, color 0.5s;
     }
     .widgets-header p {
@@ -487,44 +492,79 @@
     .widget-seg-wrap { text-align: center; margin-bottom: 32px; }
     .widget-segments {
       display: inline-flex; gap: 0;
-      background: var(--surface); border-radius: var(--r);
-      padding: 4px; box-shadow: var(--shadow);
-      transition: all 0.5s;
+      background: var(--surface); border-radius: var(--r-pill);
+      padding: 5px; box-shadow: var(--shadow);
+      transition: background 0.5s, box-shadow 0.5s;
+      position: relative;
+    }
+    /* Sliding pill indicator */
+    .seg-slider {
+      position: absolute; top: 5px; left: 5px; height: calc(100% - 10px);
+      border-radius: var(--r-pill); background: var(--accent);
+      transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s ease, width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 0;
     }
     .widget-seg {
-      font-family: var(--body); font-size: 13px; font-weight: 500;
-      padding: 8px 20px; border: none; border-radius: calc(var(--r) - 4px);
+      font-family: var(--body); font-size: 14px; font-weight: 500;
+      padding: 10px 28px; border: none; border-radius: var(--r-pill);
       background: transparent; color: var(--ink3); cursor: pointer;
-      transition: all 0.25s; white-space: nowrap; position: relative;
+      transition: color 0.25s; white-space: nowrap; position: relative;
+      z-index: 1;
     }
     .widget-seg.active {
-      background: var(--accent); color: #fff;
-      transition: background 0.4s ease, color 0.25s;
-    }
-    .widget-seg:hover:not(.active) { color: var(--ink); background: var(--accent-lo); }
-
-    /* Widget segment active colors per tab */
-    .widgets-section[data-widget-bg="spotlight"] .widget-seg.active { background: #EE8130; }
-    .widgets-section[data-widget-bg="livingdex"] .widget-seg.active { background: #7AC74C; }
-    .widgets-section[data-widget-bg="roster"] .widget-seg.active { background: #6390F0; }
-    .widgets-section[data-widget-bg="health"] .widget-seg.active { background: #A33EA1; }
-
-    /* White text when body has type color bg */
-    body.widget-bg-active .widgets-section .widgets-header h2,
-    body.widget-bg-active .widgets-section .widgets-header p,
-    body.widget-bg-active .widgets-section .widget-info h3,
-    body.widget-bg-active .widgets-section .widget-info p,
-    body.widget-bg-active .widgets-section .feature-tag,
-    body.widget-bg-active .widgets-section .widget-phone-label {
       color: #fff;
+    }
+    .widget-seg:hover:not(.active) { color: var(--ink); }
+
+    /* Widget segment slider + text colors per type (dark hue on type bg) */
+    .widgets-section[data-widget-bg="spotlight"] .seg-slider { background: #5C4A00; }
+    .widgets-section[data-widget-bg="livingdex"] .seg-slider { background: #1B4D08; }
+    .widgets-section[data-widget-bg="roster"] .seg-slider { background: #5A2500; }
+    .widgets-section[data-widget-bg="health"] .seg-slider { background: #0A2660; }
+
+    /* Dark type-hue text when body has type color bg */
+    body.widget-bg-active .widgets-section .widgets-header h2,
+    body.widget-bg-active .widgets-section .widget-info h3,
+    body.widget-bg-active .widgets-section .widget-phone-label {
+      color: var(--widget-ink, #333);
     }
     body.widget-bg-active .widgets-section .widgets-header p,
     body.widget-bg-active .widgets-section .widget-info p {
-      color: rgba(255,255,255,0.8);
+      color: var(--widget-ink-soft, rgba(0,0,0,0.6));
     }
     body.widget-bg-active .widgets-section .feature-tag {
-      color: rgba(255,255,255,0.6);
+      color: var(--widget-ink-soft, rgba(0,0,0,0.5));
     }
+    body.widget-bg-active .widget-segments {
+      background: rgba(255,255,255,0.85);
+    }
+    body.widget-bg-active .widget-seg:not(.active) {
+      color: #333;
+    }
+    /* Per-type text colors */
+    .widgets-section[data-widget-bg="spotlight"] { --widget-ink: #5C4A00; --widget-ink-soft: rgba(92,74,0,0.7); }
+    .widgets-section[data-widget-bg="livingdex"] { --widget-ink: #1B4D08; --widget-ink-soft: rgba(27,77,8,0.7); }
+    .widgets-section[data-widget-bg="roster"] { --widget-ink: #5A2500; --widget-ink-soft: rgba(90,37,0,0.7); }
+    .widgets-section[data-widget-bg="health"] { --widget-ink: #0A2660; --widget-ink-soft: rgba(10,38,96,0.7); }
+
+    /* Dark mode widget section — deeper type bg, white text */
+    [data-theme="dark"] .widgets-section[data-widget-bg="spotlight"] { --widget-ink: #FDE68A; --widget-ink-soft: rgba(253,230,138,0.7); }
+    [data-theme="dark"] .widgets-section[data-widget-bg="livingdex"] { --widget-ink: #BBF7D0; --widget-ink-soft: rgba(187,247,208,0.7); }
+    [data-theme="dark"] .widgets-section[data-widget-bg="roster"] { --widget-ink: #FED7AA; --widget-ink-soft: rgba(254,215,170,0.7); }
+    [data-theme="dark"] .widgets-section[data-widget-bg="health"] { --widget-ink: #BFDBFE; --widget-ink-soft: rgba(191,219,254,0.7); }
+    /* Dark mode slider uses bright type colors */
+    [data-theme="dark"] .widgets-section[data-widget-bg="spotlight"] .seg-slider { background: #F7D02C; }
+    [data-theme="dark"] .widgets-section[data-widget-bg="livingdex"] .seg-slider { background: #7AC74C; }
+    [data-theme="dark"] .widgets-section[data-widget-bg="roster"] .seg-slider { background: #EE8130; }
+    [data-theme="dark"] .widgets-section[data-widget-bg="health"] .seg-slider { background: #6390F0; }
+    /* Dark mode active tab text — dark hue on bright slider */
+    [data-theme="dark"] .widgets-section[data-widget-bg="spotlight"] .widget-seg.active { color: #5C4A00; }
+    [data-theme="dark"] .widgets-section[data-widget-bg="livingdex"] .widget-seg.active { color: #1B4D08; }
+    [data-theme="dark"] .widgets-section[data-widget-bg="roster"] .widget-seg.active { color: #5A2500; }
+    [data-theme="dark"] .widgets-section[data-widget-bg="health"] .widget-seg.active { color: #0A2660; }
+    /* Dark mode segments container */
+    [data-theme="dark"] body.widget-bg-active .widget-segments { background: rgba(0,0,0,0.4); }
+    [data-theme="dark"] body.widget-bg-active .widget-seg:not(.active) { color: rgba(255,255,255,0.7); }
     body.widget-bg-active .widgets-section .w-tag {
       color: rgba(255,255,255,0.7);
     }
@@ -568,8 +608,15 @@
 
     @media (max-width: 768px) {
       .widget-showcase { flex-direction: column; gap: 32px; text-align: center; }
-      .widget-segments { max-width: 100%; overflow-x: auto; }
-      .widget-seg { font-size: 10px; padding: 5px 12px; }
+      .widget-seg-wrap { width: 100%; padding: 0 16px; box-sizing: border-box; }
+      .widget-segments {
+        display: flex; width: 100%;
+        border-radius: var(--r-pill); padding: 4px;
+      }
+      .widget-seg {
+        flex: 1; font-size: 13px; padding: 10px 0; text-align: center;
+        border-radius: var(--r-pill);
+      }
     }
 
     .dexter-visual {
@@ -786,6 +833,10 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
+      nav { width: calc(100% - 24px); padding: 0 16px; top: 10px; }
+      .nav-inner { height: 48px; }
+      .logo { font-size: 17px; }
+      .logo-icon { width: 24px; height: 24px; border-radius: 5px; }
       .hero h1 { font-size: 52px; }
       .hero { padding: 72px 24px 56px; }
       .feature-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -806,9 +857,15 @@
     @media (max-width: 480px) {
       .hero h1 { font-size: 40px; }
       .phone { width: 280px; height: 560px; }
+      nav { width: calc(100% - 24px); padding: 0 14px; top: 8px; }
+      .nav-inner { height: 44px; }
+      .logo { font-size: 16px; gap: 6px; }
+      .logo-icon { width: 22px; height: 22px; }
+      .nav-right { gap: 6px; }
+      .era-trigger { font-size: 9px; padding: 4px 10px; }
+      .theme-btn { width: 30px; height: 30px; }
       .dl-btn { display: none; }
       .cta-section h2 { font-size: 28px; }
-      /* Reduce hero pin duration on mobile */
       .hero { padding: 72px 16px 56px; }
       /* Smaller catch counter */
       .catch-counter { font-size: 10px; padding: 6px 12px; bottom: 16px; right: 16px; }
@@ -828,8 +885,9 @@
       .feature-desc { font-size: 15px; }
       /* Extras */
       .extras { padding: 64px 16px; }
-      /* Hide sprites on very small screens */
+      /* Hide hero/CTA sprites on very small screens, keep widget sprites */
       .sprite-layer { display: none; }
+      #spriteLayerWidgets { display: block; }
     }
   </style>
 </head>
@@ -907,6 +965,7 @@
 
     <!-- WIDGETS BENTO -->
     <section class="widgets-section" data-widget-bg="spotlight">
+      <div class="sprite-layer" id="spriteLayerWidgets"></div>
       <div class="widgets-header">
         <div class="feature-tag">Home Screen Widgets</div>
         <h2>Your Pokédex, always visible.</h2>
@@ -914,6 +973,7 @@
       </div>
       <div class="widget-seg-wrap">
         <div class="widget-segments">
+          <div class="seg-slider"></div>
           <button class="widget-seg active" data-widget="spotlight">Spotlight</button>
           <button class="widget-seg" data-widget="livingdex">Living Dex</button>
           <button class="widget-seg" data-widget="roster">Roster</button>
@@ -1151,6 +1211,12 @@
         root.dataset.theme = theme;
         localStorage.setItem('treeco-theme', theme);
         // Icons always use dark variant
+        // Update widget section bg if currently active
+        if (document.body.classList.contains('widget-bg-active') && window.widgetBgColors) {
+          var active = document.querySelector('.widgets-section').dataset.widgetBg || 'spotlight';
+          var colors = window.widgetBgColors[theme] || window.widgetBgColors.light;
+          document.body.style.backgroundColor = colors[active] || '';
+        }
       }
       function toggleDropdown() {
         var open = dropdown.classList.toggle('open');
@@ -1315,12 +1381,11 @@
     });
 
     // Widgets section — morph page background to type color on scroll
-    var widgetBgColors = {
-      spotlight: '#EE8130',
-      livingdex: '#7AC74C',
-      roster: '#6390F0',
-      health: '#A33EA1'
+    window.widgetBgColors = {
+      light: { spotlight: '#F7D02C', livingdex: '#7AC74C', roster: '#EE8130', health: '#6390F0' },
+      dark: { spotlight: '#5C4A00', livingdex: '#1B4D08', roster: '#5A2500', health: '#0A2660' }
     };
+    var widgetBgColors = window.widgetBgColors;
     var savedBgBeforeWidgets = null;
     ScrollTrigger.create({
       trigger: '.widgets-section',
@@ -1328,8 +1393,9 @@
       end: 'bottom 40%',
       onEnter: function() {
         savedBgBeforeWidgets = document.body.style.backgroundColor || '';
+        var theme = document.documentElement.dataset.theme || 'light';
         var active = document.querySelector('.widgets-section').dataset.widgetBg || 'spotlight';
-        document.body.style.backgroundColor = widgetBgColors[active] || '';
+        document.body.style.backgroundColor = widgetBgColors[theme][active] || '';
         document.body.classList.add('widget-bg-active');
       },
       onLeave: function() {
@@ -1337,8 +1403,9 @@
         document.body.classList.remove('widget-bg-active');
       },
       onEnterBack: function() {
+        var theme = document.documentElement.dataset.theme || 'light';
         var active = document.querySelector('.widgets-section').dataset.widgetBg || 'spotlight';
-        document.body.style.backgroundColor = widgetBgColors[active] || '';
+        document.body.style.backgroundColor = widgetBgColors[theme][active] || '';
         document.body.classList.add('widget-bg-active');
       },
       onLeaveBack: function() {
@@ -1417,25 +1484,65 @@
     gsap.from('.cta-btn', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-sub', { opacity: 0, duration: 0.5, delay: 0.5, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
 
-    // Widget segments
+    // Widget segments with sliding pill + animated transitions
     (function() {
       var segs = document.querySelectorAll('.widget-seg');
       var panels = document.querySelectorAll('.widget-info-panel');
       var phoneLabel = document.getElementById('widgetPhoneLabel');
+      var slider = document.querySelector('.seg-slider');
+      var segWrap = document.querySelector('.widget-segments');
       var labels = { spotlight: 'Spotlight widget', livingdex: 'Living Dex widget', roster: 'Team Roster widget', health: 'Team Health widget' };
+      var wColorsLight = { spotlight:'#F7D02C', livingdex:'#7AC74C', roster:'#EE8130', health:'#6390F0' };
+      var wColorsDark = { spotlight:'#5C4A00', livingdex:'#1B4D08', roster:'#5A2500', health:'#0A2660' };
+
+      function moveSlider(target) {
+        var wrapRect = segWrap.getBoundingClientRect();
+        var tabRect = target.getBoundingClientRect();
+        slider.style.width = tabRect.width + 'px';
+        slider.style.transform = 'translateX(' + (tabRect.left - wrapRect.left - 5) + 'px)';
+      }
+
+      // Position slider on initial active tab
+      var initActive = document.querySelector('.widget-seg.active');
+      if (initActive) {
+        // Wait for layout
+        requestAnimationFrame(function() { moveSlider(initActive); });
+      }
+      // Reposition on resize
+      window.addEventListener('resize', function() {
+        var active = document.querySelector('.widget-seg.active');
+        if (active) moveSlider(active);
+      });
+
       segs.forEach(function(seg) {
         seg.addEventListener('click', function() {
           var w = seg.dataset.widget;
           segs.forEach(function(s) { s.classList.toggle('active', s.dataset.widget === w); });
-          panels.forEach(function(p) { p.classList.toggle('active', p.dataset.widgetPanel === w); });
+
+          // Slide the pill
+          moveSlider(seg);
+
+          // Animate panel swap
+          var activePanel = document.querySelector('.widget-info-panel.active');
+          var nextPanel = document.querySelector('.widget-info-panel[data-widget-panel="' + w + '"]');
+          if (activePanel && activePanel !== nextPanel) {
+            gsap.to(activePanel, { opacity: 0, y: 6, duration: 0.12, onComplete: function() {
+              panels.forEach(function(p) { p.classList.remove('active'); p.style.opacity = ''; p.style.transform = ''; });
+              nextPanel.classList.add('active');
+              gsap.fromTo(nextPanel, { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.15, ease: 'power2.out' });
+            }});
+          } else {
+            panels.forEach(function(p) { p.classList.toggle('active', p.dataset.widgetPanel === w); });
+          }
+
           document.querySelector('.widgets-section').dataset.widgetBg = w;
           if (phoneLabel) phoneLabel.textContent = labels[w] || w;
-          // Update body bg if currently viewing widgets section
-          var wColors = { spotlight:'#EE8130', livingdex:'#7AC74C', roster:'#6390F0', health:'#A33EA1' };
-          var wSection = document.querySelector('.widgets-section');
-          var rect = wSection.getBoundingClientRect();
+
+          // Smooth background color transition
           if (document.body.classList.contains('widget-bg-active')) {
-            document.body.style.backgroundColor = wColors[w] || '';
+            var theme = document.documentElement.dataset.theme || 'light';
+            var colors = theme === 'dark' ? wColorsDark : wColorsLight;
+            gsap.to(document.body, { backgroundColor: colors[w], duration: 0.3, ease: 'power2.inOut' });
           }
         });
       });
@@ -1693,6 +1800,55 @@
         placeSprite(shuffled[spawnIndex], ctaLayer, sl[0], sl[1], sl[2]);
         spawnIndex++;
       }
+
+      // Widget section sprites — type-matched to active tab
+      var widgetLayer = document.getElementById('spriteLayerWidgets');
+      var widgetSlots = [
+        [4, 15, 32], [90, 10, 30], [6, 55, 34], [88, 50, 28],
+        [10, 85, 30], [85, 88, 32]
+      ];
+      var typeMap = {
+        spotlight: 'Electric', livingdex: 'Grass', roster: 'Fire', health: 'Water'
+      };
+
+      function spawnWidgetSprites(widgetKey) {
+        widgetLayer.innerHTML = '';
+        var type = typeMap[widgetKey];
+        var typed = pokemon.filter(function(p) { return p.type === type; });
+        var shuffledTyped = shuffle(typed);
+        for (var i = 0; i < widgetSlots.length && i < shuffledTyped.length; i++) {
+          var sl = widgetSlots[i];
+          var p = shuffledTyped[i];
+          // Inline version — don't use the catch system for widget sprites
+          var el = document.createElement('div');
+          el.className = 'poke-sprite visible';
+          el.innerHTML =
+            '<img src="' + spriteBaseUrl + p.id + '.gif" alt="' + p.name + '" draggable="false" style="width:' + sl[2] + 'px;height:' + sl[2] + 'px;">' +
+            '<div class="sprite-tooltip">' +
+              '<span class="tt-name">' + p.name + '</span> ' +
+              '<span class="tt-num">#' + String(p.id).padStart(3, '0') + '</span>' +
+              '<span class="tt-type" style="background:' + p.color + '">' + p.type + '</span>' +
+            '</div>';
+          el.style.left = sl[0] + '%';
+          el.style.top = sl[1] + '%';
+          el.style.setProperty('--float-dur', (2.5 + Math.random() * 2) + 's');
+          el.style.setProperty('--float-delay', (Math.random() * -3) + 's');
+          el.style.setProperty('--float-y', (-4 - Math.random() * 6) + 'px');
+          widgetLayer.appendChild(el);
+          // Fade in
+          gsap.fromTo(el, { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.4, delay: i * 0.08, ease: 'back.out(1.5)' });
+        }
+      }
+      // Initial spawn
+      spawnWidgetSprites('spotlight');
+
+      // Re-spawn when tab changes — hook into click handler
+      document.querySelectorAll('.widget-seg').forEach(function(seg) {
+        seg.addEventListener('click', function() {
+          spawnWidgetSprites(seg.dataset.widget);
+        });
+      });
+
       // ── ORBIT SETUP (after sprites are placed) ──
       var heroSprites = document.querySelectorAll('#spriteLayerHero .poke-sprite');
       if (heroSprites.length > 0) {
