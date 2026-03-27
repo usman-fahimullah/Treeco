@@ -4,6 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tree Co. — Your Pokémon Companion</title>
+  <meta name="description" content="Browse all 1,025 Pokémon with full stats, moves, type matchups, team builder, and on-device AI assistant. Free offline Pokédex for iOS with Smogon tiers, weakness heatmaps, and Showdown export.">
+  <link rel="canonical" href="https://www.treeco.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.treeco.app/">
+  <meta property="og:title" content="Tree Co. — The Pokédex You Actually Want to Use">
+  <meta property="og:description" content="All 1,025 Pokémon with stats, moves, type matchups, team builder, and AI assistant. Free offline Pokédex for iOS.">
+  <meta property="og:image" content="https://www.treeco.app/icon-dark.png">
+  <meta property="og:site_name" content="Tree Co.">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Tree Co. — The Pokédex You Actually Want to Use">
+  <meta name="twitter:description" content="All 1,025 Pokémon with stats, moves, type matchups, team builder, and AI assistant. Free offline Pokédex for iOS.">
+  <meta name="twitter:image" content="https://www.treeco.app/icon-dark.png">
+
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="fonts/MomoTrustDisplay-Regular.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/MomoTrustSans-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
   <link rel="icon" href="icon-dark.png">
   <link rel="apple-touch-icon" href="icon-dark.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
@@ -831,6 +852,24 @@
       font-size: 11px; color: var(--ink3); text-align: center;
     }
 
+    /* ── FAQ ── */
+    .faq-section { max-width: 720px; margin: 0 auto; padding: 80px 24px; }
+    .faq-section h2 { margin-bottom: 40px; }
+    .faq-item {
+      border-bottom: 1px solid var(--border); padding: 20px 0;
+      transition: border-color 0.5s;
+    }
+    .faq-summary {
+      cursor: pointer; font-family: var(--body); font-weight: 600;
+      color: var(--ink); font-size: 17px;
+      transition: font-family 0.5s, color 0.5s;
+    }
+    .faq-answer {
+      margin-top: 12px; color: var(--ink2); line-height: 1.6;
+      transition: color 0.5s;
+    }
+    .faq-answer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { width: calc(100% - 24px); padding: 0 16px; top: 10px; }
@@ -890,6 +929,125 @@
       #spriteLayerWidgets { display: block; }
     }
   </style>
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Tree Co.",
+    "url": "https://www.treeco.app",
+    "logo": "https://www.treeco.app/icon-dark.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "fahimullahusman@gmail.com",
+      "contactType": "customer support"
+    }
+  }
+  </script>
+
+  <!-- Structured Data: SoftwareApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Tree Co.",
+    "alternateName": "Tree Co. Pokédex",
+    "description": "A comprehensive Pokédex companion app covering all 1,025 Pokémon across 9 generations. Features include full stats, moves, type matchups, a competitive team builder with Smogon tier data and Showdown export, home screen widgets, a Living Dex tracker, Nuzlocke mode, and an on-device AI assistant called Dexter. Works offline with a 200MB cache. No ads, no analytics, no account required.",
+    "url": "https://www.treeco.app",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "iOS 26",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free to download with optional Pro subscription ($2.99/month or $19.99/year) for advanced features including unlimited AI queries, full team analysis, offline downloads, competitive profiles, and Living Dex import/export."
+    },
+    "featureList": [
+      "Complete Pokédex with all 1,025 Pokémon across 9 generations",
+      "Full stats, abilities, movesets, evolution chains, and type matchups",
+      "3 sprite styles: official artwork, pixel sprites, and Showdown sprites",
+      "Competitive team builder with weakness heatmap and Smogon tier data",
+      "Export teams to Pokémon Showdown in one tap",
+      "On-device AI assistant (Ask Dexter) with 4 specialized agents",
+      "Interactive 18x18 type effectiveness chart",
+      "Living Dex tracker with shiny hunting streak counters",
+      "Home screen widgets for Pokémon spotlight, team roster, and progress",
+      "Nuzlocke mode for hardcore challenge runs",
+      "TCG Card Binder with camera scanning",
+      "6 visual eras: Modern, Game Boy, GB Pocket, GB Color, GB Advance, Nintendo DS",
+      "Offline mode with 200MB cache",
+      "Zero tracking: no ads, no analytics, no accounts"
+    ],
+    "screenshot": "https://www.treeco.app/icon-dark.png"
+  }
+  </script>
+
+  <!-- Structured Data: FAQPage (AEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many Pokémon does Tree Co. include?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tree Co. includes all 1,025 Pokémon across all 9 generations, from Bulbasaur to Pecharunt. Each Pokémon has full stats, abilities, movesets, evolution chains, and type matchups. You can view them as official artwork, pixel sprites, or Showdown sprites."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tree Co. free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Tree Co. is free to download with no account required. The free version includes the full Pokédex, type chart, team builder basics, and 3 daily AI queries. Pro ($2.99/month or $19.99/year) adds unlimited AI queries, full team analysis with Smogon data, offline downloads, competitive profiles, Living Dex import/export, and the shiny hunting toolkit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Tree Co. work offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Tree Co. works fully offline. The app caches the complete Pokédex data (approximately 200MB) on your device, including all stats, moves, abilities, and evolution data. Pro users can trigger a full offline download. The on-device AI assistant (Dexter) also runs locally using Apple's Foundation Models framework — no internet needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Ask Dexter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ask Dexter is Tree Co.'s on-device AI assistant, powered by Apple's Foundation Models framework. It uses 4 specialized agents — Type Scanner (type matchups), Data Scout (stats and moves), Strategy Engine (Smogon competitive analysis), and Lore Reader (design origins and trivia) — that research your question before Dexter synthesizes a final answer. It runs entirely on-device for privacy. Free users get 3 queries per day; Pro users get unlimited access."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I build competitive teams in Tree Co.?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Tree Co. includes a full competitive team builder. It shows a weakness heatmap so you can see your team's vulnerabilities at a glance, provides Smogon tier context and usage data for VGC and Smogon formats, suggests optimal partners and movesets, and lets you export your team to Pokémon Showdown in one tap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Tree Co. track my data or show ads?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Tree Co. has zero tracking — no ads, no analytics, no user accounts. All data stays on your device. The AI assistant runs entirely on-device using Apple's Foundation Models, so your queries are never sent to external servers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What devices does Tree Co. support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tree Co. is available for iPhone and iPad running iOS 26 or later. It is currently iOS only. The app takes full advantage of iOS 26 features including Liquid Glass design, home screen widgets, and on-device AI via Apple's Foundation Models framework."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -959,13 +1117,13 @@
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>3 sprite styles</span>
           </div>
         </div>
-        <div class="feature-visual"><span>Pokédex screenshot</span></div>
+        <div class="feature-visual" role="img" aria-label="Tree Co. Pokédex showing all 1,025 Pokémon with stats, moves, and type matchups"><span>Pokédex screenshot</span></div>
       </div>
     </section>
 
     <!-- WIDGETS BENTO -->
     <section class="widgets-section" data-widget-bg="spotlight">
-      <div class="sprite-layer" id="spriteLayerWidgets"></div>
+      <div class="sprite-layer" id="spriteLayerWidgets" style="pointer-events:none;"></div>
       <div class="widgets-header">
         <div class="feature-tag">Home Screen Widgets</div>
         <h2>Your Pokédex, always visible.</h2>
@@ -1015,14 +1173,14 @@
         <div class="feature-text">
           <div class="feature-tag">Team Builder</div>
           <h2 class="feature-title">Build teams that<br>actually win.</h2>
-          <p class="feature-desc">See your team's weaknesses at a glance with the heatmap view. Get tier context from Smogon, coverage analysis, and best partner suggestions. Export to Pokémon Showdown in one tap.</p>
+          <p class="feature-desc">See your team's weaknesses at a glance with the heatmap view. Get tier context from <a href="https://www.smogon.com/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">Smogon</a>, coverage analysis, and best partner suggestions. Export to <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">Pokémon Showdown</a> in one tap.</p>
           <div class="feature-detail">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>VGC + Smogon</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Weakness heatmap</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Showdown export</span>
           </div>
         </div>
-        <div class="feature-visual"><span>Team Builder screenshot</span></div>
+        <div class="feature-visual" role="img" aria-label="Team Builder with weakness heatmap, Smogon tier data, and Showdown export"><span>Team Builder screenshot</span></div>
       </div>
     </section>
 
@@ -1042,7 +1200,7 @@
 
         <!-- Screenshot -->
         <div style="display:flex; justify-content:center; margin-bottom: 80px;">
-          <div class="dexter-visual"><span>Ask Dexter screenshot</span></div>
+          <div class="dexter-visual" role="img" aria-label="Ask Dexter AI assistant answering a Pokémon question with specialized agents"><span>Ask Dexter screenshot</span></div>
         </div>
 
         <!-- Agent Timeline -->
@@ -1161,6 +1319,40 @@
       </div>
     </section>
 
+    <!-- FAQ (AEO: answer-first for AI search engine citability) -->
+    <section class="faq-section" id="faq">
+      <div class="feature-tag">FAQ</div>
+      <h2>Common questions</h2>
+      <details class="faq-item">
+        <summary class="faq-summary">How many Pokémon does Tree Co. include?</summary>
+        <p class="faq-answer">All 1,025 Pokémon across all 9 generations, from Bulbasaur to Pecharunt. Each entry includes full stats, abilities, movesets, evolution chains, and type matchups. You can view them as official artwork, pixel sprites, or Showdown sprites.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Is Tree Co. free?</summary>
+        <p class="faq-answer">Yes — free to download, no account required. The free tier includes the full Pokédex, type chart, team builder basics, and 3 daily AI queries. <strong>Pro ($2.99/month or $19.99/year)</strong> adds unlimited AI queries, full team analysis with Smogon data, offline downloads, competitive profiles, Living Dex import/export, and the shiny hunting toolkit. Theme packs are $0.99 each.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Does it work offline?</summary>
+        <p class="faq-answer">Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device, including stats, moves, abilities, and evolution data. Pro users can trigger a full offline download. The AI assistant (Dexter) also runs entirely on-device using Apple's Foundation Models — no internet needed.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">What is Ask Dexter?</summary>
+        <p class="faq-answer">Your on-device AI Pokédex assistant. It uses 4 specialized agents — Type Scanner, Data Scout, Strategy Engine, and Lore Reader — to research your question before synthesizing a clear answer. Runs locally via Apple's Foundation Models for complete privacy. Free: 3 queries/day. Pro: unlimited.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Can I build competitive teams?</summary>
+        <p class="faq-answer">Yes. The team builder shows a weakness heatmap, provides <a href="https://www.smogon.com/" target="_blank" rel="noopener">Smogon</a> tier context and usage data for VGC and Smogon formats, suggests partners and movesets, and exports directly to <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener">Pokémon Showdown</a>.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">Does Tree Co. track my data?</summary>
+        <p class="faq-answer">No. Zero tracking — no ads, no analytics, no user accounts. All data stays on your device. AI queries run on-device and are never sent to external servers.</p>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-summary">What devices does it support?</summary>
+        <p class="faq-answer">iPhone and iPad running iOS 26 or later. Currently iOS only. Built with Liquid Glass, home screen widgets, and on-device AI via Apple's Foundation Models framework.</p>
+      </details>
+    </section>
+
     <!-- CTA -->
     <section class="cta-section" style="position:relative;">
       <div class="sprite-layer" id="spriteLayerCTA"></div>
@@ -1171,7 +1363,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download for iOS
       </button>
-      <div class="cta-sub">iOS 26+ required. Free with optional premium features.</div>
+      <div class="cta-sub">iOS 26+ required. Free with full Pokédex &amp; 3 daily AI queries. Pro: $2.99/month or $19.99/year.</div>
     </section>
   </main>
 
