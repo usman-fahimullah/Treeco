@@ -895,12 +895,77 @@
     .waitlist-wrap.is-success .waitlist-form,
     .waitlist-wrap.is-success .waitlist-error { display: none; }
     .waitlist-wrap.is-success .waitlist-success { display: inline-flex; }
-    .waitlist-counter {
-      font-family: var(--mono); font-size: 12px; color: var(--ink3);
-      margin-top: 12px; letter-spacing: 0.04em;
-      transition: color 0.5s;
+    /* Stacked avatar social proof */
+    .waitlist-proof {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-top: 16px;
     }
-    .waitlist-counter .counter-num { font-weight: 600; color: var(--ink2); transition: color 0.5s; }
+    .wl-avatars { display: flex; }
+    .wl-avatar {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 10px; font-weight: 700;
+      color: #fff; margin-left: -6px; border: 2px solid var(--bg);
+      transition: border-color 0.5s;
+    }
+    .wl-avatar:first-child { margin-left: 0; }
+    .wl-proof-text {
+      font-family: var(--mono); font-size: 12px; color: var(--ink3);
+      letter-spacing: 0.04em; transition: color 0.5s;
+    }
+    .wl-proof-text .counter-num { font-weight: 600; color: var(--ink2); transition: color 0.5s; }
+
+    /* Trust microcopy */
+    .wl-trust {
+      font-family: var(--mono); font-size: 10px; color: var(--ink3);
+      margin-top: 10px; letter-spacing: 0.04em; text-transform: uppercase;
+      opacity: 0.7; transition: color 0.5s;
+    }
+
+    /* Success state — upgraded */
+    .waitlist-success {
+      display: none; flex-direction: column; align-items: center; gap: 16px;
+      padding: 20px 28px; max-width: 400px; margin: 0 auto;
+      background: color-mix(in srgb, var(--accent) 8%, transparent);
+      border-radius: var(--r-lg, 16px);
+    }
+    .wl-success-main {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .wl-success-main svg circle { stroke: var(--accent); fill: none; stroke-width: 2; }
+    .wl-success-main svg path {
+      stroke: var(--accent); fill: none; stroke-width: 2.5;
+      stroke-dasharray: 24; stroke-dashoffset: 24;
+      animation: wl-check 0.5s 0.2s ease forwards;
+    }
+    .waitlist-success-text {
+      font-family: var(--body); font-size: 16px; font-weight: 600; color: var(--accent);
+      display: block;
+    }
+    .wl-queue-pos {
+      font-family: var(--mono); font-size: 11px; color: var(--ink3);
+      letter-spacing: 0.04em; display: block; margin-top: 2px;
+    }
+    .wl-share { text-align: center; }
+    .wl-share-label {
+      font-family: var(--mono); font-size: 10px; color: var(--ink3);
+      letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 10px;
+    }
+    .wl-share-btns { display: flex; gap: 8px; justify-content: center; }
+    .wl-share-btn {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--ink2); cursor: pointer; transition: all 0.2s;
+      text-decoration: none;
+    }
+    .wl-share-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .wl-share-copy.is-copied { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .waitlist-wrap.is-success .waitlist-form,
+    .waitlist-wrap.is-success .waitlist-error,
+    .waitlist-wrap.is-success .waitlist-proof,
+    .waitlist-wrap.is-success .wl-trust { display: none; }
+    .waitlist-wrap.is-success .waitlist-success { display: flex; }
 
     /* ── CTA DETAILS ── */
     .cta-details {
@@ -1486,15 +1551,43 @@
           <h1 data-gsap="hero-title">The Pokédex you <span class="accent">actually</span> want to use.</h1>
           <div class="waitlist-wrap" id="waitlist-hero" data-gsap="hero-cta">
             <form class="waitlist-form" data-source="hero">
-              <input type="email" class="waitlist-input" placeholder="Enter your email" required autocomplete="email" aria-label="Email address for waitlist">
-              <button type="submit" class="waitlist-submit"><span>Join Waitlist</span><div class="wl-spinner"></div></button>
+              <input type="email" class="waitlist-input" placeholder="trainer@pokemon.com" required autocomplete="email" aria-label="Email address for waitlist">
+              <button type="submit" class="waitlist-submit"><span>Get Early Access</span><div class="wl-spinner"></div></button>
             </form>
             <div class="waitlist-success">
-              <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-              <span class="waitlist-success-text">You're on the list!</span>
+              <div class="wl-success-main">
+                <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+                <div>
+                  <span class="waitlist-success-text">You're on the list!</span>
+                  <span class="wl-queue-pos"></span>
+                </div>
+              </div>
+              <div class="wl-share">
+                <p class="wl-share-label">Share to move up the queue</p>
+                <div class="wl-share-btns">
+                  <a class="wl-share-btn wl-share-x" href="#" target="_blank" rel="noopener" aria-label="Share on X">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a class="wl-share-btn wl-share-wa" href="#" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  </a>
+                  <button class="wl-share-btn wl-share-copy" aria-label="Copy link">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  </button>
+                </div>
+              </div>
             </div>
             <div class="waitlist-error" aria-live="polite"></div>
-            <p class="waitlist-counter"><span class="counter-num">0</span> trainers waiting</p>
+            <div class="waitlist-proof">
+              <div class="wl-avatars">
+                <span class="wl-avatar" style="background:#7AC74C;">T</span>
+                <span class="wl-avatar" style="background:#6390F0;">A</span>
+                <span class="wl-avatar" style="background:#EE8130;">K</span>
+                <span class="wl-avatar" style="background:#A98FF3;">M</span>
+              </div>
+              <span class="wl-proof-text">Join <span class="counter-num">0</span>+ trainers</span>
+            </div>
+            <p class="wl-trust">No spam. Just launch updates. Unsubscribe anytime.</p>
           </div>
         </div>
         <div class="hero-phone" data-gsap="hero-phone">
@@ -1915,14 +2008,34 @@
       <p>No account required. Your Pokémon adventure starts soon.</p>
       <div class="waitlist-wrap" id="waitlist-cta">
         <form class="waitlist-form" data-source="cta-section">
-          <input type="email" class="waitlist-input" placeholder="Enter your email" required autocomplete="email" aria-label="Email address for waitlist">
-          <button type="submit" class="waitlist-submit"><span>Join Waitlist</span><div class="wl-spinner"></div></button>
+          <input type="email" class="waitlist-input" placeholder="trainer@pokemon.com" required autocomplete="email" aria-label="Email address for waitlist">
+          <button type="submit" class="waitlist-submit"><span>Get Early Access</span><div class="wl-spinner"></div></button>
         </form>
         <div class="waitlist-success">
-          <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
-          <span class="waitlist-success-text">You're on the list!</span>
+          <div class="wl-success-main">
+            <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+            <div>
+              <span class="waitlist-success-text">You're on the list!</span>
+              <span class="wl-queue-pos"></span>
+            </div>
+          </div>
+          <div class="wl-share">
+            <p class="wl-share-label">Share to move up the queue</p>
+            <div class="wl-share-btns">
+              <a class="wl-share-btn wl-share-x" href="#" target="_blank" rel="noopener" aria-label="Share on X">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a class="wl-share-btn wl-share-wa" href="#" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </a>
+              <button class="wl-share-btn wl-share-copy" aria-label="Copy link">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="waitlist-error" aria-live="polite"></div>
+        <p class="wl-trust">No spam. Just launch updates.</p>
       </div>
       <div class="cta-details">
         <span class="cta-detail">
@@ -2348,28 +2461,53 @@
       var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
       var forms = document.querySelectorAll('.waitlist-form');
       var wraps = document.querySelectorAll('.waitlist-wrap');
-      var counterEl = document.querySelector('.counter-num');
+      var counterEls = document.querySelectorAll('.counter-num');
+      var SHARE_URL = 'https://treeco.app';
+      var SHARE_TEXT = "I just signed up for Tree Co. — the Pokédex you actually want to use. Get early access:";
 
       // Load waitlist count
-      function loadCount() {
+      function loadCount(animate) {
         sb.from('waitlist').select('*', { count: 'exact', head: true }).then(function(res) {
-          if (res.count != null && counterEl) {
-            var target = res.count;
-            gsap.to({ val: 0 }, {
-              val: target, duration: 1.2, ease: 'power2.out',
-              onUpdate: function() { counterEl.textContent = Math.round(this.targets()[0].val); }
+          if (res.count != null) {
+            counterEls.forEach(function(el) {
+              if (animate) {
+                gsap.to({ val: 0 }, {
+                  val: res.count, duration: 1.2, ease: 'power2.out',
+                  onUpdate: function() { el.textContent = Math.round(this.targets()[0].val); }
+                });
+              } else {
+                el.textContent = res.count;
+              }
             });
           }
         });
       }
-      loadCount();
+      loadCount(true);
+
+      // Set share URLs
+      function setShareUrls() {
+        document.querySelectorAll('.wl-share-x').forEach(function(a) {
+          a.href = 'https://x.com/intent/tweet?text=' + encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL);
+        });
+        document.querySelectorAll('.wl-share-wa').forEach(function(a) {
+          a.href = 'https://wa.me/?text=' + encodeURIComponent(SHARE_TEXT + ' ' + SHARE_URL);
+        });
+        document.querySelectorAll('.wl-share-copy').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            navigator.clipboard.writeText(SHARE_URL).then(function() {
+              btn.classList.add('is-copied');
+              setTimeout(function() { btn.classList.remove('is-copied'); }, 1500);
+            });
+          });
+        });
+      }
+      setShareUrls();
 
       // Form submission
       forms.forEach(function(form) {
         var wrap = form.closest('.waitlist-wrap');
         var input = form.querySelector('.waitlist-input');
         var errorEl = wrap.querySelector('.waitlist-error');
-        var successTextEl = wrap.querySelector('.waitlist-success-text');
 
         input.addEventListener('input', function() {
           form.classList.remove('has-error');
@@ -2401,21 +2539,26 @@
                 return;
               }
 
-              // Check if duplicate (created_at is more than 5s ago)
               var row = res.data && res.data[0];
               var isDupe = row && (Date.now() - new Date(row.created_at).getTime() > 5000);
 
-              // Mark all wraps as success
-              wraps.forEach(function(w) {
-                var txt = w.querySelector('.waitlist-success-text');
-                if (txt) txt.textContent = isDupe ? "You're already on the list!" : "You're on the list!";
-                w.classList.add('is-success');
-                var pill = w.querySelector('.waitlist-success');
-                if (pill) gsap.from(pill, { scale: 0.8, opacity: 0, duration: 0.4, ease: 'back.out(1.7)' });
-              });
+              // Get queue position
+              sb.from('waitlist').select('*', { count: 'exact', head: true }).then(function(countRes) {
+                var total = countRes.count || 0;
 
-              // Refresh counter
-              if (!isDupe) loadCount();
+                wraps.forEach(function(w) {
+                  var txt = w.querySelector('.waitlist-success-text');
+                  var pos = w.querySelector('.wl-queue-pos');
+                  if (txt) txt.textContent = isDupe ? "You're already on the list!" : "You're on the list!";
+                  if (pos && !isDupe) pos.textContent = "You're #" + total + " in line";
+                  if (pos && isDupe) pos.textContent = "We'll email you when it's ready";
+                  w.classList.add('is-success');
+                  var pill = w.querySelector('.waitlist-success');
+                  if (pill) gsap.from(pill, { scale: 0.8, opacity: 0, duration: 0.4, ease: 'back.out(1.7)' });
+                });
+
+                if (!isDupe) loadCount(false);
+              });
             })
             .catch(function() {
               form.classList.remove('is-loading');
