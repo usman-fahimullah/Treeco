@@ -264,6 +264,14 @@
       transition: all 0.3s; letter-spacing: 0.04em; text-transform: uppercase;
     }
     .dl-btn:hover { opacity: 0.85; }
+    .nav-dex-link {
+      font-family: var(--mono); font-size: 11px; font-weight: 500;
+      padding: 6px 14px; border-radius: var(--r-pill);
+      border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+      color: var(--ink2); text-decoration: none; letter-spacing: 0.04em;
+      text-transform: uppercase; transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-dex-link:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ── HERO ── */
     .hero { padding: 96px 24px 80px; text-align: center; overflow: hidden; }
@@ -989,6 +997,7 @@
       .era-trigger { font-size: 9px; padding: 4px 10px; }
       .theme-btn { width: 30px; height: 30px; }
       .dl-btn { display: none; }
+      .nav-dex-link { display: none; }
       .cta-section h2 { font-size: 28px; }
       .hero { padding: 72px 16px 56px; }
       /* Smaller catch counter */
@@ -1221,6 +1230,7 @@
             <button data-era="ds" role="option"><span class="era-label">Nintendo DS</span></button>
           </div>
         </div>
+        <a href="pokemon/" class="nav-dex-link">Pokédex</a>
         <button class="theme-btn" aria-label="Toggle light/dark mode">
           <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
@@ -1606,6 +1616,7 @@
       </div>
       <div class="footer-col">
         <h4>App</h4>
+        <a href="pokemon/">Pokédex</a>
         <a href="#faq">FAQ</a>
         <a href="privacy.html">Privacy Policy</a>
         <a href="mailto:fahimullahusman@gmail.com">Support</a>
