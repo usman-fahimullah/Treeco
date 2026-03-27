@@ -78,7 +78,7 @@
       --mono: 'GeistMono', 'SF Mono', monospace;
     }
     body { font-family: var(--body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
-    .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+    .container { max-width: 800px; margin: 0 auto; padding: 24px; padding-top: 88px; }
     nav {
       position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
       z-index: 100; width: calc(100% - 32px); max-width: 800px; padding: 0 20px;
@@ -120,21 +120,20 @@
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
     .nav-card {
-      display: flex; flex-direction: column; gap: 4px;
+      display: flex; align-items: center; gap: 10px;
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      border-radius: 14px; padding: 10px 14px; text-decoration: none;
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-      flex: 1;
+      flex: 1; overflow: hidden; position: relative;
     }
-    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
-    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
-    .nav-card--next .nav-card__dir { text-align: right; }
-    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
-    .nav-card__inner--right { justify-content: flex-end; }
-    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
-    .nav-card--next .nav-card__num { text-align: right; }
-    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
-    .nav-card--next .nav-card__name { text-align: right; }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 12%, transparent); transform: translateY(-1px); }
+    .nav-card--next { flex-direction: row-reverse; }
+    .nav-card__sprite { width: 52px; height: 52px; image-rendering: pixelated; flex-shrink: 0; }
+    .nav-card__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .nav-card--next .nav-card__text { text-align: right; }
+    .nav-card__dir { font-family: var(--mono); font-size: 10px; color: var(--ink3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-card__name { font-family: var(--display); font-size: 16px; color: var(--ink); letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-card__num { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.04em; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
@@ -170,23 +169,19 @@
     <!-- Prev/Next Nav -->
     <div style="display:flex;gap:12px;align-items:stretch;margin-bottom:24px;">
       <a href="../toedscruel/" class="nav-card nav-card--prev">
-    <span class="nav-card__dir">← Previous</span>
-    <div class="nav-card__inner">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/949.png" width="56" height="56" alt="Toedscruel" style="image-rendering:pixelated;">
-      <div>
-        <div class="nav-card__num">#949</div>
-        <div class="nav-card__name">Toedscruel</div>
-      </div>
+    <img class="nav-card__sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/949.png" alt="Toedscruel">
+    <div class="nav-card__text">
+      <span class="nav-card__dir">← Previous</span>
+      <span class="nav-card__name">Toedscruel</span>
+      <span class="nav-card__num">#949</span>
     </div>
   </a>
       <a href="../capsakid/" class="nav-card nav-card--next">
-    <span class="nav-card__dir">Next →</span>
-    <div class="nav-card__inner nav-card__inner--right">
-      <div>
-        <div class="nav-card__num">#951</div>
-        <div class="nav-card__name">Capsakid</div>
-      </div>
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png" width="56" height="56" alt="Capsakid" style="image-rendering:pixelated;">
+    <img class="nav-card__sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png" alt="Capsakid">
+    <div class="nav-card__text">
+      <span class="nav-card__dir">Next →</span>
+      <span class="nav-card__name">Capsakid</span>
+      <span class="nav-card__num">#951</span>
     </div>
   </a>
     </div>
@@ -298,24 +293,24 @@
     <div class="section">
       <h2>Similar Rock-type Pokémon</h2>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
-        <a href="../omastar/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/139.png" width="48" height="48" alt="Omastar" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Omastar</span>
-    </a><a href="../onix/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png" width="48" height="48" alt="Onix" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Onix</span>
-    </a><a href="../rampardos/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/409.png" width="48" height="48" alt="Rampardos" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Rampardos</span>
-    </a><a href="../naclstack/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/933.png" width="48" height="48" alt="Naclstack" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Naclstack</span>
-    </a><a href="../nosepass/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/299.png" width="48" height="48" alt="Nosepass" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Nosepass</span>
-    </a><a href="../aron/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/304.png" width="48" height="48" alt="Aron" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Aron</span>
+        <a href="../gigalith/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/526.png" width="48" height="48" alt="Gigalith" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Gigalith</span>
+    </a><a href="../aurorus/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/699.png" width="48" height="48" alt="Aurorus" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Aurorus</span>
+    </a><a href="../garganacl/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/934.png" width="48" height="48" alt="Garganacl" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Garganacl</span>
+    </a><a href="../diancie/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/719.png" width="48" height="48" alt="Diancie" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Diancie</span>
+    </a><a href="../carkol/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/838.png" width="48" height="48" alt="Carkol" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Carkol</span>
+    </a><a href="../sudowoodo/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/185.png" width="48" height="48" alt="Sudowoodo" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Sudowoodo</span>
     </a>
       </div>
     </div>
@@ -352,23 +347,19 @@
     <!-- Prev/Next Nav (bottom) -->
     <div style="display:flex;gap:12px;align-items:stretch;padding:24px 0;border-top:1px solid var(--border);">
       <a href="../toedscruel/" class="nav-card nav-card--prev">
-    <span class="nav-card__dir">← Previous</span>
-    <div class="nav-card__inner">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/949.png" width="56" height="56" alt="Toedscruel" style="image-rendering:pixelated;">
-      <div>
-        <div class="nav-card__num">#949</div>
-        <div class="nav-card__name">Toedscruel</div>
-      </div>
+    <img class="nav-card__sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/949.png" alt="Toedscruel">
+    <div class="nav-card__text">
+      <span class="nav-card__dir">← Previous</span>
+      <span class="nav-card__name">Toedscruel</span>
+      <span class="nav-card__num">#949</span>
     </div>
   </a>
       <a href="../capsakid/" class="nav-card nav-card--next">
-    <span class="nav-card__dir">Next →</span>
-    <div class="nav-card__inner nav-card__inner--right">
-      <div>
-        <div class="nav-card__num">#951</div>
-        <div class="nav-card__name">Capsakid</div>
-      </div>
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png" width="56" height="56" alt="Capsakid" style="image-rendering:pixelated;">
+    <img class="nav-card__sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png" alt="Capsakid">
+    <div class="nav-card__text">
+      <span class="nav-card__dir">Next →</span>
+      <span class="nav-card__name">Capsakid</span>
+      <span class="nav-card__num">#951</span>
     </div>
   </a>
     </div>

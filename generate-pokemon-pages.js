@@ -154,25 +154,21 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
 
   // Prev/Next navigation
   const prevLink = prevPoke ? `<a href="../${prevPoke.name}/" class="nav-card nav-card--prev">
-    <span class="nav-card__dir">← Previous</span>
-    <div class="nav-card__inner">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${prevPoke.id}.png" width="56" height="56" alt="${capitalize(prevPoke.name)}" style="image-rendering:pixelated;">
-      <div>
-        <div class="nav-card__num">#${pad(prevPoke.id)}</div>
-        <div class="nav-card__name">${capitalize(prevPoke.name)}</div>
-      </div>
+    <img class="nav-card__sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${prevPoke.id}.png" alt="${capitalize(prevPoke.name)}">
+    <div class="nav-card__text">
+      <span class="nav-card__dir">← Previous</span>
+      <span class="nav-card__name">${capitalize(prevPoke.name)}</span>
+      <span class="nav-card__num">#${pad(prevPoke.id)}</span>
     </div>
-  </a>` : '<span></span>';
+  </a>` : '<span style="flex:1;"></span>';
   const nextLink = nextPoke ? `<a href="../${nextPoke.name}/" class="nav-card nav-card--next">
-    <span class="nav-card__dir">Next →</span>
-    <div class="nav-card__inner nav-card__inner--right">
-      <div>
-        <div class="nav-card__num">#${pad(nextPoke.id)}</div>
-        <div class="nav-card__name">${capitalize(nextPoke.name)}</div>
-      </div>
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nextPoke.id}.png" width="56" height="56" alt="${capitalize(nextPoke.name)}" style="image-rendering:pixelated;">
+    <img class="nav-card__sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nextPoke.id}.png" alt="${capitalize(nextPoke.name)}">
+    <div class="nav-card__text">
+      <span class="nav-card__dir">Next →</span>
+      <span class="nav-card__name">${capitalize(nextPoke.name)}</span>
+      <span class="nav-card__num">#${pad(nextPoke.id)}</span>
     </div>
-  </a>` : '<span></span>';
+  </a>` : '<span style="flex:1;"></span>';
 
   const weakStr = weaknesses.map(w => `${capitalize(w.type)} (${w.mult})`).join(', ') || 'None';
   const resistStr = resistances.map(r => `${capitalize(r.type)} (${r.mult})`).join(', ') || 'None';
@@ -278,7 +274,7 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
       --mono: 'GeistMono', 'SF Mono', monospace;
     }
     body { font-family: var(--body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
-    .container { max-width: 800px; margin: 0 auto; padding: 24px; }
+    .container { max-width: 800px; margin: 0 auto; padding: 24px; padding-top: 88px; }
     nav {
       position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
       z-index: 100; width: calc(100% - 32px); max-width: 800px; padding: 0 20px;
@@ -320,21 +316,20 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
     .nav-card {
-      display: flex; flex-direction: column; gap: 4px;
+      display: flex; align-items: center; gap: 10px;
       background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      border-radius: 14px; padding: 10px 14px; text-decoration: none;
       transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
-      flex: 1;
+      flex: 1; overflow: hidden; position: relative;
     }
-    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
-    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
-    .nav-card--next .nav-card__dir { text-align: right; }
-    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
-    .nav-card__inner--right { justify-content: flex-end; }
-    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
-    .nav-card--next .nav-card__num { text-align: right; }
-    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
-    .nav-card--next .nav-card__name { text-align: right; }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 12%, transparent); transform: translateY(-1px); }
+    .nav-card--next { flex-direction: row-reverse; }
+    .nav-card__sprite { width: 52px; height: 52px; image-rendering: pixelated; flex-shrink: 0; }
+    .nav-card__text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+    .nav-card--next .nav-card__text { text-align: right; }
+    .nav-card__dir { font-family: var(--mono); font-size: 10px; color: var(--ink3); letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-card__name { font-family: var(--display); font-size: 16px; color: var(--ink); letter-spacing: -0.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .nav-card__num { font-family: var(--mono); font-size: 10px; color: var(--accent); letter-spacing: 0.04em; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
