@@ -915,12 +915,6 @@
     }
     .wl-proof-text .counter-num { font-weight: 600; color: var(--ink2); transition: color 0.5s; }
 
-    /* Trust microcopy */
-    .wl-trust {
-      font-family: var(--mono); font-size: 10px; color: var(--ink3);
-      margin-top: 10px; letter-spacing: 0.04em; text-transform: uppercase;
-      opacity: 0.7; transition: color 0.5s;
-    }
 
     /* Success state — upgraded */
     .waitlist-success {
@@ -963,8 +957,7 @@
     .wl-share-copy.is-copied { background: var(--accent); color: #fff; border-color: var(--accent); }
     .waitlist-wrap.is-success .waitlist-form,
     .waitlist-wrap.is-success .waitlist-error,
-    .waitlist-wrap.is-success .waitlist-proof,
-    .waitlist-wrap.is-success .wl-trust { display: none; }
+    .waitlist-wrap.is-success .waitlist-proof { display: none; }
     .waitlist-wrap.is-success .waitlist-success { display: flex; }
 
     /* ── CTA DETAILS ── */
@@ -1587,7 +1580,6 @@
               </div>
               <span class="wl-proof-text">Join <span class="counter-num">0</span>+ trainers</span>
             </div>
-            <p class="wl-trust">No spam. Just launch updates. Unsubscribe anytime.</p>
           </div>
         </div>
         <div class="hero-phone" data-gsap="hero-phone">
@@ -2035,7 +2027,6 @@
           </div>
         </div>
         <div class="waitlist-error" aria-live="polite"></div>
-        <p class="wl-trust">No spam. Just launch updates.</p>
       </div>
       <div class="cta-details">
         <span class="cta-detail">
