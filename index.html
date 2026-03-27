@@ -834,23 +834,50 @@
     .cta-btn svg { width: 20px; height: 20px; }
     .cta-sub { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--ink3); letter-spacing: 0.04em; }
 
+    /* ── CTA DETAILS ── */
+    .cta-details {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--ink3);
+      letter-spacing: 0.02em;
+    }
+    .cta-detail {
+      display: flex; align-items: center; gap: 6px;
+    }
+    .cta-detail svg { width: 14px; height: 14px; opacity: 0.5; }
+
     /* ── FOOTER ── */
-    footer { border-top: none; padding: 32px 24px 20px; transition: border-color 0.5s; }
-    .footer-row {
-      max-width: 1080px; margin: 0 auto;
-      display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
-    }
-    .footer-left { display: flex; align-items: center; gap: 24px; }
-    .footer-left .logo { font-size: 16px; }
-    .footer-links { display: flex; gap: 20px; }
-    .footer-links a { font-size: 13px; font-weight: 500; color: var(--ink3); }
-    .footer-links a:hover { color: var(--accent); }
-    .footer-copy { font-size: 12px; color: var(--ink3); }
-    .footer-legal {
-      max-width: 1080px; margin: 12px auto 0; padding: 12px 0 0;
+    footer {
       border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
-      font-size: 11px; color: var(--ink3); text-align: center;
+      padding: 64px 24px 32px; transition: border-color 0.5s;
     }
+    .footer-grid {
+      max-width: 1080px; margin: 0 auto;
+      display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px;
+    }
+    .footer-brand { display: flex; flex-direction: column; gap: 12px; }
+    .footer-brand .logo { font-size: 18px; }
+    .footer-brand p {
+      font-family: var(--body); font-size: 14px; color: var(--ink2); line-height: 1.5;
+      max-width: 280px; transition: color 0.5s, font-family 0.5s;
+    }
+    .footer-col h4 {
+      font-family: var(--body); font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink3);
+      margin-bottom: 16px; transition: color 0.5s, font-family 0.5s;
+    }
+    .footer-col a {
+      display: block; font-family: var(--body); font-size: 14px; font-weight: 500;
+      color: var(--ink2); text-decoration: none; padding: 4px 0;
+      transition: color 0.2s, font-family 0.5s;
+    }
+    .footer-col a:hover { color: var(--accent); }
+    .footer-bottom {
+      max-width: 1080px; margin: 40px auto 0; padding: 20px 0 0;
+      border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: 12px; color: var(--ink3); }
+    .footer-legal { font-size: 11px; color: var(--ink3); text-align: right; max-width: 500px; line-height: 1.4; }
 
     /* ── FAQ ── */
     .faq-section {
@@ -952,8 +979,10 @@
       .feature-title { font-size: 28px; }
       .extras-grid { grid-template-columns: 1fr; gap: 24px; }
       .cta-section h2 { font-size: 32px; }
-      .footer-row { flex-direction: column; text-align: center; }
-      .footer-left { flex-direction: column; gap: 12px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: span 2; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-legal { text-align: center; }
       /* FAQ: collapse to single column */
       .faq-section { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
       .faq-left { position: static; }
@@ -999,6 +1028,10 @@
       .feature-desc { font-size: 15px; }
       /* Extras */
       .extras { padding: 64px 16px; }
+      /* Footer */
+      .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+      .footer-brand { grid-column: span 1; }
+      .cta-details { flex-direction: column; align-items: center; gap: 12px; }
       /* Hide hero/CTA sprites on very small screens, keep widget sprites */
       .sprite-layer { display: none; }
       #spriteLayerWidgets { display: block; }
@@ -1499,23 +1532,58 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download for iOS
       </button>
-      <div class="cta-sub">iOS 26+ required. Free with full Pokédex &amp; 3 daily AI queries. Feature packs from $1.99 or Dexter Pro from $2.99/month.</div>
+      <div class="cta-details">
+        <span class="cta-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          iOS 26+
+        </span>
+        <span class="cta-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Free — no account needed
+        </span>
+        <span class="cta-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+          Packs from $1.99
+        </span>
+        <span class="cta-detail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Pro from $2.99/mo
+        </span>
+      </div>
     </section>
   </main>
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-row">
-      <div class="footer-left">
+    <div class="footer-grid">
+      <div class="footer-brand">
         <div class="logo"><img src="icon-dark.png" alt="Tree Co." class="logo-icon"> Tree Co.</div>
-        <div class="footer-links">
-          <a href="privacy.html">Privacy</a>
-          <a href="mailto:fahimullahusman@gmail.com">Support</a>
-        </div>
+        <p>The Pokédex you actually want to use. All 1,025 Pokémon, competitive tools, and an AI assistant — offline and private.</p>
       </div>
-      <div class="footer-copy">&copy; 2026 Usman Fahimullah</div>
+      <div class="footer-col">
+        <h4>App</h4>
+        <a href="#faq">FAQ</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="mailto:fahimullahusman@gmail.com">Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Features</h4>
+        <a href="#" onclick="return false;">Pokédex</a>
+        <a href="#" onclick="return false;">Team Builder</a>
+        <a href="#" onclick="return false;">Ask Dexter</a>
+        <a href="#" onclick="return false;">Widgets</a>
+      </div>
+      <div class="footer-col">
+        <h4>Community</h4>
+        <a href="https://www.smogon.com/" target="_blank" rel="noopener">Smogon</a>
+        <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener">Pokémon Showdown</a>
+        <a href="https://pokeapi.co/" target="_blank" rel="noopener">PokéAPI</a>
+      </div>
     </div>
-    <div class="footer-legal">Pokémon and all related names are trademarks of Nintendo / Creatures Inc. / GAME FREAK inc.</div>
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 Usman Fahimullah. All rights reserved.</div>
+      <div class="footer-legal">Pokémon and all related names are trademarks of Nintendo / Creatures Inc. / GAME FREAK inc. This app is not affiliated with or endorsed by The Pokémon Company.</div>
+    </div>
   </footer>
 
   <script>
