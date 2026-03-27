@@ -351,6 +351,8 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
       .nav-logo { font-size: 16px; }
     }
   </style>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <nav>
@@ -759,6 +761,8 @@ function generateIndexPage(pokemon) {
       .controls { flex-direction: column; }
     }
   </style>
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <nav>
