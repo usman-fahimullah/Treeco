@@ -29,6 +29,7 @@
   <link rel="apple-touch-icon" href="icon-dark.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.7/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 
   <style>
     @font-face { font-family: 'MomoTrustDisplay'; src: url('fonts/MomoTrustDisplay-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
@@ -159,7 +160,7 @@
     /* Smooth theme morphing across all elements */
     nav, .feature-section, .extras, .cta-section, footer,
     .feature-visual, .phone, .extra-icon, .dexter-visual,
-    .era-trigger, .era-menu, .theme-btn, .dl-btn, .hero-cta, .cta-btn {
+    .era-trigger, .era-menu, .theme-btn, .dl-btn, .waitlist-form, .waitlist-submit {
       transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease, box-shadow 0.6s ease !important;
     }
     body::after {
@@ -823,6 +824,84 @@
     .cta-btn svg { width: 20px; height: 20px; }
     .cta-sub { margin-top: 16px; font-family: var(--mono); font-size: 12px; color: var(--ink3); letter-spacing: 0.04em; }
 
+    /* ── WAITLIST FORM ── */
+    .waitlist-wrap { text-align: center; }
+    .waitlist-form {
+      display: inline-flex; align-items: center;
+      background: var(--surface); border: var(--bw, 1px) solid var(--border);
+      border-radius: var(--r-pill); padding: 5px 5px 5px 20px;
+      box-shadow: var(--shadow); transition: border-color 0.2s, box-shadow 0.2s;
+      max-width: 440px; width: 100%;
+    }
+    .waitlist-form:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    .waitlist-input {
+      flex: 1; min-width: 0; border: none; outline: none; background: transparent;
+      font-family: var(--body); font-size: 15px; color: var(--ink);
+      padding: 8px 0;
+    }
+    .waitlist-input::placeholder {
+      font-family: var(--mono); font-size: 12px; color: var(--ink3);
+      letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .waitlist-submit {
+      flex-shrink: 0; border: none; cursor: pointer;
+      font-family: var(--mono); font-size: 12px; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 12px 24px; border-radius: var(--r-pill);
+      background: var(--accent); color: var(--accent-on);
+      transition: background 0.2s, transform 0.1s;
+      position: relative;
+    }
+    .waitlist-submit:hover { background: var(--accent-hi); }
+    .waitlist-submit:active { transform: scale(0.97); }
+    .waitlist-submit .wl-spinner {
+      display: none; width: 16px; height: 16px; border: 2px solid transparent;
+      border-top-color: var(--accent-on); border-radius: 50%;
+      animation: wl-spin 0.6s linear infinite;
+    }
+    .waitlist-form.is-loading .waitlist-submit span { visibility: hidden; }
+    .waitlist-form.is-loading .waitlist-submit .wl-spinner { display: inline-block; position: absolute; top: 50%; left: 50%; margin: -8px 0 0 -8px; }
+    .waitlist-form.is-loading .waitlist-submit { pointer-events: none; }
+    @keyframes wl-spin { to { transform: rotate(360deg); } }
+    .waitlist-form.has-error { border-color: #EF4444; animation: wl-shake 0.4s ease; }
+    @keyframes wl-shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+    .waitlist-error {
+      font-family: var(--mono); font-size: 11px; color: #EF4444;
+      margin-top: 8px; letter-spacing: 0.04em; text-transform: uppercase;
+      min-height: 16px;
+    }
+    .waitlist-success {
+      display: none; align-items: center; gap: 8px;
+      font-family: var(--body); font-size: 15px; font-weight: 500;
+      color: var(--accent); padding: 14px 28px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      border-radius: var(--r-pill);
+    }
+    .waitlist-success svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .waitlist-success svg circle { stroke: var(--accent); fill: none; stroke-width: 2; }
+    .waitlist-success svg path {
+      stroke: var(--accent); fill: none; stroke-width: 2.5;
+      stroke-dasharray: 24; stroke-dashoffset: 24;
+      animation: wl-check 0.5s 0.2s ease forwards;
+    }
+    @keyframes wl-check { to { stroke-dashoffset: 0; } }
+    .waitlist-wrap.is-success .waitlist-form,
+    .waitlist-wrap.is-success .waitlist-error { display: none; }
+    .waitlist-wrap.is-success .waitlist-success { display: inline-flex; }
+    .waitlist-counter {
+      font-family: var(--mono); font-size: 12px; color: var(--ink3);
+      margin-top: 12px; letter-spacing: 0.04em;
+      transition: color 0.5s;
+    }
+    .waitlist-counter .counter-num { font-weight: 600; color: var(--ink2); transition: color 0.5s; }
+
     /* ── CTA DETAILS ── */
     .cta-details {
       display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
@@ -1140,6 +1219,12 @@
       .theme-btn { width: 30px; height: 30px; }
       .dl-btn { display: none; }
       .nav-dex-link { display: none; }
+      .waitlist-form {
+        flex-direction: column; padding: 12px;
+        border-radius: var(--r-lg, 16px); max-width: 320px;
+      }
+      .waitlist-input { width: 100%; text-align: center; padding: 10px 0; }
+      .waitlist-submit { width: 100%; padding: 14px; }
       .cta-section h2 { font-size: 28px; }
       .hero { padding: 72px 16px 56px; }
       /* Smaller catch counter */
@@ -1387,7 +1472,7 @@
           <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
           <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
         </button>
-        <button class="dl-btn" disabled style="opacity:0.7;cursor:default;">Coming Soon</button>
+        <button class="dl-btn" id="nav-waitlist-btn">Join Waitlist</button>
       </div>
     </div>
   </nav>
@@ -1399,10 +1484,18 @@
       <div class="hero-inner">
         <div class="hero-fade">
           <h1 data-gsap="hero-title">The Pokédex you <span class="accent">actually</span> want to use.</h1>
-          <button class="hero-cta" data-gsap="hero-cta" disabled style="cursor:default;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-            Coming Soon on iOS
-          </button>
+          <div class="waitlist-wrap" id="waitlist-hero" data-gsap="hero-cta">
+            <form class="waitlist-form" data-source="hero">
+              <input type="email" class="waitlist-input" placeholder="Enter your email" required autocomplete="email" aria-label="Email address for waitlist">
+              <button type="submit" class="waitlist-submit"><span>Join Waitlist</span><div class="wl-spinner"></div></button>
+            </form>
+            <div class="waitlist-success">
+              <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+              <span class="waitlist-success-text">You're on the list!</span>
+            </div>
+            <div class="waitlist-error" aria-live="polite"></div>
+            <p class="waitlist-counter"><span class="counter-num">0</span> trainers waiting</p>
+          </div>
         </div>
         <div class="hero-phone" data-gsap="hero-phone">
           <div class="phone"><span class="phone-label">Screenshot</span></div>
@@ -1708,9 +1801,9 @@
       </div>
 
       <div class="compare-cta">
-        <a href="#" class="compare-cta-btn" disabled>
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          Coming Soon on iOS
+        <a href="#waitlist-hero" class="compare-cta-btn" id="compare-waitlist-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/></svg>
+          Join the Waitlist
         </a>
       </div>
     </section>
@@ -1820,10 +1913,17 @@
       <img src="icon-dark.png" alt="Tree Co." class="cta-app-icon">
       <h2>Ready to start your journey?</h2>
       <p>No account required. Your Pokémon adventure starts soon.</p>
-      <button class="cta-btn" disabled style="cursor:default;">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Coming Soon on iOS
-      </button>
+      <div class="waitlist-wrap" id="waitlist-cta">
+        <form class="waitlist-form" data-source="cta-section">
+          <input type="email" class="waitlist-input" placeholder="Enter your email" required autocomplete="email" aria-label="Email address for waitlist">
+          <button type="submit" class="waitlist-submit"><span>Join Waitlist</span><div class="wl-spinner"></div></button>
+        </form>
+        <div class="waitlist-success">
+          <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-5"/></svg>
+          <span class="waitlist-success-text">You're on the list!</span>
+        </div>
+        <div class="waitlist-error" aria-live="polite"></div>
+      </div>
       <div class="cta-details">
         <span class="cta-detail">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
@@ -2163,7 +2263,7 @@
     gsap.from('.cta-app-icon', { y: 40, opacity: 0, scale: 0.8, duration: 0.7, ease: 'back.out(1.7)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-section h2', { y: 30, opacity: 0, duration: 0.6, delay: 0.1, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-section p', { y: 20, opacity: 0, duration: 0.5, delay: 0.15, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
-    gsap.from('.cta-btn', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+    gsap.from('#waitlist-cta', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-sub', { opacity: 0, duration: 0.5, delay: 0.5, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
 
     // Comparison table — stagger rows in
@@ -2238,6 +2338,125 @@
           document.body.style.backgroundColor = compareBgColors[theme];
         }
       });
+    })();
+
+    // ── WAITLIST ──
+    (function() {
+      var SUPA_URL = 'https://ncgevvcjphafqwuvhwgi.supabase.co';
+      var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5jZ2V2dmNqcGhhZnF3dXZod2dpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTUzMTQsImV4cCI6MjA4ODU3MTMxNH0.EfsgUk6bqtPweNZc4hyICvnS-z5t26wmDQzjYvYzKGk';
+      var sb = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+      var emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      var forms = document.querySelectorAll('.waitlist-form');
+      var wraps = document.querySelectorAll('.waitlist-wrap');
+      var counterEl = document.querySelector('.counter-num');
+
+      // Load waitlist count
+      function loadCount() {
+        sb.from('waitlist').select('*', { count: 'exact', head: true }).then(function(res) {
+          if (res.count != null && counterEl) {
+            var target = res.count;
+            gsap.to({ val: 0 }, {
+              val: target, duration: 1.2, ease: 'power2.out',
+              onUpdate: function() { counterEl.textContent = Math.round(this.targets()[0].val); }
+            });
+          }
+        });
+      }
+      loadCount();
+
+      // Form submission
+      forms.forEach(function(form) {
+        var wrap = form.closest('.waitlist-wrap');
+        var input = form.querySelector('.waitlist-input');
+        var errorEl = wrap.querySelector('.waitlist-error');
+        var successTextEl = wrap.querySelector('.waitlist-success-text');
+
+        input.addEventListener('input', function() {
+          form.classList.remove('has-error');
+          errorEl.textContent = '';
+        });
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var email = input.value.trim().toLowerCase();
+
+          if (!emailRe.test(email)) {
+            form.classList.add('has-error');
+            errorEl.textContent = 'Please enter a valid email';
+            input.focus();
+            return;
+          }
+
+          form.classList.add('is-loading');
+          form.querySelector('.waitlist-submit').disabled = true;
+
+          var source = form.dataset.source || 'unknown';
+          sb.from('waitlist').upsert({ email: email, source: source }, { onConflict: 'email' }).select()
+            .then(function(res) {
+              form.classList.remove('is-loading');
+              if (res.error) {
+                form.classList.add('has-error');
+                errorEl.textContent = res.error.message || 'Something went wrong';
+                form.querySelector('.waitlist-submit').disabled = false;
+                return;
+              }
+
+              // Check if duplicate (created_at is more than 5s ago)
+              var row = res.data && res.data[0];
+              var isDupe = row && (Date.now() - new Date(row.created_at).getTime() > 5000);
+
+              // Mark all wraps as success
+              wraps.forEach(function(w) {
+                var txt = w.querySelector('.waitlist-success-text');
+                if (txt) txt.textContent = isDupe ? "You're already on the list!" : "You're on the list!";
+                w.classList.add('is-success');
+                var pill = w.querySelector('.waitlist-success');
+                if (pill) gsap.from(pill, { scale: 0.8, opacity: 0, duration: 0.4, ease: 'back.out(1.7)' });
+              });
+
+              // Refresh counter
+              if (!isDupe) loadCount();
+            })
+            .catch(function() {
+              form.classList.remove('is-loading');
+              form.classList.add('has-error');
+              errorEl.textContent = 'Network error. Please try again.';
+              form.querySelector('.waitlist-submit').disabled = false;
+            });
+        });
+      });
+
+      // Nav button → scroll to hero form
+      var navBtn = document.getElementById('nav-waitlist-btn');
+      if (navBtn) {
+        navBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var hero = document.getElementById('waitlist-hero');
+          if (hero) {
+            hero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(function() {
+              var inp = hero.querySelector('.waitlist-input');
+              if (inp) inp.focus();
+            }, 600);
+          }
+        });
+      }
+
+      // Comparison CTA → scroll to hero form
+      var compareBtn = document.getElementById('compare-waitlist-btn');
+      if (compareBtn) {
+        compareBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          var hero = document.getElementById('waitlist-hero');
+          if (hero) {
+            hero.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            setTimeout(function() {
+              var inp = hero.querySelector('.waitlist-input');
+              if (inp) inp.focus();
+            }, 600);
+          }
+        });
+      }
     })();
 
     // FAQ single-expand behavior
