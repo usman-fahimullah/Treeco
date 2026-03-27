@@ -1039,7 +1039,7 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "MobileApplication",
     "name": "Tree Co.",
     "alternateName": "Tree Co. Pokédex",
     "description": "A comprehensive Pokédex companion app covering all 1,025 Pokémon across 9 generations. Features include full stats, moves, type matchups, a competitive team builder with Smogon tier data and Showdown export, home screen widgets, a Living Dex tracker, Nuzlocke mode, and an on-device AI assistant called Dexter. Works offline with a 200MB cache. No ads, no analytics, no account required.",
@@ -1142,8 +1142,54 @@
           "@type": "Answer",
           "text": "Competitive Pack ($4.99): Unlimited Ask Dexter, team analysis with weakness heatmaps, and Smogon competitive profiles. Collection Pack ($3.99): Full offline dex, Living Dex pro tools with CSV export, lore deep dives, and card collection tracking. Style Pack ($1.99): Custom accent themes and all 6 retro visual eras. Everything Bundle ($6.99): All packs at a discount. Dexter Pro ($2.99/month or $19.99/year): Everything plus cloud-enhanced AI."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best Pokédex app for iPhone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tree Co. is a comprehensive Pokédex app for iPhone and iPad covering all 1,025 Pokémon across 9 generations. It includes full stats, moves, abilities, evolution chains, type matchups, a competitive team builder with Smogon tier data and Showdown export, an on-device AI assistant, home screen widgets, Living Dex tracking, Nuzlocke mode, shiny hunting with 11 methods, and TCG card collection. It works fully offline, has zero ads or tracking, and requires no account."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I check Pokémon type weaknesses?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tree Co. includes an interactive 18x18 type effectiveness chart that instantly shows super effective, resistant, and immune matchups for any type combination. You can also tap any Pokémon to see its full defensive and offensive type profile, including 4x weaknesses for dual-types. The AI assistant (Ask Dexter) can answer natural language questions like 'What beats Garchomp?' with detailed counter recommendations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I build a competitive Pokémon team?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tree Co.'s team builder helps you build competitive Pokémon teams with a weakness heatmap that visualizes your team's vulnerabilities, Smogon tier data and usage stats for VGC and Smogon formats, coverage analysis, and AI-powered partner suggestions. You can import and export teams directly to Pokémon Showdown."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a Pokédex app that works offline?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device so it works without an internet connection. All 1,025 Pokémon with full stats, moves, abilities, evolution chains, and type matchups are available offline. The on-device AI assistant (Ask Dexter) also runs entirely locally using Apple's Foundation Models framework."
+        }
       }
     ]
+  }
+  </script>
+
+  <!-- Structured Data: Speakable -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Tree Co. — The Pokédex You Actually Want to Use",
+    "speakable": {
+      "@type": "SpeakableSpecification",
+      "cssSelector": [".faq-answer p", ".dexter-oneliner", ".hero h1"]
+    },
+    "url": "https://www.treeco.app/"
   }
   </script>
 </head>
@@ -1488,6 +1534,34 @@
             <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
           <div class="faq-answer-wrap"><div class="faq-answer"><p><strong>Competitive Pack ($4.99):</strong> Unlimited Ask Dexter, team analysis with weakness heatmaps, and Smogon competitive profiles. <strong>Collection Pack ($3.99):</strong> Full offline dex, Living Dex pro tools with CSV export, lore deep dives, and card collection tracking. <strong>Style Pack ($1.99):</strong> Custom accent themes and all 6 retro visual eras. <strong>Everything Bundle ($6.99):</strong> All packs at a discount. <strong>Dexter Pro ($2.99/mo or $19.99/yr):</strong> Everything plus cloud-enhanced AI.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            What is the best Pokédex app for iPhone?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Tree Co. is a comprehensive Pokédex app for iPhone and iPad covering all 1,025 Pokémon across 9 generations. It includes full stats, moves, abilities, evolution chains, type matchups, a competitive team builder with Smogon tier data and Showdown export, an on-device AI assistant, home screen widgets, Living Dex tracking, Nuzlocke mode, shiny hunting with 11 methods, and TCG card collection. It works fully offline, has zero ads or tracking, and requires no account.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            How do I check Pokémon type weaknesses?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Tree Co. includes an interactive 18x18 type effectiveness chart that instantly shows super effective, resistant, and immune matchups for any type combination. You can also tap any Pokémon to see its full defensive and offensive type profile, including 4x weaknesses for dual-types. The AI assistant (Ask Dexter) can answer natural language questions like "What beats Garchomp?" with detailed counter recommendations.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            How do I build a competitive Pokémon team?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Tree Co.'s team builder helps you build competitive Pokémon teams with a weakness heatmap that visualizes your team's vulnerabilities, Smogon tier data and usage stats for VGC and Smogon formats, coverage analysis, and AI-powered partner suggestions. You can import and export teams directly to Pokémon Showdown. The AI assistant can analyze your team and recommend improvements based on the current competitive meta.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Is there a Pokédex app that works offline?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device so it works without an internet connection. All 1,025 Pokémon with full stats, moves, abilities, evolution chains, and type matchups are available offline. The on-device AI assistant (Ask Dexter) also runs entirely locally using Apple's Foundation Models framework — your queries never leave your device.</p></div></div>
         </details>
       </div>
     </section>
