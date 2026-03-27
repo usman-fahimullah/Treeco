@@ -88,7 +88,7 @@ function generatePage(pokemon) {
   const immuneStr = immunities.map(i => capitalize(i)).join(', ') || 'None';
 
   const typeBadges = typeNames.map(t =>
-    `<span style="background:${TYPE_COLORS[t]};color:#fff;padding:4px 12px;border-radius:100px;font-size:13px;font-weight:600;text-transform:uppercase;">${t}</span>`
+    `<span class="type-pill" style="background:${TYPE_COLORS[t]}">${t}</span>`
   ).join(' ');
 
   const statBars = [
@@ -100,9 +100,9 @@ function generatePage(pokemon) {
     ['Speed', statMap.speed]
   ].map(([label, val]) => `
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px;">
-      <span style="width:80px;font-size:13px;color:#626962;text-align:right;">${label}</span>
-      <span style="width:36px;font-size:14px;font-weight:600;color:#1A1E1B;">${val}</span>
-      <div style="flex:1;height:8px;background:#E2E0DA;border-radius:4px;overflow:hidden;">
+      <span style="width:80px;font-family:var(--mono);font-size:12px;color:var(--ink3);text-align:right;text-transform:uppercase;letter-spacing:0.04em;">${label}</span>
+      <span style="width:36px;font-family:var(--display);font-size:16px;color:var(--ink);">${val}</span>
+      <div style="flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden;">
         <div style="width:${Math.min(val / 255 * 100, 100)}%;height:100%;background:${typeColor};border-radius:4px;"></div>
       </div>
     </div>`).join('');
@@ -164,53 +164,89 @@ function generatePage(pokemon) {
   }
   </script>
   <style>
+    @font-face { font-family: 'MomoTrustDisplay'; src: url('../../fonts/MomoTrustDisplay-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('../../fonts/MomoTrustSans-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('../../fonts/MomoTrustSans-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('../../fonts/MomoTrustSans-SemiBold.ttf') format('truetype'); font-weight: 600; font-display: swap; }
+    @font-face { font-family: 'GeistMono'; src: url('../../fonts/GeistMono-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #EFEEE9; color: #1A1E1B; }
+    :root {
+      --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
+      --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
+      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --display: 'MomoTrustDisplay', Georgia, serif;
+      --body: 'MomoTrustSans', -apple-system, sans-serif;
+      --mono: 'GeistMono', 'SF Mono', monospace;
+    }
+    body { font-family: var(--body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
     .container { max-width: 800px; margin: 0 auto; padding: 24px; }
-    nav { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-weight: 700; font-size: 18px; color: #1A1E1B; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    nav {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      z-index: 100; width: calc(100% - 32px); max-width: 800px; padding: 0 20px;
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      border-radius: 100px; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-logo { font-family: var(--display); font-weight: 400; font-size: 18px; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
-    .nav-back { font-size: 14px; color: #047857; text-decoration: none; font-weight: 500; }
-    .nav-back:hover { text-decoration: underline; }
-    .hero { text-align: center; padding: 40px 0; }
-    .hero img { width: 200px; height: 200px; image-rendering: auto; }
-    .dex-num { font-family: 'SF Mono', monospace; font-size: 14px; color: #626962; margin-bottom: 8px; }
-    h1 { font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+      background: var(--ink); color: var(--bg); border-radius: 100px;
+      font-family: var(--body); font-size: 13px; font-weight: 600;
+      text-decoration: none; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .dl-btn svg { width: 14px; height: 14px; }
+    .dl-btn:hover { opacity: 0.85; }
+    .hero { text-align: center; padding: 80px 0 40px; }
+    .hero img { width: 220px; height: 220px; image-rendering: auto; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.1)); }
+    .dex-num { font-family: var(--mono); font-size: 14px; color: var(--ink3); margin-bottom: 8px; letter-spacing: 0.04em; }
+    h1 { font-family: var(--display); font-size: 40px; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 12px; }
     .types { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; }
-    .section { background: #FAF9F5; border-radius: 16px; padding: 24px; margin-bottom: 16px; }
-    .section h2 { font-size: 18px; font-weight: 600; margin-bottom: 16px; color: #1A1E1B; }
+    .section { background: var(--surface); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    .section h2 { font-family: var(--display); font-size: 20px; font-weight: 400; margin-bottom: 16px; color: var(--ink); letter-spacing: -0.02em; }
     .matchup-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-    .matchup-label { font-size: 13px; color: #626962; margin-bottom: 6px; font-weight: 500; }
-    .type-pill { padding: 4px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; }
+    .matchup-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .type-pill { padding: 4px 12px; border-radius: 100px; font-family: var(--body); font-size: 12px; font-weight: 600; color: #fff; text-transform: uppercase; }
     .moves-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .move { font-size: 14px; color: #52594F; padding: 8px 12px; background: #EFEEE9; border-radius: 8px; }
+    .move { font-family: var(--body); font-size: 14px; color: var(--ink2); padding: 10px 14px; background: var(--bg); border-radius: 10px; }
     .cta { text-align: center; padding: 48px 24px; }
-    .cta h2 { font-size: 24px; margin-bottom: 12px; }
-    .cta p { font-size: 16px; color: #52594F; margin-bottom: 24px; }
-    .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: #047857; color: #fff; border: none; border-radius: 100px; font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; }
-    .cta-btn:hover { opacity: 0.9; }
+    .cta h2 { font-family: var(--display); font-size: 28px; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 12px; }
+    .cta p { font-size: 16px; color: var(--ink2); margin-bottom: 24px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; background: var(--accent); color: #fff; border: none; border-radius: 100px; font-family: var(--body); font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; }
+    .cta-btn:hover { opacity: 0.85; }
     .cta-btn svg { width: 20px; height: 20px; }
-    .breadcrumb { font-size: 13px; color: #626962; margin-bottom: 16px; }
-    .breadcrumb a { color: #047857; text-decoration: none; }
+    .breadcrumb { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; letter-spacing: 0.02em; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
-    .info-item { }
-    .info-label { font-size: 12px; color: #626962; margin-bottom: 4px; }
-    .info-value { font-size: 16px; font-weight: 600; }
-    footer { text-align: center; padding: 32px 24px; font-size: 12px; color: #626962; }
-    footer a { color: #047857; text-decoration: none; }
+    .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .info-value { font-family: var(--display); font-size: 20px; }
+    footer {
+      border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      text-align: center; padding: 32px 24px; font-size: 12px; color: var(--ink3);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
     @media (max-width: 480px) {
-      h1 { font-size: 28px; }
-      .hero img { width: 160px; height: 160px; }
+      h1 { font-size: 32px; }
+      .hero { padding: 72px 0 32px; }
+      .hero img { width: 180px; height: 180px; }
       .moves-grid { grid-template-columns: 1fr; }
       .info-grid { grid-template-columns: 1fr; gap: 12px; }
+      nav { width: calc(100% - 24px); padding: 0 14px; height: 48px; }
+      .nav-logo { font-size: 16px; }
     }
   </style>
 </head>
 <body>
   <nav>
     <a href="../../" class="nav-logo"><img src="../../icon-dark.png" alt="Tree Co."> Tree Co.</a>
-    <a href="../../" class="nav-back">Download App</a>
+    <a href="../../" class="dl-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download App
+    </a>
   </nav>
   <div class="container">
     <div class="breadcrumb">
@@ -345,17 +381,30 @@ ${sitemapEntries}
 }
 
 function generateIndexPage(pokemon) {
-  const rows = pokemon.map(p => {
-    const typeBadges = p.types.map(t =>
-      `<span style="background:${TYPE_COLORS[t]};color:#fff;padding:2px 8px;border-radius:100px;font-size:11px;font-weight:600;text-transform:uppercase;">${t}</span>`
-    ).join(' ');
-    return `<a href="${p.name}/" style="display:flex;align-items:center;gap:12px;padding:12px;background:#FAF9F5;border-radius:12px;text-decoration:none;color:#1A1E1B;transition:transform 0.2s;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.id}.png" alt="${capitalize(p.name)}" width="48" height="48" loading="lazy" style="image-rendering:pixelated;">
-      <span style="font-weight:600;flex:1;">${capitalize(p.name)}</span>
-      <span style="font-family:monospace;font-size:12px;color:#626962;">#${pad(p.id)}</span>
-      <span style="display:flex;gap:4px;">${typeBadges}</span>
-    </a>`;
-  }).join('\n');
+  // Generation ranges
+  const gens = [
+    { label: 'All', range: [1, 1025] },
+    { label: 'I', range: [1, 151] },
+    { label: 'II', range: [152, 251] },
+    { label: 'III', range: [252, 386] },
+    { label: 'IV', range: [387, 493] },
+    { label: 'V', range: [494, 649] },
+    { label: 'VI', range: [650, 721] },
+    { label: 'VII', range: [722, 809] },
+    { label: 'VIII', range: [810, 905] },
+    { label: 'IX', range: [906, 1025] }
+  ];
+
+  const items = pokemon.map(p =>
+    `<a href="${p.name}/" class="poke-cell" data-id="${p.id}" data-name="${p.name}" data-types="${p.types.join(',')}" title="${capitalize(p.name)} #${pad(p.id)}">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${p.id}.png" alt="${capitalize(p.name)}" width="48" height="48" loading="lazy">
+      <span class="cell-num">${pad(p.id)}</span>
+    </a>`
+  ).join('\n');
+
+  const genBtns = gens.map((g, i) =>
+    `<button class="gen-btn${i === 0 ? ' active' : ''}" data-min="${g.range[0]}" data-max="${g.range[1]}">${g.label}</button>`
+  ).join('');
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -367,35 +416,145 @@ function generateIndexPage(pokemon) {
   <link rel="canonical" href="https://www.treeco.app/pokemon/">
   <link rel="icon" href="../icon-dark.png">
   <style>
+    @font-face { font-family: 'MomoTrustDisplay'; src: url('../fonts/MomoTrustDisplay-Regular.ttf') format('truetype'); font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('../fonts/MomoTrustSans-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+    @font-face { font-family: 'MomoTrustSans'; src: url('../fonts/MomoTrustSans-Medium.ttf') format('truetype'); font-weight: 500; font-display: swap; }
+    @font-face { font-family: 'GeistMono'; src: url('../fonts/GeistMono-Regular.ttf') format('truetype'); font-display: swap; }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #EFEEE9; color: #1A1E1B; }
-    .container { max-width: 800px; margin: 0 auto; padding: 24px; }
-    nav { padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-weight: 700; font-size: 18px; color: #1A1E1B; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    :root {
+      --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
+      --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
+      --accent: #047857; --accent-lo: rgba(4,120,87,0.09);
+      --display: 'MomoTrustDisplay', Georgia, serif;
+      --body: 'MomoTrustSans', -apple-system, sans-serif;
+      --mono: 'GeistMono', 'SF Mono', monospace;
+    }
+    body { font-family: var(--body); background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+    .container { max-width: 1080px; margin: 0 auto; padding: 24px; }
+    nav {
+      position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+      z-index: 100; width: calc(100% - 32px); max-width: 1080px; padding: 0 20px;
+      background: color-mix(in srgb, var(--bg) 75%, transparent);
+      backdrop-filter: blur(24px) saturate(1.4); -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      border: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      border-radius: 100px; box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      display: flex; align-items: center; justify-content: space-between; height: 52px;
+    }
+    .nav-logo { font-family: var(--display); font-weight: 400; font-size: 18px; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
-    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
-    .subtitle { font-size: 16px; color: #52594F; margin-bottom: 32px; }
-    .grid { display: flex; flex-direction: column; gap: 8px; }
-    .grid a:hover { transform: translateX(4px); }
-    footer { text-align: center; padding: 32px 24px; font-size: 12px; color: #626962; }
-    footer a { color: #047857; text-decoration: none; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+      background: var(--ink); color: var(--bg); border-radius: 100px;
+      font-family: var(--body); font-size: 13px; font-weight: 600;
+      text-decoration: none; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .dl-btn svg { width: 14px; height: 14px; }
+    h1 { font-family: var(--display); font-size: 36px; font-weight: 400; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .subtitle { font-size: 16px; color: var(--ink2); margin-bottom: 24px; }
+    .controls { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+    .search-input {
+      flex: 1; min-width: 200px; padding: 10px 16px; border-radius: 100px;
+      border: 1px solid var(--border); background: var(--surface);
+      font-family: var(--body); font-size: 14px; color: var(--ink);
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--accent); }
+    .search-input::placeholder { color: var(--ink3); }
+    .gen-bar { display: flex; gap: 4px; flex-wrap: wrap; }
+    .gen-btn {
+      font-family: var(--mono); font-size: 12px; padding: 6px 12px;
+      border: 1px solid var(--border); border-radius: 100px;
+      background: transparent; color: var(--ink3); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .gen-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .gen-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .count { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; }
+    .grid {
+      display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px;
+    }
+    .poke-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 8px 4px; background: var(--surface); border-radius: 10px;
+      text-decoration: none; color: var(--ink); transition: all 0.15s;
+    }
+    .poke-cell:hover { transform: scale(1.08); background: var(--accent-lo); z-index: 1; }
+    .poke-cell img { width: 48px; height: 48px; image-rendering: pixelated; }
+    .cell-num { font-family: var(--mono); font-size: 9px; color: var(--ink3); }
+    .poke-cell.hidden { display: none; }
+    footer {
+      border-top: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      text-align: center; padding: 32px 24px; font-size: 12px; color: var(--ink3); margin-top: 48px;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+    @media (max-width: 768px) { .grid { grid-template-columns: repeat(6, 1fr); } }
+    @media (max-width: 480px) {
+      .grid { grid-template-columns: repeat(5, 1fr); }
+      nav { width: calc(100% - 24px); height: 48px; }
+      h1 { font-size: 28px; }
+      .controls { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
   <nav>
     <a href="../" class="nav-logo"><img src="../icon-dark.png" alt="Tree Co."> Tree Co.</a>
+    <a href="../" class="dl-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download
+    </a>
   </nav>
-  <div class="container">
+  <div class="container" style="padding-top:80px;">
     <h1>Complete Pokédex</h1>
-    <p class="subtitle">All 1,025 Pokémon — stats, weaknesses, moves, and abilities.</p>
-    <div class="grid">
-      ${rows}
+    <p class="subtitle">All 1,025 Pokémon — tap any sprite for full stats, weaknesses, and moves.</p>
+    <div class="controls">
+      <input type="text" class="search-input" placeholder="Search Pokémon..." id="searchInput">
+      <div class="gen-bar">${genBtns}</div>
+    </div>
+    <div class="count" id="countLabel">Showing 1,025 Pokémon</div>
+    <div class="grid" id="pokeGrid">
+      ${items}
     </div>
   </div>
   <footer>
     <p>&copy; 2026 Tree Co. · <a href="../privacy.html">Privacy</a> · <a href="mailto:fahimullahusman@gmail.com">Support</a></p>
     <p style="margin-top:8px;">Pokémon and all related names are trademarks of Nintendo / Creatures Inc. / GAME FREAK inc.</p>
   </footer>
+  <script>
+    (function() {
+      var cells = document.querySelectorAll('.poke-cell');
+      var searchInput = document.getElementById('searchInput');
+      var countLabel = document.getElementById('countLabel');
+      var genBtns = document.querySelectorAll('.gen-btn');
+      var currentMin = 1, currentMax = 1025;
+
+      function filter() {
+        var query = searchInput.value.toLowerCase().trim();
+        var visible = 0;
+        cells.forEach(function(cell) {
+          var id = parseInt(cell.dataset.id);
+          var name = cell.dataset.name;
+          var inGen = id >= currentMin && id <= currentMax;
+          var matchesSearch = !query || name.indexOf(query) !== -1 || String(id).indexOf(query) !== -1;
+          if (inGen && matchesSearch) { cell.classList.remove('hidden'); visible++; }
+          else { cell.classList.add('hidden'); }
+        });
+        countLabel.textContent = 'Showing ' + visible.toLocaleString() + ' Pokémon';
+      }
+
+      searchInput.addEventListener('input', filter);
+
+      genBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          genBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          currentMin = parseInt(btn.dataset.min);
+          currentMax = parseInt(btn.dataset.max);
+          filter();
+        });
+      });
+    })();
+  </script>
 </body>
 </html>`;
 }
