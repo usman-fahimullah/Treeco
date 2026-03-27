@@ -776,35 +776,27 @@
       display: flex; flex-direction: column; gap: 12px;
       transition: all 0.4s; overflow: hidden; position: relative;
     }
-    .extra-item:hover { transform: translateY(-2px); }
-    .extra-item.bento-hero { grid-column: span 2; grid-row: span 2; padding: 32px; }
-    .extra-item.bento-wide { grid-column: span 2; }
+    .extra-item:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
     .extra-icon {
-      width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
       background: var(--accent-lo); display: flex; align-items: center; justify-content: center;
       transition: all 0.5s;
     }
-    .bento-hero .extra-icon { width: 56px; height: 56px; border-radius: 14px; }
-    .extra-icon svg { width: 24px; height: 24px; color: var(--accent); transition: color 0.5s; }
-    .bento-hero .extra-icon svg { width: 28px; height: 28px; }
+    .extra-icon svg { width: 22px; height: 22px; color: var(--accent); transition: color 0.5s; }
     .extra-item h3 {
-      font-family: var(--display); font-size: 17px; color: var(--ink);
+      font-family: var(--display); font-size: 18px; color: var(--ink);
       transition: font-family 0.5s, color 0.5s;
     }
-    .bento-hero h3 { font-size: 24px; }
-    .extra-item p { font-size: 13px; color: var(--ink2); line-height: 1.55; }
-    .bento-hero p { font-size: 15px; }
+    .extra-item p { font-size: 14px; color: var(--ink2); line-height: 1.55; }
     .extra-item .extra-tag {
-      font-family: var(--mono); font-size: 9px; color: var(--accent);
+      font-family: var(--mono); font-size: 10px; color: var(--accent);
       text-transform: uppercase; letter-spacing: 0.06em; margin-top: auto;
     }
     @media (max-width: 768px) {
       .extras-grid { grid-template-columns: repeat(2, 1fr); }
-      .extra-item.bento-hero { grid-column: span 2; }
     }
     @media (max-width: 480px) {
       .extras-grid { grid-template-columns: 1fr; }
-      .extra-item.bento-hero, .extra-item.bento-wide { grid-column: span 1; }
     }
 
     /* ── CTA SECTION ── */
@@ -1392,22 +1384,22 @@
         <h2>Everything else a trainer needs.</h2>
       </div>
       <div class="extras-grid">
-        <!-- Hero: Type Chart (2x2) -->
-        <div class="extra-item bento-hero">
+        <!-- Type Chart -->
+        <div class="extra-item">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
           <h3>Type Chart</h3>
-          <p>Interactive 18x18 type effectiveness grid. Instantly see what's super effective, what resists, and what's immune. Compare dual-type matchups and find the best counters for any Pokémon.</p>
+          <p>Interactive 18x18 effectiveness grid. See what's super effective, resistant, or immune at a glance.</p>
           <div class="extra-tag">18 types</div>
         </div>
         <!-- Living Dex (2x1 wide) -->
-        <div class="extra-item bento-wide">
+        <div class="extra-item">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
           <h3>Living Dex Tracker</h3>
           <p>Track every catch across multiple games. Smart sort, multi-game tracking, and CSV export for serious collectors.</p>
           <div class="extra-tag">Multi-game</div>
         </div>
         <!-- Shiny Hunting (2x1 wide) -->
-        <div class="extra-item bento-wide">
+        <div class="extra-item">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
           <h3>Shiny Hunting</h3>
           <p>11 hunting methods — Masuda, Chain Fishing, SOS, Radar, and more. Live odds calculator with Shiny Charm support and streak tracking.</p>
