@@ -39,6 +39,14 @@
           "@type": "Answer",
           "text": "Kangaskhan's abilities are: Early bird, Scrappy, Inner focus."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature and EV spread for Kangaskhan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kangaskhan is best used as a Bulky Attacker. A Adamant nature is recommended with an EV spread of 252 HP / 252 Atk / 4 Spe. Good bulk with real offensive presence. Can take a hit before firing back."
+        }
       }
     ]
   }
@@ -64,7 +72,7 @@
     :root {
       --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
       --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
-      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent: #A8A77A; --accent-hi: #A8A77A; --accent-lo: #A8A77A1a;
       --display: 'MomoTrustDisplay', Georgia, serif;
       --body: 'MomoTrustSans', -apple-system, sans-serif;
       --mono: 'GeistMono', 'SF Mono', monospace;
@@ -143,11 +151,26 @@
     <div class="breadcrumb">
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Kangaskhan
     </div>
+    <!-- Prev/Next Nav -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <a href="../tangela/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/114.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#114 Tangela</span>
+  </a>
+      <a href="../horsea/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#116 Horsea</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/116.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
+    </div>
+
     <div class="hero">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/115.png" alt="Kangaskhan official artwork" loading="lazy">
-      <div class="dex-num">#115</div>
+      <div class="dex-num">#115 · Parent Pokémon</div>
       <h1>Kangaskhan</h1>
       <div class="types"><span class="type-pill" style="background:#A8A77A">normal</span></div>
+      <p style="font-family:var(--body);font-size:15px;color:var(--ink2);line-height:1.6;max-width:480px;margin:0 auto;font-style:italic;">"There are records of a lost human child being raised by a childless Kangaskhan."</p>
     </div>
 
     <div class="section">
@@ -157,6 +180,8 @@
         <div class="info-item"><div class="info-label">BST</div><div class="info-value">490</div></div>
       </div>
     </div>
+
+    
 
     <div class="section">
       <h2>Base Stats</h2>
@@ -220,14 +245,73 @@
 
     <div class="section">
       <h2>Abilities</h2>
-      <p style="font-size:15px;color:#52594F;line-height:1.6;">Early bird, Scrappy, Inner focus</p>
+      <p style="font-size:15px;color:var(--ink2);line-height:1.6;">Early bird, Scrappy, Inner focus</p>
     </div>
 
     <div class="section">
-      <h2>Notable Moves</h2>
+      <h2>Level-Up Moves</h2>
       <div class="moves-grid">
-        <div class="move">Pound</div><div class="move">Comet punch</div><div class="move">Mega punch</div><div class="move">Fire punch</div><div class="move">Ice punch</div><div class="move">Thunder punch</div><div class="move">Cut</div><div class="move">Stomp</div>
+        <div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Pound</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Comet punch</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Rage</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv4</span>Growl</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv19</span>Fake out</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv26</span>Bite</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv31</span>Tail whip</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv31</span>Crunch</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv31</span>Chip away</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv36</span>Mega punch</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv37</span>Outrage</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv37</span>Endure</div>
       </div>
+    </div>
+
+    <div class="section">
+      <h2>TM / HM Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Fire punch</div><div class="move">Ice punch</div><div class="move">Thunder punch</div><div class="move">Cut</div><div class="move">Mega kick</div><div class="move">Headbutt</div><div class="move">Body slam</div><div class="move">Take down</div><div class="move">Double edge</div><div class="move">Roar</div><div class="move">Water gun</div><div class="move">Hydro pump</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Egg Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Stomp</div><div class="move">Disable</div><div class="move">Focus energy</div><div class="move">Foresight</div><div class="move">Safeguard</div><div class="move">Endeavor</div><div class="move">Crush claw</div><div class="move">Hammer arm</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Similar Normal-type Pokémon</h2>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
+        <a href="../bidoof/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/399.png" width="48" height="48" alt="Bidoof" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Bidoof</span>
+    </a><a href="../swellow/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/277.png" width="48" height="48" alt="Swellow" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Swellow</span>
+    </a><a href="../porygon2/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/233.png" width="48" height="48" alt="Porygon2" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Porygon2</span>
+    </a><a href="../wigglytuff/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/40.png" width="48" height="48" alt="Wigglytuff" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Wigglytuff</span>
+    </a><a href="../fletchling/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/661.png" width="48" height="48" alt="Fletchling" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Fletchling</span>
+    </a><a href="../taillow/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/276.png" width="48" height="48" alt="Taillow" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Taillow</span>
+    </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Competitive Profile</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Role</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--accent);margin-top:4px;">Bulky Attacker</div>
+        </div>
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Nature</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--ink);margin-top:4px;">Adamant</div>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div class="info-label">EV Spread</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:6px;">252 HP / 252 Atk / 4 Spe</div>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);line-height:1.6;">Good bulk with real offensive presence. Can take a hit before firing back.</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:12px;font-family:var(--mono);">* Suggested EV spread based on base stats. Open Tree Co. for full AI-powered team analysis.</p>
     </div>
 
     <div class="cta">
@@ -237,6 +321,20 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download Tree Co.
       </a>
+    </div>
+
+    <!-- Prev/Next Nav (bottom) -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../tangela/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/114.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#114 Tangela</span>
+  </a>
+      <a href="../horsea/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#116 Horsea</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/116.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
     </div>
   </div>
   <footer>

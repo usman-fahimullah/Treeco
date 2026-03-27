@@ -68,8 +68,51 @@ const TYPE_COLORS = {
   steel: '#B7B7CE', fairy: '#D685AD'
 };
 
-function generatePage(pokemon) {
-  const { id, name, types, stats, abilities, height, weight, moves } = pokemon;
+function getCompetitiveProfile(statMap, typeNames) {
+  const atk = statMap.attack || 0;
+  const spa = statMap['special-attack'] || 0;
+  const def = statMap.defense || 0;
+  const spd = statMap['special-defense'] || 0;
+  const spe = statMap.speed || 0;
+  const hp  = statMap.hp || 0;
+  const bulk = hp + def + spd;
+  const offenses = Math.max(atk, spa);
+  const isPhysical = atk >= spa;
+
+  let role, nature, evSpread, notes;
+
+  if (spe >= 100 && offenses >= 110) {
+    role = 'Fast Sweeper';
+    nature = isPhysical ? 'Jolly' : 'Timid';
+    evSpread = `252 ${isPhysical ? 'Atk' : 'SpA'} / 4 ${isPhysical ? 'SpD' : 'Atk'} / 252 Spe`;
+    notes = 'High speed + offense. Max Speed to outpace threats; max attack stat for KOs.';
+  } else if (bulk >= 270 && offenses < 90) {
+    role = 'Wall / Support';
+    nature = def >= spd ? 'Bold' : 'Calm';
+    evSpread = `252 HP / 252 ${def >= spd ? 'Def' : 'SpD'} / 4 ${def >= spd ? 'SpD' : 'Def'}`;
+    notes = 'Excellent bulk. Invest heavily in HP + best defensive stat to wall attacks.';
+  } else if (bulk >= 230 && offenses >= 90) {
+    role = 'Bulky Attacker';
+    nature = isPhysical ? 'Adamant' : 'Modest';
+    evSpread = `252 HP / 252 ${isPhysical ? 'Atk' : 'SpA'} / 4 Spe`;
+    notes = 'Good bulk with real offensive presence. Can take a hit before firing back.';
+  } else if (offenses >= 120) {
+    role = 'Wallbreaker';
+    nature = isPhysical ? 'Adamant' : 'Modest';
+    evSpread = `252 ${isPhysical ? 'Atk' : 'SpA'} / 252 Spe / 4 ${isPhysical ? 'Def' : 'SpD'}`;
+    notes = 'Raw power for breaking defensive cores. Pair with speed control support.';
+  } else {
+    role = 'Mixed Attacker';
+    nature = isPhysical ? 'Lonely' : 'Mild';
+    evSpread = `252 Atk / 252 SpA / 4 Spe`;
+    notes = 'Can threaten different defensive types. Unpredictable coverage mix.';
+  }
+
+  return { role, nature, evSpread, notes };
+}
+
+function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
+  const { id, name, types, stats, abilities, height, weight } = pokemon;
   const displayName = capitalize(name);
   const typeNames = types.map(t => t.type.name);
   const { weaknesses, resistances, immunities } = getWeaknesses(typeNames);
@@ -80,8 +123,46 @@ function generatePage(pokemon) {
   stats.forEach(s => { statMap[s.stat.name] = s.base_stat; });
   const bst = stats.reduce((sum, s) => sum + s.base_stat, 0);
 
-  const abilityNames = abilities.map(a => capitalize(a.ability.name.replace('-', ' '))).join(', ');
-  const topMoves = moves.slice(0, 8).map(m => capitalize(m.move.name.replace('-', ' ')));
+  const abilityNames = abilities.map(a => capitalize(a.ability.name.replace(/-/g, ' '))).join(', ');
+  const moveSections = categorizeMoves(pokemon);
+  const flavorText = pokemon._flavorText || '';
+  const genus = pokemon._genus || '';
+  const competitive = getCompetitiveProfile(statMap, typeNames);
+
+  // Evolution chain
+  let evoHtml = '';
+  if (pokemon._evoChain) {
+    const stages = extractEvoChain(pokemon._evoChain);
+    if (stages.length > 1) {
+      evoHtml = stages.map(s => {
+        const isCurrent = s.id === id;
+        return `<a href="../${s.name}/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;${isCurrent ? 'opacity:1;' : 'opacity:0.6;'}">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${s.id}.png" width="56" height="56" alt="${capitalize(s.name)}" style="image-rendering:pixelated;${isCurrent ? 'filter:drop-shadow(0 0 8px ' + typeColor + ');' : ''}">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:${isCurrent ? '600' : '400'};">${capitalize(s.name)}</span>
+        </a>`;
+      }).join('<span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span>');
+    }
+  }
+
+  // Related Pokemon
+  const relatedHtml = related.map(r =>
+    `<a href="../${r.name}/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${r.id}.png" width="48" height="48" alt="${capitalize(r.name)}" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">${capitalize(r.name)}</span>
+    </a>`
+  ).join('');
+
+  // Prev/Next navigation
+  const prevLink = prevPoke ? `<a href="../${prevPoke.name}/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${prevPoke.id}.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#${pad(prevPoke.id)} ${capitalize(prevPoke.name)}</span>
+  </a>` : '<span></span>';
+  const nextLink = nextPoke ? `<a href="../${nextPoke.name}/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#${pad(nextPoke.id)} ${capitalize(nextPoke.name)}</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nextPoke.id}.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>` : '<span></span>';
 
   const weakStr = weaknesses.map(w => `${capitalize(w.type)} (${w.mult})`).join(', ') || 'None';
   const resistStr = resistances.map(r => `${capitalize(r.type)} (${r.mult})`).join(', ') || 'None';
@@ -148,6 +229,14 @@ function generatePage(pokemon) {
           "@type": "Answer",
           "text": "${displayName}'s abilities are: ${abilityNames}."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature and EV spread for ${displayName}?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "${displayName} is best used as a ${competitive.role}. A ${competitive.nature} nature is recommended with an EV spread of ${competitive.evSpread}. ${competitive.notes}"
+        }
       }
     ]
   }
@@ -173,7 +262,7 @@ function generatePage(pokemon) {
     :root {
       --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
       --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
-      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent: ${typeColor}; --accent-hi: ${typeColor}; --accent-lo: ${typeColor}1a;
       --display: 'MomoTrustDisplay', Georgia, serif;
       --body: 'MomoTrustSans', -apple-system, sans-serif;
       --mono: 'GeistMono', 'SF Mono', monospace;
@@ -252,11 +341,18 @@ function generatePage(pokemon) {
     <div class="breadcrumb">
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › ${displayName}
     </div>
+    <!-- Prev/Next Nav -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      ${prevLink}
+      ${nextLink}
+    </div>
+
     <div class="hero">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png" alt="${displayName} official artwork" loading="lazy">
-      <div class="dex-num">#${pad(id)}</div>
+      <div class="dex-num">#${pad(id)}${genus ? ' · ' + genus : ''}</div>
       <h1>${displayName}</h1>
       <div class="types">${typeBadges}</div>
+      ${flavorText ? `<p style="font-family:var(--body);font-size:15px;color:var(--ink2);line-height:1.6;max-width:480px;margin:0 auto;font-style:italic;">"${flavorText}"</p>` : ''}
     </div>
 
     <div class="section">
@@ -266,6 +362,13 @@ function generatePage(pokemon) {
         <div class="info-item"><div class="info-label">BST</div><div class="info-value">${bst}</div></div>
       </div>
     </div>
+
+    ${evoHtml ? `<div class="section">
+      <h2>Evolution Chain</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px 0;">
+        ${evoHtml}
+      </div>
+    </div>` : ''}
 
     <div class="section">
       <h2>Base Stats</h2>
@@ -287,15 +390,56 @@ function generatePage(pokemon) {
 
     <div class="section">
       <h2>Abilities</h2>
-      <p style="font-size:15px;color:#52594F;line-height:1.6;">${abilityNames}</p>
+      <p style="font-size:15px;color:var(--ink2);line-height:1.6;">${abilityNames}</p>
     </div>
 
-    ${topMoves.length ? `<div class="section">
-      <h2>Notable Moves</h2>
+    ${moveSections.levelUp.length ? `<div class="section">
+      <h2>Level-Up Moves</h2>
       <div class="moves-grid">
-        ${topMoves.map(m => `<div class="move">${m}</div>`).join('')}
+        ${moveSections.levelUp.map(m => `<div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv${m.level}</span>${m.name}</div>`).join('')}
       </div>
     </div>` : ''}
+
+    ${moveSections.tm.length ? `<div class="section">
+      <h2>TM / HM Moves</h2>
+      <div class="moves-grid">
+        ${moveSections.tm.map(m => `<div class="move">${m}</div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${moveSections.egg.length ? `<div class="section">
+      <h2>Egg Moves</h2>
+      <div class="moves-grid">
+        ${moveSections.egg.map(m => `<div class="move">${m}</div>`).join('')}
+      </div>
+    </div>` : ''}
+
+    ${related.length ? `<div class="section">
+      <h2>Similar ${capitalize(primaryType)}-type Pokémon</h2>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
+        ${relatedHtml}
+      </div>
+    </div>` : ''}
+
+    <div class="section">
+      <h2>Competitive Profile</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Role</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--accent);margin-top:4px;">${competitive.role}</div>
+        </div>
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Nature</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--ink);margin-top:4px;">${competitive.nature}</div>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div class="info-label">EV Spread</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:6px;">${competitive.evSpread}</div>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);line-height:1.6;">${competitive.notes}</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:12px;font-family:var(--mono);">* Suggested EV spread based on base stats. Open Tree Co. for full AI-powered team analysis.</p>
+    </div>
 
     <div class="cta">
       <h2>Get the full ${displayName} analysis</h2>
@@ -304,6 +448,12 @@ function generatePage(pokemon) {
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download Tree Co.
       </a>
+    </div>
+
+    <!-- Prev/Next Nav (bottom) -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+      ${prevLink}
+      ${nextLink}
     </div>
   </div>
   <footer>
@@ -314,21 +464,89 @@ function generatePage(pokemon) {
 </html>`;
 }
 
-async function fetchPokemon(id) {
-  const res = await fetch(`${POKEAPI}/pokemon/${id}`);
-  if (!res.ok) throw new Error(`Failed to fetch Pokemon ${id}: ${res.status}`);
+async function fetchJSON(url) {
+  const res = await fetch(url);
+  if (!res.ok) return null;
   return res.json();
 }
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+// Cache for evolution chains and species
+const evoChainCache = {};
+const speciesCache = {};
+
+async function fetchFullPokemon(id) {
+  const pokemon = await fetchJSON(`${POKEAPI}/pokemon/${id}`);
+  if (!pokemon) return null;
+
+  // Fetch species for flavor text + evolution chain
+  const species = await fetchJSON(`${POKEAPI}/pokemon-species/${id}`).catch(() => null);
+  if (species) {
+    speciesCache[id] = species;
+    // Fetch evolution chain if not cached
+    if (species.evolution_chain && species.evolution_chain.url) {
+      const chainId = species.evolution_chain.url.split('/').filter(Boolean).pop();
+      if (!evoChainCache[chainId]) {
+        evoChainCache[chainId] = await fetchJSON(species.evolution_chain.url).catch(() => null);
+      }
+      pokemon._evoChain = evoChainCache[chainId];
+    }
+    // Get English flavor text (latest game entry)
+    const englishEntries = (species.flavor_text_entries || []).filter(e => e.language.name === 'en');
+    pokemon._flavorText = englishEntries.length
+      ? englishEntries[englishEntries.length - 1].flavor_text.replace(/[\n\f\r]/g, ' ').replace(/\s+/g, ' ')
+      : '';
+    pokemon._genus = (species.genera || []).find(g => g.language.name === 'en');
+    pokemon._genus = pokemon._genus ? pokemon._genus.genus : '';
+  }
+
+  return pokemon;
+}
+
+function extractEvoChain(chain) {
+  const stages = [];
+  function walk(node) {
+    if (!node) return;
+    const name = node.species.name;
+    const id = parseInt(node.species.url.split('/').filter(Boolean).pop());
+    stages.push({ name, id });
+    if (node.evolves_to) {
+      for (const evo of node.evolves_to) walk(evo);
+    }
+  }
+  walk(chain.chain);
+  return stages;
+}
+
+function categorizeMoves(pokemon) {
+  const levelUp = [], tm = [], egg = [], tutor = [];
+  for (const m of pokemon.moves) {
+    const name = capitalize(m.move.name.replace(/-/g, ' '));
+    for (const vg of m.version_group_details) {
+      const method = vg.move_learn_method.name;
+      if (method === 'level-up') { levelUp.push({ name, level: vg.level_learned_at }); break; }
+      else if (method === 'machine') { tm.push(name); break; }
+      else if (method === 'egg') { egg.push(name); break; }
+      else if (method === 'tutor') { tutor.push(name); break; }
+    }
+  }
+  // Sort level-up by level, dedupe others
+  levelUp.sort((a, b) => a.level - b.level);
+  return {
+    levelUp: levelUp.slice(0, 12),
+    tm: [...new Set(tm)].slice(0, 12),
+    egg: [...new Set(egg)].slice(0, 8)
+  };
+}
+
 async function main() {
   console.log(`Generating pages for ${TOTAL} Pokémon...`);
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  // Generate index page
-  const indexPokemon = [];
+  const allPokemon = [];
 
+  // Phase 1: Fetch all data
   for (let batch = 0; batch < Math.ceil(TOTAL / BATCH_SIZE); batch++) {
     const start = batch * BATCH_SIZE + 1;
     const end = Math.min((batch + 1) * BATCH_SIZE, TOTAL);
@@ -336,26 +554,49 @@ async function main() {
 
     const promises = [];
     for (let id = start; id <= end; id++) {
-      promises.push(fetchPokemon(id).catch(err => {
+      promises.push(fetchFullPokemon(id).catch(err => {
         console.error(`  Skipping #${id}: ${err.message}`);
         return null;
       }));
     }
 
     const results = await Promise.all(promises);
+    for (const p of results) { if (p) allPokemon.push(p); }
 
-    for (const pokemon of results) {
-      if (!pokemon) continue;
-      const dir = path.join(OUT_DIR, pokemon.name);
-      fs.mkdirSync(dir, { recursive: true });
-      const html = generatePage(pokemon);
-      fs.writeFileSync(path.join(dir, 'index.html'), html);
-      indexPokemon.push({ id: pokemon.id, name: pokemon.name, types: pokemon.types.map(t => t.type.name) });
-    }
+    if (batch < Math.ceil(TOTAL / BATCH_SIZE) - 1) await sleep(DELAY_MS);
+  }
 
-    if (batch < Math.ceil(TOTAL / BATCH_SIZE) - 1) {
-      await sleep(DELAY_MS);
+  console.log(`Fetched ${allPokemon.length} Pokémon. Generating pages...`);
+
+  // Build type index for "related Pokemon"
+  const typeIndex = {};
+  for (const p of allPokemon) {
+    for (const t of p.types) {
+      if (!typeIndex[t.type.name]) typeIndex[t.type.name] = [];
+      typeIndex[t.type.name].push({ id: p.id, name: p.name });
     }
+  }
+
+  // Phase 2: Generate pages
+  const indexPokemon = [];
+  for (const pokemon of allPokemon) {
+    const dir = path.join(OUT_DIR, pokemon.name);
+    fs.mkdirSync(dir, { recursive: true });
+
+    // Find related Pokemon (same primary type, different Pokemon, max 6)
+    const primaryType = pokemon.types[0].type.name;
+    const related = (typeIndex[primaryType] || [])
+      .filter(p => p.id !== pokemon.id)
+      .sort(() => Math.random() - 0.5)
+      .slice(0, 6);
+
+    // Prev/next
+    const prevPoke = allPokemon.find(p => p.id === pokemon.id - 1);
+    const nextPoke = allPokemon.find(p => p.id === pokemon.id + 1);
+
+    const html = generatePage(pokemon, { related, prevPoke, nextPoke });
+    fs.writeFileSync(path.join(dir, 'index.html'), html);
+    indexPokemon.push({ id: pokemon.id, name: pokemon.name, types: pokemon.types.map(t => t.type.name) });
   }
 
   // Generate Pokedex index page

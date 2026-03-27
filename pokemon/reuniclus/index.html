@@ -39,6 +39,14 @@
           "@type": "Answer",
           "text": "Reuniclus's abilities are: Overcoat, Magic guard, Regenerator."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature and EV spread for Reuniclus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reuniclus is best used as a Bulky Attacker. A Modest nature is recommended with an EV spread of 252 HP / 252 SpA / 4 Spe. Good bulk with real offensive presence. Can take a hit before firing back."
+        }
       }
     ]
   }
@@ -64,7 +72,7 @@
     :root {
       --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
       --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
-      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent: #F95587; --accent-hi: #F95587; --accent-lo: #F955871a;
       --display: 'MomoTrustDisplay', Georgia, serif;
       --body: 'MomoTrustSans', -apple-system, sans-serif;
       --mono: 'GeistMono', 'SF Mono', monospace;
@@ -143,11 +151,26 @@
     <div class="breadcrumb">
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Reuniclus
     </div>
+    <!-- Prev/Next Nav -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <a href="../duosion/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/578.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#578 Duosion</span>
+  </a>
+      <a href="../ducklett/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#580 Ducklett</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/580.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
+    </div>
+
     <div class="hero">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/579.png" alt="Reuniclus official artwork" loading="lazy">
-      <div class="dex-num">#579</div>
+      <div class="dex-num">#579 · Multiplying Pokémon</div>
       <h1>Reuniclus</h1>
       <div class="types"><span class="type-pill" style="background:#F95587">psychic</span></div>
+      <p style="font-family:var(--body);font-size:15px;color:var(--ink2);line-height:1.6;max-width:480px;margin:0 auto;font-style:italic;">"It’s said that drinking the liquid surrounding Reuniclus grants wisdom. Problem is, the liquid is highly toxic to anything besides Reuniclus itself."</p>
     </div>
 
     <div class="section">
@@ -155,6 +178,22 @@
         <div class="info-item"><div class="info-label">Height</div><div class="info-value">1.0m</div></div>
         <div class="info-item"><div class="info-label">Weight</div><div class="info-value">20.1kg</div></div>
         <div class="info-item"><div class="info-label">BST</div><div class="info-value">490</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Evolution Chain</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px 0;">
+        <a href="../solosis/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/577.png" width="56" height="56" alt="Solosis" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Solosis</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../duosion/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/578.png" width="56" height="56" alt="Duosion" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Duosion</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../reuniclus/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:1;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/579.png" width="56" height="56" alt="Reuniclus" style="image-rendering:pixelated;filter:drop-shadow(0 0 8px #F95587);">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:600;">Reuniclus</span>
+        </a>
       </div>
     </div>
 
@@ -220,14 +259,73 @@
 
     <div class="section">
       <h2>Abilities</h2>
-      <p style="font-size:15px;color:#52594F;line-height:1.6;">Overcoat, Magic guard, Regenerator</p>
+      <p style="font-size:15px;color:var(--ink2);line-height:1.6;">Overcoat, Magic guard, Regenerator</p>
     </div>
 
     <div class="section">
-      <h2>Notable Moves</h2>
+      <h2>Level-Up Moves</h2>
       <div class="moves-grid">
-        <div class="move">Mega punch</div><div class="move">Fire punch</div><div class="move">Ice punch</div><div class="move">Thunder punch</div><div class="move">Body slam</div><div class="move">Psybeam</div><div class="move">Hyper beam</div><div class="move">Strength</div>
+        <div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv0</span>Hammer arm</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Confusion</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Reflect</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Psywave</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Rollout</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Snatch</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv12</span>Psybeam</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv14</span>Hidden power</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv16</span>Light screen</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv19</span>Charm</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv24</span>Recover</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv25</span>Psyshock</div>
       </div>
+    </div>
+
+    <div class="section">
+      <h2>TM / HM Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Mega punch</div><div class="move">Body slam</div><div class="move">Hyper beam</div><div class="move">Strength</div><div class="move">Thunder wave</div><div class="move">Thunder</div><div class="move">Toxic</div><div class="move">Night shade</div><div class="move">Double team</div><div class="move">Swift</div><div class="move">Dream eater</div><div class="move">Flash</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Egg Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Confuse ray</div><div class="move">Acid armor</div><div class="move">Astonish</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Similar Psychic-type Pokémon</h2>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
+        <a href="../sigilyph/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/561.png" width="48" height="48" alt="Sigilyph" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Sigilyph</span>
+    </a><a href="../drowzee/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/96.png" width="48" height="48" alt="Drowzee" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Drowzee</span>
+    </a><a href="../mr-mime/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/122.png" width="48" height="48" alt="Mr-mime" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Mr-mime</span>
+    </a><a href="../mime-jr/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/439.png" width="48" height="48" alt="Mime-jr" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Mime-jr</span>
+    </a><a href="../chimecho/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/358.png" width="48" height="48" alt="Chimecho" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Chimecho</span>
+    </a><a href="../metagross/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png" width="48" height="48" alt="Metagross" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Metagross</span>
+    </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Competitive Profile</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Role</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--accent);margin-top:4px;">Bulky Attacker</div>
+        </div>
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Nature</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--ink);margin-top:4px;">Modest</div>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div class="info-label">EV Spread</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:6px;">252 HP / 252 SpA / 4 Spe</div>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);line-height:1.6;">Good bulk with real offensive presence. Can take a hit before firing back.</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:12px;font-family:var(--mono);">* Suggested EV spread based on base stats. Open Tree Co. for full AI-powered team analysis.</p>
     </div>
 
     <div class="cta">
@@ -237,6 +335,20 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download Tree Co.
       </a>
+    </div>
+
+    <!-- Prev/Next Nav (bottom) -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../duosion/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/578.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#578 Duosion</span>
+  </a>
+      <a href="../ducklett/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#580 Ducklett</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/580.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
     </div>
   </div>
   <footer>

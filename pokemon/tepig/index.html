@@ -39,6 +39,14 @@
           "@type": "Answer",
           "text": "Tepig's abilities are: Blaze, Thick fat."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature and EV spread for Tepig?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tepig is best used as a Mixed Attacker. A Lonely nature is recommended with an EV spread of 252 Atk / 252 SpA / 4 Spe. Can threaten different defensive types. Unpredictable coverage mix."
+        }
       }
     ]
   }
@@ -64,7 +72,7 @@
     :root {
       --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
       --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
-      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent: #EE8130; --accent-hi: #EE8130; --accent-lo: #EE81301a;
       --display: 'MomoTrustDisplay', Georgia, serif;
       --body: 'MomoTrustSans', -apple-system, sans-serif;
       --mono: 'GeistMono', 'SF Mono', monospace;
@@ -143,11 +151,26 @@
     <div class="breadcrumb">
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Tepig
     </div>
+    <!-- Prev/Next Nav -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <a href="../serperior/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#497 Serperior</span>
+  </a>
+      <a href="../pignite/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#499 Pignite</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/499.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
+    </div>
+
     <div class="hero">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/498.png" alt="Tepig official artwork" loading="lazy">
-      <div class="dex-num">#498</div>
+      <div class="dex-num">#498 · Fire Pig Pokémon</div>
       <h1>Tepig</h1>
       <div class="types"><span class="type-pill" style="background:#EE8130">fire</span></div>
+      <p style="font-family:var(--body);font-size:15px;color:var(--ink2);line-height:1.6;max-width:480px;margin:0 auto;font-style:italic;">"It loves to eat roasted berries, but sometimes it gets too excited and burns them to a crisp."</p>
     </div>
 
     <div class="section">
@@ -155,6 +178,22 @@
         <div class="info-item"><div class="info-label">Height</div><div class="info-value">0.5m</div></div>
         <div class="info-item"><div class="info-label">Weight</div><div class="info-value">9.9kg</div></div>
         <div class="info-item"><div class="info-label">BST</div><div class="info-value">308</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Evolution Chain</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px 0;">
+        <a href="../tepig/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:1;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/498.png" width="56" height="56" alt="Tepig" style="image-rendering:pixelated;filter:drop-shadow(0 0 8px #EE8130);">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:600;">Tepig</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../pignite/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/499.png" width="56" height="56" alt="Pignite" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Pignite</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../emboar/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/500.png" width="56" height="56" alt="Emboar" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Emboar</span>
+        </a>
       </div>
     </div>
 
@@ -220,14 +259,73 @@
 
     <div class="section">
       <h2>Abilities</h2>
-      <p style="font-size:15px;color:#52594F;line-height:1.6;">Blaze, Thick fat</p>
+      <p style="font-size:15px;color:var(--ink2);line-height:1.6;">Blaze, Thick fat</p>
     </div>
 
     <div class="section">
-      <h2>Notable Moves</h2>
+      <h2>Level-Up Moves</h2>
       <div class="moves-grid">
-        <div class="move">Fire punch</div><div class="move">Tackle</div><div class="move">Body slam</div><div class="move">Take down</div><div class="move">Thrash</div><div class="move">Double edge</div><div class="move">Tail whip</div><div class="move">Roar</div>
+        <div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Tackle</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv3</span>Tail whip</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv7</span>Ember</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv9</span>Endure</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv9</span>Odor sleuth</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv13</span>Defense curl</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv15</span>Flame charge</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv19</span>Smog</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv21</span>Rollout</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv25</span>Take down</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv27</span>Heat crash</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv31</span>Assurance</div>
       </div>
+    </div>
+
+    <div class="section">
+      <h2>TM / HM Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Fire punch</div><div class="move">Double edge</div><div class="move">Strength</div><div class="move">Solar beam</div><div class="move">Fire spin</div><div class="move">Dig</div><div class="move">Toxic</div><div class="move">Double team</div><div class="move">Fire blast</div><div class="move">Rest</div><div class="move">Substitute</div><div class="move">Protect</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Egg Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Body slam</div><div class="move">Thrash</div><div class="move">Curse</div><div class="move">Sleep talk</div><div class="move">Magnitude</div><div class="move">Superpower</div><div class="move">Yawn</div><div class="move">Endeavor</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Similar Fire-type Pokémon</h2>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
+        <a href="../magmortar/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/467.png" width="48" height="48" alt="Magmortar" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Magmortar</span>
+    </a><a href="../torracat/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/726.png" width="48" height="48" alt="Torracat" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Torracat</span>
+    </a><a href="../oricorio-baile/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/741.png" width="48" height="48" alt="Oricorio-baile" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Oricorio-baile</span>
+    </a><a href="../talonflame/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/663.png" width="48" height="48" alt="Talonflame" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Talonflame</span>
+    </a><a href="../entei/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/244.png" width="48" height="48" alt="Entei" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Entei</span>
+    </a><a href="../sizzlipede/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/850.png" width="48" height="48" alt="Sizzlipede" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Sizzlipede</span>
+    </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Competitive Profile</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Role</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--accent);margin-top:4px;">Mixed Attacker</div>
+        </div>
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Nature</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--ink);margin-top:4px;">Lonely</div>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div class="info-label">EV Spread</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:6px;">252 Atk / 252 SpA / 4 Spe</div>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);line-height:1.6;">Can threaten different defensive types. Unpredictable coverage mix.</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:12px;font-family:var(--mono);">* Suggested EV spread based on base stats. Open Tree Co. for full AI-powered team analysis.</p>
     </div>
 
     <div class="cta">
@@ -237,6 +335,20 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download Tree Co.
       </a>
+    </div>
+
+    <!-- Prev/Next Nav (bottom) -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../serperior/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/497.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#497 Serperior</span>
+  </a>
+      <a href="../pignite/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#499 Pignite</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/499.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
     </div>
   </div>
   <footer>

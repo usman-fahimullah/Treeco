@@ -39,6 +39,14 @@
           "@type": "Answer",
           "text": "Makuhita's abilities are: Thick fat, Guts, Sheer force."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature and EV spread for Makuhita?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Makuhita is best used as a Mixed Attacker. A Lonely nature is recommended with an EV spread of 252 Atk / 252 SpA / 4 Spe. Can threaten different defensive types. Unpredictable coverage mix."
+        }
       }
     ]
   }
@@ -64,7 +72,7 @@
     :root {
       --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
       --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
-      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent: #C22E28; --accent-hi: #C22E28; --accent-lo: #C22E281a;
       --display: 'MomoTrustDisplay', Georgia, serif;
       --body: 'MomoTrustSans', -apple-system, sans-serif;
       --mono: 'GeistMono', 'SF Mono', monospace;
@@ -143,11 +151,26 @@
     <div class="breadcrumb">
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Makuhita
     </div>
+    <!-- Prev/Next Nav -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <a href="../exploud/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/295.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#295 Exploud</span>
+  </a>
+      <a href="../hariyama/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#297 Hariyama</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/297.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
+    </div>
+
     <div class="hero">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/296.png" alt="Makuhita official artwork" loading="lazy">
-      <div class="dex-num">#296</div>
+      <div class="dex-num">#296 · Guts Pokémon</div>
       <h1>Makuhita</h1>
       <div class="types"><span class="type-pill" style="background:#C22E28">fighting</span></div>
+      <p style="font-family:var(--body);font-size:15px;color:var(--ink2);line-height:1.6;max-width:480px;margin:0 auto;font-style:italic;">"There’s a rumor of a traditional recipe for stew that Trainers can use to raise strong Makuhita."</p>
     </div>
 
     <div class="section">
@@ -155,6 +178,19 @@
         <div class="info-item"><div class="info-label">Height</div><div class="info-value">1.0m</div></div>
         <div class="info-item"><div class="info-label">Weight</div><div class="info-value">86.4kg</div></div>
         <div class="info-item"><div class="info-label">BST</div><div class="info-value">237</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Evolution Chain</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px 0;">
+        <a href="../makuhita/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:1;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/296.png" width="56" height="56" alt="Makuhita" style="image-rendering:pixelated;filter:drop-shadow(0 0 8px #C22E28);">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:600;">Makuhita</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../hariyama/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/297.png" width="56" height="56" alt="Hariyama" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Hariyama</span>
+        </a>
       </div>
     </div>
 
@@ -220,14 +256,73 @@
 
     <div class="section">
       <h2>Abilities</h2>
-      <p style="font-size:15px;color:#52594F;line-height:1.6;">Thick fat, Guts, Sheer force</p>
+      <p style="font-size:15px;color:var(--ink2);line-height:1.6;">Thick fat, Guts, Sheer force</p>
     </div>
 
     <div class="section">
-      <h2>Notable Moves</h2>
+      <h2>Level-Up Moves</h2>
       <div class="moves-grid">
-        <div class="move">Mega punch</div><div class="move">Fire punch</div><div class="move">Ice punch</div><div class="move">Thunder punch</div><div class="move">Whirlwind</div><div class="move">Mega kick</div><div class="move">Sand attack</div><div class="move">Headbutt</div>
+        <div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Tackle</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Focus energy</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv4</span>Sand attack</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv10</span>Arm thrust</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv13</span>Vital throw</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv19</span>Fake out</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv22</span>Whirlwind</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv28</span>Knock off</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv28</span>Force palm</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv31</span>Smelling salts</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv34</span>Wake up slap</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv37</span>Belly drum</div>
       </div>
+    </div>
+
+    <div class="section">
+      <h2>TM / HM Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Take down</div><div class="move">Surf</div><div class="move">Strength</div><div class="move">Earthquake</div><div class="move">Dig</div><div class="move">Toxic</div><div class="move">Double team</div><div class="move">Swift</div><div class="move">Rest</div><div class="move">Thief</div><div class="move">Protect</div><div class="move">Attract</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Egg Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Counter</div><div class="move">Feint attack</div><div class="move">Foresight</div><div class="move">Detect</div><div class="move">Dynamic punch</div><div class="move">Cross chop</div><div class="move">Helping hand</div><div class="move">Revenge</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Similar Fighting-type Pokémon</h2>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
+        <a href="../mankey/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png" width="48" height="48" alt="Mankey" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Mankey</span>
+    </a><a href="../crabrawler/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/739.png" width="48" height="48" alt="Crabrawler" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Crabrawler</span>
+    </a><a href="../hawlucha/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/701.png" width="48" height="48" alt="Hawlucha" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Hawlucha</span>
+    </a><a href="../okidogi/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1014.png" width="48" height="48" alt="Okidogi" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Okidogi</span>
+    </a><a href="../annihilape/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/979.png" width="48" height="48" alt="Annihilape" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Annihilape</span>
+    </a><a href="../kubfu/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/891.png" width="48" height="48" alt="Kubfu" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Kubfu</span>
+    </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Competitive Profile</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Role</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--accent);margin-top:4px;">Mixed Attacker</div>
+        </div>
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Nature</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--ink);margin-top:4px;">Lonely</div>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div class="info-label">EV Spread</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:6px;">252 Atk / 252 SpA / 4 Spe</div>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);line-height:1.6;">Can threaten different defensive types. Unpredictable coverage mix.</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:12px;font-family:var(--mono);">* Suggested EV spread based on base stats. Open Tree Co. for full AI-powered team analysis.</p>
     </div>
 
     <div class="cta">
@@ -237,6 +332,20 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download Tree Co.
       </a>
+    </div>
+
+    <!-- Prev/Next Nav (bottom) -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../exploud/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/295.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#295 Exploud</span>
+  </a>
+      <a href="../hariyama/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#297 Hariyama</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/297.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
     </div>
   </div>
   <footer>

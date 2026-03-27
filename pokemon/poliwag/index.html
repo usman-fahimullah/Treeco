@@ -39,6 +39,14 @@
           "@type": "Answer",
           "text": "Poliwag's abilities are: Water absorb, Damp, Swift swim."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature and EV spread for Poliwag?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Poliwag is best used as a Mixed Attacker. A Lonely nature is recommended with an EV spread of 252 Atk / 252 SpA / 4 Spe. Can threaten different defensive types. Unpredictable coverage mix."
+        }
       }
     ]
   }
@@ -64,7 +72,7 @@
     :root {
       --bg: #EFEEE9; --surface: #FAF9F5; --border: #E2E0DA;
       --ink: #1A1E1B; --ink2: #52594F; --ink3: #626962;
-      --accent: #047857; --accent-hi: #059669; --accent-lo: rgba(4,120,87,0.09);
+      --accent: #6390F0; --accent-hi: #6390F0; --accent-lo: #6390F01a;
       --display: 'MomoTrustDisplay', Georgia, serif;
       --body: 'MomoTrustSans', -apple-system, sans-serif;
       --mono: 'GeistMono', 'SF Mono', monospace;
@@ -143,11 +151,26 @@
     <div class="breadcrumb">
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Poliwag
     </div>
+    <!-- Prev/Next Nav -->
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+      <a href="../arcanine/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#059 Arcanine</span>
+  </a>
+      <a href="../poliwhirl/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#061 Poliwhirl</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
+    </div>
+
     <div class="hero">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/60.png" alt="Poliwag official artwork" loading="lazy">
-      <div class="dex-num">#060</div>
+      <div class="dex-num">#060 · Tadpole Pokémon</div>
       <h1>Poliwag</h1>
       <div class="types"><span class="type-pill" style="background:#6390F0">water</span></div>
+      <p style="font-family:var(--body);font-size:15px;color:var(--ink2);line-height:1.6;max-width:480px;margin:0 auto;font-style:italic;">"In rivers with fast-flowing water, this Pokémon will cling to a rock by using its thick lips, which act like a suction cup."</p>
     </div>
 
     <div class="section">
@@ -155,6 +178,25 @@
         <div class="info-item"><div class="info-label">Height</div><div class="info-value">0.6m</div></div>
         <div class="info-item"><div class="info-label">Weight</div><div class="info-value">12.4kg</div></div>
         <div class="info-item"><div class="info-label">BST</div><div class="info-value">300</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Evolution Chain</h2>
+      <div style="display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:12px 0;">
+        <a href="../poliwag/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:1;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png" width="56" height="56" alt="Poliwag" style="image-rendering:pixelated;filter:drop-shadow(0 0 8px #6390F0);">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:600;">Poliwag</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../poliwhirl/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png" width="56" height="56" alt="Poliwhirl" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Poliwhirl</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../poliwrath/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/62.png" width="56" height="56" alt="Poliwrath" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Poliwrath</span>
+        </a><span style="color:var(--ink3);font-size:18px;margin:0 4px;">→</span><a href="../politoed/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;opacity:0.6;">
+          <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/186.png" width="56" height="56" alt="Politoed" style="image-rendering:pixelated;">
+          <span style="font-family:var(--body);font-size:12px;color:var(--ink);font-weight:400;">Politoed</span>
+        </a>
       </div>
     </div>
 
@@ -220,14 +262,73 @@
 
     <div class="section">
       <h2>Abilities</h2>
-      <p style="font-size:15px;color:#52594F;line-height:1.6;">Water absorb, Damp, Swift swim</p>
+      <p style="font-size:15px;color:var(--ink2);line-height:1.6;">Water absorb, Damp, Swift swim</p>
     </div>
 
     <div class="section">
-      <h2>Notable Moves</h2>
+      <h2>Level-Up Moves</h2>
       <div class="moves-grid">
-        <div class="move">Pound</div><div class="move">Double slap</div><div class="move">Headbutt</div><div class="move">Body slam</div><div class="move">Take down</div><div class="move">Double edge</div><div class="move">Mist</div><div class="move">Water gun</div>
+        <div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv1</span>Bubble</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv4</span>Pound</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv16</span>Hypnosis</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv19</span>Water gun</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv25</span>Double slap</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv25</span>Rain dance</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv26</span>Low kick</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv28</span>Mud shot</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv31</span>Body slam</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv35</span>Wake up slap</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv36</span>Earth power</div><div class="move"><span style="font-family:var(--mono);font-size:11px;color:var(--ink3);margin-right:8px;">Lv37</span>Belly drum</div>
       </div>
+    </div>
+
+    <div class="section">
+      <h2>TM / HM Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Headbutt</div><div class="move">Take down</div><div class="move">Double edge</div><div class="move">Surf</div><div class="move">Ice beam</div><div class="move">Blizzard</div><div class="move">Bubble beam</div><div class="move">Dig</div><div class="move">Toxic</div><div class="move">Psychic</div><div class="move">Rage</div><div class="move">Mimic</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Egg Moves</h2>
+      <div class="moves-grid">
+        <div class="move">Mist</div><div class="move">Haze</div><div class="move">Splash</div><div class="move">Mind reader</div><div class="move">Encore</div><div class="move">Endeavor</div><div class="move">Refresh</div><div class="move">Ice ball</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Similar Water-type Pokémon</h2>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
+        <a href="../mantine/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/226.png" width="48" height="48" alt="Mantine" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Mantine</span>
+    </a><a href="../psyduck/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png" width="48" height="48" alt="Psyduck" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Psyduck</span>
+    </a><a href="../kingler/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/99.png" width="48" height="48" alt="Kingler" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Kingler</span>
+    </a><a href="../barboach/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/339.png" width="48" height="48" alt="Barboach" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Barboach</span>
+    </a><a href="../octillery/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/224.png" width="48" height="48" alt="Octillery" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Octillery</span>
+    </a><a href="../kingdra/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/230.png" width="48" height="48" alt="Kingdra" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Kingdra</span>
+    </a>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Competitive Profile</h2>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;">
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Role</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--accent);margin-top:4px;">Mixed Attacker</div>
+        </div>
+        <div style="background:var(--bg);border-radius:12px;padding:14px;">
+          <div class="info-label">Nature</div>
+          <div style="font-family:var(--display);font-size:18px;color:var(--ink);margin-top:4px;">Lonely</div>
+        </div>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:14px;margin-bottom:12px;">
+        <div class="info-label">EV Spread</div>
+        <div style="font-family:var(--mono);font-size:14px;color:var(--ink);margin-top:6px;">252 Atk / 252 SpA / 4 Spe</div>
+      </div>
+      <p style="font-size:14px;color:var(--ink2);line-height:1.6;">Can threaten different defensive types. Unpredictable coverage mix.</p>
+      <p style="font-size:12px;color:var(--ink3);margin-top:12px;font-family:var(--mono);">* Suggested EV spread based on base stats. Open Tree Co. for full AI-powered team analysis.</p>
     </div>
 
     <div class="cta">
@@ -237,6 +338,20 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download Tree Co.
       </a>
+    </div>
+
+    <!-- Prev/Next Nav (bottom) -->
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../arcanine/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span style="font-size:18px;">←</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span>#059 Arcanine</span>
+  </a>
+      <a href="../poliwhirl/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
+    <span>#061 Poliwhirl</span>
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png" width="32" height="32" style="image-rendering:pixelated;">
+    <span style="font-size:18px;">→</span>
+  </a>
     </div>
   </div>
   <footer>
