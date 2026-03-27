@@ -853,20 +853,70 @@
     }
 
     /* ── FAQ ── */
-    .faq-section { max-width: 720px; margin: 0 auto; padding: 80px 24px; }
-    .faq-section h2 { margin-bottom: 40px; }
-    .faq-item {
-      border-bottom: 1px solid var(--border); padding: 20px 0;
-      transition: border-color 0.5s;
+    .faq-section {
+      max-width: 1080px; margin: 0 auto; padding: 80px 24px;
+      display: grid; grid-template-columns: 1fr 1.5fr; gap: 64px; align-items: start;
     }
-    .faq-summary {
-      cursor: pointer; font-family: var(--body); font-weight: 600;
-      color: var(--ink); font-size: 17px;
+    .faq-left {
+      position: sticky; top: 120px;
+    }
+    .faq-left h2 {
+      font-family: var(--display); font-size: 36px; letter-spacing: -0.03em;
+      line-height: 1.1; color: var(--ink); margin-bottom: 16px;
       transition: font-family 0.5s, color 0.5s;
     }
+    .faq-left p {
+      font-family: var(--body); font-size: 16px; color: var(--ink2); line-height: 1.5;
+      margin-bottom: 24px; transition: font-family 0.5s, color 0.5s;
+    }
+    .faq-contact {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--body); font-size: 14px; font-weight: 500;
+      color: var(--accent); text-decoration: none;
+      padding: 10px 20px; border-radius: var(--r-pill);
+      border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+      transition: all 0.25s;
+    }
+    .faq-contact:hover { background: var(--accent-lo); }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item {
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+      transition: border-color 0.5s;
+    }
+    .faq-item:first-child { border-top: 1px solid color-mix(in srgb, var(--border) 60%, transparent); }
+    .faq-summary {
+      display: flex; justify-content: space-between; align-items: center;
+      cursor: pointer; padding: 24px 0;
+      font-family: var(--body); font-weight: 500; font-size: 18px;
+      color: var(--ink); line-height: 1.5; list-style: none;
+      transition: font-family 0.5s, color 0.5s, background 0.2s;
+      border-radius: 8px; margin: 0 -8px; padding-left: 8px; padding-right: 8px;
+    }
+    .faq-summary::-webkit-details-marker { display: none; }
+    .faq-summary::marker { display: none; content: ''; }
+    .faq-summary:hover { background: color-mix(in srgb, var(--ink) 4%, transparent); }
+    .faq-icon {
+      width: 20px; height: 20px; flex-shrink: 0; margin-left: 16px;
+      color: var(--ink3); transition: transform 0.3s ease-in-out, color 0.2s;
+    }
+    .faq-item[open] .faq-icon { transform: rotate(45deg); color: var(--accent); }
+    .faq-answer-wrap {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 0.3s ease-in-out;
+    }
+    .faq-item[open] .faq-answer-wrap { grid-template-rows: 1fr; }
     .faq-answer {
-      margin-top: 12px; color: var(--ink2); line-height: 1.6;
-      transition: color 0.5s;
+      overflow: hidden;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .faq-item[open] .faq-answer {
+      opacity: 1; transform: translateY(0);
+    }
+    .faq-answer p {
+      padding: 0 8px 24px; font-family: var(--body); font-size: 16px;
+      font-weight: 400; line-height: 1.7; color: var(--ink2); max-width: 640px;
+      transition: font-family 0.5s, color 0.5s;
     }
     .faq-answer a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
 
@@ -885,6 +935,12 @@
       .cta-section h2 { font-size: 32px; }
       .footer-row { flex-direction: column; text-align: center; }
       .footer-left { flex-direction: column; gap: 12px; }
+      /* FAQ: collapse to single column */
+      .faq-section { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
+      .faq-left { position: static; }
+      .faq-left h2 { font-size: 28px; }
+      .faq-summary { font-size: 16px; padding: 20px 8px; }
+      .faq-answer p { font-size: 15px; }
       /* Agent tabs: horizontal scroll on mobile instead of wrapping */
       .agents-tab-bar {
         flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
@@ -1321,36 +1377,66 @@
 
     <!-- FAQ (AEO: answer-first for AI search engine citability) -->
     <section class="faq-section" id="faq">
-      <div class="feature-tag">FAQ</div>
-      <h2>Common questions</h2>
-      <details class="faq-item">
-        <summary class="faq-summary">How many Pokémon does Tree Co. include?</summary>
-        <p class="faq-answer">All 1,025 Pokémon across all 9 generations, from Bulbasaur to Pecharunt. Each entry includes full stats, abilities, movesets, evolution chains, and type matchups. You can view them as official artwork, pixel sprites, or Showdown sprites.</p>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-summary">Is Tree Co. free?</summary>
-        <p class="faq-answer">Yes — free to download, no account required. The free tier includes the full Pokédex, type chart, team builder basics, and 3 daily AI queries. <strong>Pro ($2.99/month or $19.99/year)</strong> adds unlimited AI queries, full team analysis with Smogon data, offline downloads, competitive profiles, Living Dex import/export, and the shiny hunting toolkit. Theme packs are $0.99 each.</p>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-summary">Does it work offline?</summary>
-        <p class="faq-answer">Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device, including stats, moves, abilities, and evolution data. Pro users can trigger a full offline download. The AI assistant (Dexter) also runs entirely on-device using Apple's Foundation Models — no internet needed.</p>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-summary">What is Ask Dexter?</summary>
-        <p class="faq-answer">Your on-device AI Pokédex assistant. It uses 4 specialized agents — Type Scanner, Data Scout, Strategy Engine, and Lore Reader — to research your question before synthesizing a clear answer. Runs locally via Apple's Foundation Models for complete privacy. Free: 3 queries/day. Pro: unlimited.</p>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-summary">Can I build competitive teams?</summary>
-        <p class="faq-answer">Yes. The team builder shows a weakness heatmap, provides <a href="https://www.smogon.com/" target="_blank" rel="noopener">Smogon</a> tier context and usage data for VGC and Smogon formats, suggests partners and movesets, and exports directly to <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener">Pokémon Showdown</a>.</p>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-summary">Does Tree Co. track my data?</summary>
-        <p class="faq-answer">No. Zero tracking — no ads, no analytics, no user accounts. All data stays on your device. AI queries run on-device and are never sent to external servers.</p>
-      </details>
-      <details class="faq-item">
-        <summary class="faq-summary">What devices does it support?</summary>
-        <p class="faq-answer">iPhone and iPad running iOS 26 or later. Currently iOS only. Built with Liquid Glass, home screen widgets, and on-device AI via Apple's Foundation Models framework.</p>
-      </details>
+      <div class="faq-left">
+        <div class="feature-tag">FAQ</div>
+        <h2>Questions?<br>Answers.</h2>
+        <p>Everything you need to know about Tree Co. before you download.</p>
+        <a href="mailto:fahimullahusman@gmail.com" class="faq-contact">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Still have questions? Reach out
+        </a>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-summary">
+            How many Pokémon does Tree Co. include?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>All 1,025 Pokémon across all 9 generations, from Bulbasaur to Pecharunt. Each entry includes full stats, abilities, movesets, evolution chains, and type matchups. View them as official artwork, pixel sprites, or Showdown sprites.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Is Tree Co. free?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes — free to download, no account required. The free tier includes the full Pokédex, type chart, team builder basics, and 3 daily AI queries. <strong>Pro ($2.99/month or $19.99/year)</strong> adds unlimited AI, full team analysis with Smogon data, offline downloads, competitive profiles, Living Dex import/export, and the shiny hunting toolkit.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Does it work offline?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device. Pro users can trigger a full offline download. The AI assistant (Dexter) also runs entirely on-device using Apple's Foundation Models — no internet needed.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            What is Ask Dexter?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Your on-device AI Pokédex assistant. It uses 4 specialized agents — Type Scanner, Data Scout, Strategy Engine, and Lore Reader — to research your question before synthesizing a clear answer. Runs locally for complete privacy. Free: 3 queries/day. Pro: unlimited.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Can I build competitive teams?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes. The team builder shows a weakness heatmap, provides <a href="https://www.smogon.com/" target="_blank" rel="noopener">Smogon</a> tier context and usage data for VGC and Smogon formats, suggests partners and movesets, and exports directly to <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener">Pokémon Showdown</a>.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            Does Tree Co. track my data?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>No. Zero tracking — no ads, no analytics, no user accounts. All data stays on your device. AI queries run on-device and are never sent to external servers.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            What devices does it support?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>iPhone and iPad running iOS 26 or later. Currently iOS only. Built with Liquid Glass, home screen widgets, and on-device AI via Apple's Foundation Models framework.</p></div></div>
+        </details>
+      </div>
     </section>
 
     <!-- CTA -->
@@ -1675,6 +1761,23 @@
     gsap.from('.cta-section p', { y: 20, opacity: 0, duration: 0.5, delay: 0.15, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-btn', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-sub', { opacity: 0, duration: 0.5, delay: 0.5, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+
+    // FAQ single-expand behavior
+    (function() {
+      var faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(function(item) {
+        item.addEventListener('toggle', function() {
+          if (item.open) {
+            faqItems.forEach(function(other) {
+              if (other !== item && other.open) other.open = false;
+            });
+          }
+        });
+      });
+      // Scroll-triggered entrance
+      gsap.from('.faq-left', { opacity: 0, y: 30, duration: 0.6, scrollTrigger: { trigger: '.faq-section', start: 'top 80%' } });
+      gsap.from('.faq-item', { opacity: 0, y: 20, duration: 0.4, stagger: 0.08, scrollTrigger: { trigger: '.faq-list', start: 'top 85%' } });
+    })();
 
     // Widget segments with sliding pill + animated transitions
     (function() {
