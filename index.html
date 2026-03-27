@@ -876,9 +876,15 @@
     .compare-section .feature-tag { margin-bottom: 12px; }
     .compare-section h2 {
       font-family: var(--display); font-size: 36px; font-weight: 400;
-      letter-spacing: -0.03em; margin-bottom: 40px;
+      letter-spacing: -0.03em; margin-bottom: 12px;
       transition: color 0.5s, font-family 0.5s;
     }
+    .compare-stat {
+      font-family: var(--mono); font-size: 13px; color: var(--ink3);
+      margin-bottom: 32px; letter-spacing: 0.02em;
+      transition: color 0.5s;
+    }
+    .compare-stat strong { color: var(--accent); font-weight: 700; }
     .compare-tabs {
       display: inline-flex; background: color-mix(in srgb, var(--border) 40%, transparent);
       border-radius: var(--r-pill); padding: 3px; position: relative; margin-bottom: 32px;
@@ -894,47 +900,96 @@
       position: absolute; height: calc(100% - 6px); top: 3px;
       background: var(--surface); border-radius: var(--r-pill);
       box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: left 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     .compare-wrap {
-      max-width: 800px; margin: 0 auto;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 16px; overflow: hidden;
+      max-width: 1080px; margin: 0 auto; position: relative;
+      background: var(--surface); border: 1px solid color-mix(in srgb, var(--border) 60%, transparent);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.06);
       transition: background-color 0.5s, border-color 0.5s;
     }
     .compare-table {
-      width: 100%; border-collapse: collapse; text-align: left;
+      width: 100%; border-collapse: collapse; text-align: center;
       font-family: var(--body); font-size: 14px;
     }
     .compare-table th {
       font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
-      text-transform: uppercase; padding: 14px 16px;
-      border-bottom: 2px solid var(--border); color: var(--ink3);
-      background: var(--surface); position: sticky; top: 0;
+      text-transform: uppercase; padding: 16px 16px;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 40%, transparent);
+      color: var(--ink3); background: var(--surface);
+      position: sticky; top: 0; z-index: 2;
       transition: background-color 0.5s;
     }
+    .compare-table th:first-child { text-align: left; }
     .compare-table th.hl {
-      color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+      color: var(--accent);
+      background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+      border-bottom-color: color-mix(in srgb, var(--accent) 20%, transparent);
     }
     .compare-table th.hl img { width: 18px; height: 18px; border-radius: 4px; vertical-align: middle; margin-right: 4px; }
-    .compare-table td {
-      padding: 11px 16px; border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
-      color: var(--ink2); transition: color 0.5s;
+    .compare-badge {
+      display: inline-block; font-size: 8px; font-weight: 700;
+      background: var(--accent); color: #fff; padding: 2px 6px;
+      border-radius: 100px; margin-left: 6px; vertical-align: middle;
+      letter-spacing: 0.06em;
     }
-    .compare-table td.hl { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+    .compare-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid color-mix(in srgb, var(--border) 25%, transparent);
+      color: var(--ink2); transition: color 0.5s, background-color 0.15s;
+    }
+    .compare-table td.hl { background: color-mix(in srgb, var(--accent) 4%, transparent); }
+    .compare-table tbody tr:hover td { background: color-mix(in srgb, var(--accent) 3%, transparent); }
+    .compare-table tbody tr:hover td.hl { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+    .compare-table tbody tr:nth-child(even) td { background: color-mix(in srgb, var(--border) 8%, transparent); }
+    .compare-table tbody tr:nth-child(even) td.hl { background: color-mix(in srgb, var(--accent) 6%, transparent); }
+    .compare-table tbody tr:nth-child(even):hover td { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+    .compare-table tbody tr:nth-child(even):hover td.hl { background: color-mix(in srgb, var(--accent) 10%, transparent); }
     .compare-table tr:last-child td { border-bottom: none; }
-    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
-    .compare-check { color: var(--accent); font-weight: 700; }
-    .compare-dash { color: var(--ink3); opacity: 0.5; }
-    .compare-partial { color: var(--ink2); font-size: 12px; }
+    .compare-table td:first-child { text-align: left; font-weight: 500; color: var(--ink); }
+    .compare-table td:first-child svg { width: 14px; height: 14px; color: var(--ink3); vertical-align: -2px; margin-right: 6px; flex-shrink: 0; }
+    .compare-cat td {
+      font-family: var(--display); font-size: 12px; font-weight: 400;
+      color: var(--ink3) !important; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 20px 16px 8px !important; border-bottom: none !important;
+      background: transparent !important;
+    }
+    .compare-check { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: color-mix(in srgb, var(--accent) 15%, transparent); }
+    .compare-check svg { width: 12px; height: 12px; color: var(--accent); }
+    .compare-dash { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: color-mix(in srgb, var(--ink3) 8%, transparent); }
+    .compare-dash svg { width: 10px; height: 10px; color: var(--ink3); opacity: 0.4; }
+    .compare-partial {
+      display: inline-block; font-family: var(--mono); font-size: 10px;
+      padding: 3px 8px; border-radius: 100px;
+      background: color-mix(in srgb, var(--ink3) 10%, transparent);
+      color: var(--ink2); letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .compare-cta {
+      max-width: 1080px; margin: 24px auto 0; text-align: center;
+    }
+    .compare-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+      text-transform: uppercase; padding: 10px 24px;
+      border: 1px solid rgba(255,255,255,0.3); border-radius: var(--r-pill);
+      background: rgba(255,255,255,0.1); color: #fff;
+      text-decoration: none; cursor: default;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .compare-cta-btn:hover { background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.5); }
+    .compare-cta-btn svg { width: 16px; height: 16px; }
 
     /* Compare bg active state */
-    body.compare-bg-active .compare-section .feature-tag { color: rgba(255,255,255,0.6); }
+    body.compare-bg-active .compare-section .feature-tag { color: rgba(255,255,255,0.5); }
     body.compare-bg-active .compare-section h2 { color: #fff; }
-    body.compare-bg-active .compare-tabs { background: rgba(255,255,255,0.15); }
-    body.compare-bg-active .compare-tab { color: rgba(255,255,255,0.6); }
+    body.compare-bg-active .compare-stat { color: rgba(255,255,255,0.6); }
+    body.compare-bg-active .compare-stat strong { color: #fff; }
+    body.compare-bg-active .compare-tabs { background: rgba(255,255,255,0.12); }
+    body.compare-bg-active .compare-tab { color: rgba(255,255,255,0.5); }
     body.compare-bg-active .compare-tab.active { color: #1a1e1b; }
     body.compare-bg-active .compare-pill { background: #fff; }
+    body.compare-bg-active .compare-wrap { border-color: rgba(255,255,255,0.15); box-shadow: 0 8px 48px rgba(0,0,0,0.15); }
 
     /* ── FAQ ── */
     .faq-section {
@@ -1041,7 +1096,14 @@
       .footer-bottom { flex-direction: column; text-align: center; }
       .footer-legal { text-align: center; }
       .compare-section h2 { font-size: 28px; }
-      .compare-wrap { border-radius: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .compare-wrap {
+        border-radius: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+      }
+      .compare-wrap::after {
+        content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 40px;
+        background: linear-gradient(to right, transparent, color-mix(in srgb, var(--surface) 80%, transparent));
+        pointer-events: none; z-index: 3; border-radius: 0 12px 12px 0;
+      }
       .compare-table { min-width: 580px; }
       .compare-table td:first-child, .compare-table th:first-child {
         position: sticky; left: 0; background: var(--surface); z-index: 1;
@@ -1569,6 +1631,7 @@
     <section class="compare-section">
       <div class="feature-tag">Vs the competition</div>
       <h2>How Tree Co. compares.</h2>
+      <p class="compare-stat">Tree Co. leads in <strong>10 of 12</strong> competitive features</p>
       <div class="compare-tabs">
         <div class="compare-pill"></div>
         <button class="compare-tab active" data-table="competitive">Competitive Tools</button>
@@ -1581,25 +1644,28 @@
           <thead>
             <tr>
               <th>Feature</th>
-              <th class="hl"><img src="icon-dark.png" alt="">Tree Co.</th>
+              <th class="hl"><img src="icon-dark.png" alt="" style="width:24px;height:24px;border-radius:6px;vertical-align:middle;margin-right:6px;"><span style="font-family:var(--display);font-size:14px;letter-spacing:-0.02em;text-transform:none;">Tree Co.</span></th>
               <th>Showdown</th>
               <th>Pikalytics</th>
               <th>VGC Helper</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Team builder</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-partial">Limited</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>Role detection</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Team health score</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Build / Insights modes</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Bring-4 planner</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Speed tier chart</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>Role coverage check</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Smogon tier data</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Showdown import/export</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-partial">Native</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>Native iOS app</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>Works offline</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>No ads</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr class="compare-cat"><td colspan="5">Team Building</td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Team builder</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-partial">Limited</span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>Role detection</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Team health score</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Build / Insights modes</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>Bring-4 planner</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr class="compare-cat"><td colspan="5">Analysis</td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Speed tier chart</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Role coverage check</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>Smogon tier data</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr class="compare-cat"><td colspan="5">Platform</td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>Showdown import/export</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-partial">Native</span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>Native iOS app</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>Works offline</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>No ads</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
           </tbody>
         </table>
       </div>
@@ -1610,27 +1676,37 @@
           <thead>
             <tr>
               <th>Feature</th>
-              <th class="hl"><img src="icon-dark.png" alt="">Tree Co.</th>
+              <th class="hl"><img src="icon-dark.png" alt="" style="width:24px;height:24px;border-radius:6px;vertical-align:middle;margin-right:6px;"><span style="font-family:var(--display);font-size:14px;letter-spacing:-0.02em;text-transform:none;">Tree Co.</span></th>
               <th>ProDex</th>
               <th>MasterDex</th>
               <th>Ketchup</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>Full 1,025 Pokédex</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>Team builder</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>AI assistant</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Living Dex tracker</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Shiny hunting (11 methods)</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Nuzlocke mode</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Home screen widgets</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>Works offline</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>No ads</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>No account required</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
-            <tr><td>Visual era themes</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
-            <tr><td>TCG card tracker</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr class="compare-cat"><td colspan="5">Features</td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>Full 1,025 Pokédex</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Team builder</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>AI assistant</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr class="compare-cat"><td colspan="5">Tracking</td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>Living Dex tracker</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26"/></svg>Shiny hunting (11 methods)</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Nuzlocke mode</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr class="compare-cat"><td colspan="5">Platform</td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Home screen widgets</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><circle cx="12" cy="20" r="1"/></svg>Works offline</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>No ads</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>No account required</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>Visual era themes</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
+            <tr><td><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>TCG card tracker</td><td class="hl"><span class="compare-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td><td><span class="compare-dash"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg></span></td></tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="compare-cta">
+        <a href="#" class="compare-cta-btn" disabled>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+          Coming Soon on iOS
+        </a>
       </div>
     </section>
 
@@ -2085,6 +2161,12 @@
     gsap.from('.cta-btn', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-sub', { opacity: 0, duration: 0.5, delay: 0.5, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
 
+    // Comparison table — stagger rows in
+    gsap.from('.compare-table tbody tr:not(.compare-cat)', {
+      y: 12, opacity: 0, duration: 0.35, stagger: 0.04, ease: 'power2.out',
+      scrollTrigger: { trigger: '.compare-section', start: 'top 60%' }
+    });
+
     // Comparison section — morph page background to emerald on scroll
     (function() {
       var compareBgColors = { light: '#059669', dark: '#065F46' };
@@ -2134,6 +2216,12 @@
           Object.keys(tables).forEach(function(k) {
             tables[k].style.display = k === target ? '' : 'none';
           });
+          var stat = document.querySelector('.compare-stat');
+          if (stat) {
+            stat.innerHTML = target === 'competitive'
+              ? 'Tree Co. leads in <strong>10 of 12</strong> competitive features'
+              : 'Tree Co. leads in <strong>10 of 12</strong> Pokédex app features';
+          }
         });
       });
 
