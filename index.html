@@ -473,28 +473,6 @@
       display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
       max-width: 480px; margin: 0 auto 40px;
     }
-    /* Dexter leader card */
-    .dexter-leader {
-      max-width: 400px; margin: 0 auto;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-      border-radius: var(--r-lg); padding: 28px 32px;
-      display: flex; align-items: center; gap: 20px;
-      transition: all 0.3s;
-    }
-    .dexter-leader:hover { border-color: rgba(255,255,255,0.25); }
-    .dexter-leader canvas { image-rendering: pixelated; flex-shrink: 0; }
-    .dexter-leader-text { flex: 1; }
-    .dexter-leader-name {
-      font-family: var(--display); font-size: 20px; color: #fff;
-      margin-bottom: 4px; transition: font-family 0.5s;
-    }
-    .dexter-leader-role {
-      font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5);
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
-    }
-    .dexter-leader-desc {
-      font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5;
-    }
     @media (max-width: 768px) {
       .agents-grid { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
       .agents-grid-bottom { grid-template-columns: 1fr; max-width: 280px; }
@@ -1365,15 +1343,6 @@
             </div>
           </div>
 
-          <!-- Dexter leader card -->
-          <div class="dexter-leader">
-            <canvas class="dexter-sphere-canvas" width="64" height="64" style="width:64px;height:64px;"></canvas>
-            <div class="dexter-leader-text">
-              <div class="dexter-leader-name">Dexter</div>
-              <div class="dexter-leader-role">Lead Analyst</div>
-              <div class="dexter-leader-desc">Cross-validates all agent findings, resolves conflicts, and delivers a clear answer.</div>
-            </div>
-          </div>
         </div>
 
         <!-- Trust signals -->
