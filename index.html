@@ -868,6 +868,74 @@
     .footer-copy { font-size: 12px; color: var(--ink3); }
     .footer-legal { font-size: 11px; color: var(--ink3); text-align: right; max-width: 500px; line-height: 1.4; }
 
+    /* ── COMPARISON ── */
+    .compare-section {
+      padding: 80px 24px; text-align: center;
+      transition: background-color 0.6s ease;
+    }
+    .compare-section .feature-tag { margin-bottom: 12px; }
+    .compare-section h2 {
+      font-family: var(--display); font-size: 36px; font-weight: 400;
+      letter-spacing: -0.03em; margin-bottom: 40px;
+      transition: color 0.5s, font-family 0.5s;
+    }
+    .compare-tabs {
+      display: inline-flex; background: color-mix(in srgb, var(--border) 40%, transparent);
+      border-radius: var(--r-pill); padding: 3px; position: relative; margin-bottom: 32px;
+    }
+    .compare-tab {
+      font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em;
+      text-transform: uppercase; padding: 8px 20px; border: none; background: none;
+      cursor: pointer; color: var(--ink2); position: relative; z-index: 1;
+      transition: color 0.25s; border-radius: var(--r-pill);
+    }
+    .compare-tab.active { color: var(--ink); font-weight: 600; }
+    .compare-pill {
+      position: absolute; height: calc(100% - 6px); top: 3px;
+      background: var(--surface); border-radius: var(--r-pill);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .compare-wrap {
+      max-width: 800px; margin: 0 auto;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+      transition: background-color 0.5s, border-color 0.5s;
+    }
+    .compare-table {
+      width: 100%; border-collapse: collapse; text-align: left;
+      font-family: var(--body); font-size: 14px;
+    }
+    .compare-table th {
+      font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 14px 16px;
+      border-bottom: 2px solid var(--border); color: var(--ink3);
+      background: var(--surface); position: sticky; top: 0;
+      transition: background-color 0.5s;
+    }
+    .compare-table th.hl {
+      color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+    }
+    .compare-table th.hl img { width: 18px; height: 18px; border-radius: 4px; vertical-align: middle; margin-right: 4px; }
+    .compare-table td {
+      padding: 11px 16px; border-bottom: 1px solid color-mix(in srgb, var(--border) 50%, transparent);
+      color: var(--ink2); transition: color 0.5s;
+    }
+    .compare-table td.hl { background: color-mix(in srgb, var(--accent) 5%, transparent); }
+    .compare-table tr:last-child td { border-bottom: none; }
+    .compare-table td:first-child { font-weight: 500; color: var(--ink); }
+    .compare-check { color: var(--accent); font-weight: 700; }
+    .compare-dash { color: var(--ink3); opacity: 0.5; }
+    .compare-partial { color: var(--ink2); font-size: 12px; }
+
+    /* Compare bg active state */
+    body.compare-bg-active .compare-section .feature-tag { color: rgba(255,255,255,0.6); }
+    body.compare-bg-active .compare-section h2 { color: #fff; }
+    body.compare-bg-active .compare-tabs { background: rgba(255,255,255,0.15); }
+    body.compare-bg-active .compare-tab { color: rgba(255,255,255,0.6); }
+    body.compare-bg-active .compare-tab.active { color: #1a1e1b; }
+    body.compare-bg-active .compare-pill { background: #fff; }
+
     /* ── FAQ ── */
     .faq-section {
       max-width: 1080px; margin: 0 auto; padding: 80px 24px;
@@ -972,6 +1040,13 @@
       .footer-brand { grid-column: span 2; }
       .footer-bottom { flex-direction: column; text-align: center; }
       .footer-legal { text-align: center; }
+      .compare-section h2 { font-size: 28px; }
+      .compare-wrap { border-radius: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      .compare-table { min-width: 580px; }
+      .compare-table td:first-child, .compare-table th:first-child {
+        position: sticky; left: 0; background: var(--surface); z-index: 1;
+      }
+      .compare-table td.hl, .compare-table th.hl { position: static; }
       /* FAQ: collapse to single column */
       .faq-section { grid-template-columns: 1fr; gap: 32px; padding: 48px 20px; }
       .faq-left { position: static; }
@@ -1157,7 +1232,15 @@
         "name": "What is the best Pokédex app for iPhone?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Tree Co. is a comprehensive Pokédex app for iPhone and iPad covering all 1,025 Pokémon across 9 generations. It includes full stats, moves, abilities, evolution chains, type matchups, a competitive team builder with Smogon tier data and Showdown export, an on-device AI assistant, home screen widgets, Living Dex tracking, Nuzlocke mode, shiny hunting with 11 methods, and TCG card collection. It works fully offline, has zero ads or tracking, and requires no account."
+          "text": "Tree Co. is a comprehensive Pokédex app for iPhone and iPad covering all 1,025 Pokémon across 9 generations. Unlike ProDex and MasterDex, Tree Co. includes a full competitive team builder with role detection, health scoring, and a Bring-4 planner — plus an on-device AI assistant, home screen widgets, Living Dex tracking, Nuzlocke mode, shiny hunting with 11 methods, and TCG card collection. Unlike Ketchup, Tree Co. works fully offline with no ads, no tracking, and no account required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does Tree Co. compare to Pikalytics and Pokémon Showdown?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tree Co. offers features that neither Pikalytics nor Pokémon Showdown have: automatic role detection on team cards, a transparent team health score (0-100), a Build/Insights mode separation, a Bring-4 planner for VGC matchups, and a full-team speed tier visualization. Showdown is web-only with no iOS app, and Pikalytics focuses on usage data without a full team builder. Tree Co. also works fully offline, includes a complete 1,025 Pokédex, and has an on-device AI assistant — making it the most comprehensive competitive Pokémon tool on iOS."
         }
       },
       {
@@ -1329,10 +1412,13 @@
         <div class="feature-text">
           <div class="feature-tag">Team Builder</div>
           <h2 class="feature-title">Build teams that<br>actually win.</h2>
-          <p class="feature-desc">See your team's weaknesses at a glance with the heatmap view. Get tier context from <a href="https://www.smogon.com/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">Smogon</a>, coverage analysis, and best partner suggestions. Export to <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">Pokémon Showdown</a> in one tap.</p>
-          <div class="feature-detail">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>VGC + Smogon</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Weakness heatmap</span>
+          <p class="feature-desc">The first mobile team builder that separates building from analysis. Auto-detects roles, scores team health, and plans your Bring-4 — features no other tool ships. Get <a href="https://www.smogon.com/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">Smogon</a> tier context and export to <a href="https://pokemonshowdown.com/" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-underline-offset:3px;">Pokémon Showdown</a> in one tap.</p>
+          <div class="feature-detail" style="grid-template-columns: 1fr 1fr;">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Role detection</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Health scoring</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Build / Insights</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Bring-4 planner</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Speed tiers</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Showdown export</span>
           </div>
         </div>
@@ -1476,6 +1562,75 @@
           <p>Full Pokédex available without internet.</p>
           <div class="extra-tag">200MB cache</div>
         </div>
+      </div>
+    </section>
+
+    <!-- COMPARISON TABLE -->
+    <section class="compare-section">
+      <div class="feature-tag">Vs the competition</div>
+      <h2>How Tree Co. compares.</h2>
+      <div class="compare-tabs">
+        <div class="compare-pill"></div>
+        <button class="compare-tab active" data-table="competitive">Competitive Tools</button>
+        <button class="compare-tab" data-table="pokedex">Pokédex Apps</button>
+      </div>
+
+      <!-- Table A: Competitive Tools -->
+      <div class="compare-wrap" id="compare-competitive">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="hl"><img src="icon-dark.png" alt="">Tree Co.</th>
+              <th>Showdown</th>
+              <th>Pikalytics</th>
+              <th>VGC Helper</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Team builder</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-partial">Limited</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>Role detection</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Team health score</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Build / Insights modes</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Bring-4 planner</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Speed tier chart</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>Role coverage check</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Smogon tier data</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Showdown import/export</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-partial">Native</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>Native iOS app</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>Works offline</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>No ads</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table B: Pokédex Apps -->
+      <div class="compare-wrap" id="compare-pokedex" style="display:none;">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="hl"><img src="icon-dark.png" alt="">Tree Co.</th>
+              <th>ProDex</th>
+              <th>MasterDex</th>
+              <th>Ketchup</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Full 1,025 Pokédex</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>Team builder</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>AI assistant</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Living Dex tracker</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Shiny hunting (11 methods)</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Nuzlocke mode</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Home screen widgets</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>Works offline</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>No ads</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>No account required</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td><td><span class="compare-check">✓</span></td></tr>
+            <tr><td>Visual era themes</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+            <tr><td>TCG card tracker</td><td class="hl"><span class="compare-check">✓</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td><td><span class="compare-dash">—</span></td></tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -1929,6 +2084,67 @@
     gsap.from('.cta-section p', { y: 20, opacity: 0, duration: 0.5, delay: 0.15, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-btn', { y: 20, opacity: 0, scale: 0.95, duration: 0.6, delay: 0.3, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
     gsap.from('.cta-sub', { opacity: 0, duration: 0.5, delay: 0.5, scrollTrigger: { trigger: '.cta-section', start: 'top 80%' } });
+
+    // Comparison section — morph page background to emerald on scroll
+    (function() {
+      var compareBgColors = { light: '#059669', dark: '#065F46' };
+      var savedBgBeforeCompare = null;
+      ScrollTrigger.create({
+        trigger: '.compare-section',
+        start: 'top 60%',
+        end: 'bottom 40%',
+        onEnter: function() {
+          savedBgBeforeCompare = document.body.style.backgroundColor || '';
+          var theme = document.documentElement.dataset.theme || 'light';
+          document.body.style.backgroundColor = compareBgColors[theme];
+          document.body.classList.add('compare-bg-active');
+        },
+        onLeave: function() {
+          document.body.style.backgroundColor = savedBgBeforeCompare || '';
+          document.body.classList.remove('compare-bg-active');
+        },
+        onEnterBack: function() {
+          var theme = document.documentElement.dataset.theme || 'light';
+          document.body.style.backgroundColor = compareBgColors[theme];
+          document.body.classList.add('compare-bg-active');
+        },
+        onLeaveBack: function() {
+          document.body.style.backgroundColor = savedBgBeforeCompare || '';
+          document.body.classList.remove('compare-bg-active');
+        }
+      });
+
+      // Tab switching
+      var tabs = document.querySelectorAll('.compare-tab');
+      var pill = document.querySelector('.compare-pill');
+      var tables = { competitive: document.getElementById('compare-competitive'), pokedex: document.getElementById('compare-pokedex') };
+
+      function positionPill(tab) {
+        pill.style.left = tab.offsetLeft + 'px';
+        pill.style.width = tab.offsetWidth + 'px';
+      }
+      positionPill(tabs[0]);
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          positionPill(tab);
+          var target = tab.dataset.table;
+          Object.keys(tables).forEach(function(k) {
+            tables[k].style.display = k === target ? '' : 'none';
+          });
+        });
+      });
+
+      // Update compare bg when theme changes
+      window.addEventListener('themechange', function() {
+        if (document.body.classList.contains('compare-bg-active')) {
+          var theme = document.documentElement.dataset.theme || 'light';
+          document.body.style.backgroundColor = compareBgColors[theme];
+        }
+      });
+    })();
 
     // FAQ single-expand behavior
     (function() {
