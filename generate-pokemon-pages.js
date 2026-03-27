@@ -207,6 +207,8 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
   <meta property="og:image" content="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png">
   <meta property="og:url" content="https://www.treeco.app/pokemon/${name}/">
   <link rel="icon" href="../../icon-dark.png">
+  <!-- Vercel Analytics -->
+  <script defer src="/_vercel/insights/script.js"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
