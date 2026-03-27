@@ -430,67 +430,78 @@
       .pipeline-arrow { transform: rotate(90deg); }
     }
 
-    /* Agent Timeline */
+    /* Agent Cards Grid */
     .agents-label {
       font-family: var(--mono); font-size: 11px; color: var(--ink3);
       text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px;
       text-align: center; transition: color 0.5s;
     }
-    .agent-timeline {
-      position: relative; padding-left: 40px;
+    .agents-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      max-width: 720px; margin: 0 auto 32px;
     }
-    /* Vertical line */
-    .agent-timeline::before {
-      content: ''; position: absolute; left: 19px; top: 0; bottom: 0;
-      width: 2px; background: var(--ink3); opacity: 0.2;
-      transition: background 0.5s;
+    .agent-card {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-lg); padding: 24px; text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      transition: all 0.3s; position: relative; overflow: hidden;
     }
-    .timeline-step {
-      position: relative; display: flex; gap: 20px; align-items: flex-start;
-      margin-bottom: 40px; padding: 20px 24px;
-      background: var(--surface); border-radius: var(--r-lg);
-      box-shadow: var(--shadow); overflow: hidden;
-      transition: all 0.5s;
+    .agent-card::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.06; z-index: 0;
     }
-    .timeline-step:last-child { margin-bottom: 0; }
-    /* Gradient tint */
-    .timeline-step::before {
-      content: ''; position: absolute; inset: 0; opacity: 0.04; z-index: 0;
+    .agent-card[data-color="ruby"]::before { background: linear-gradient(135deg, #E61E1E, #FF9E08); }
+    .agent-card[data-color="sapphire"]::before { background: linear-gradient(135deg, #2626E6, #00D9D9); }
+    .agent-card[data-color="topaz"]::before { background: linear-gradient(135deg, #CC4D00, #A6F000); }
+    .agent-card[data-color="emerald"]::before { background: linear-gradient(135deg, #006B2A, #80F019); }
+    .agent-card[data-color="globe"]::before { background: linear-gradient(135deg, #0A1970, #60C8F0); }
+    .agent-card > * { position: relative; z-index: 1; }
+    .agent-card:hover { transform: translateY(-3px); border-color: rgba(255,255,255,0.2); }
+    .agent-card canvas { image-rendering: pixelated; }
+    .agent-card-name {
+      font-family: var(--display); font-size: 16px; color: #fff;
+      transition: font-family 0.5s;
     }
-    .timeline-step[data-color="ruby"]::before { background: linear-gradient(135deg, #E61E1E, #FF9E08); }
-    .timeline-step[data-color="sapphire"]::before { background: linear-gradient(135deg, #2626E6, #00D9D9); }
-    .timeline-step[data-color="topaz"]::before { background: linear-gradient(135deg, #CC4D00, #A6F000); }
-    .timeline-step[data-color="emerald"]::before { background: linear-gradient(135deg, #006B2A, #80F019); }
-    .timeline-step[data-color="dexter"]::before { background: linear-gradient(135deg, #E61E1E, #33B8D1); }
-    .timeline-step > * { position: relative; z-index: 1; }
-    /* Dot on the line */
-    .timeline-step::after {
-      content: ''; position: absolute; left: -29px; top: 28px;
-      width: 10px; height: 10px; border-radius: 50%;
-      background: var(--accent); z-index: 2;
-      transition: background 0.5s;
+    .agent-card-role {
+      font-family: var(--mono); font-size: 9px; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.08em;
     }
-    .timeline-step canvas { image-rendering: pixelated; flex-shrink: 0; margin-top: 4px; }
-    .timeline-text { flex: 1; }
-    .timeline-name {
-      font-family: var(--display); font-size: 18px; color: var(--ink);
-      margin-bottom: 2px; transition: font-family 0.5s, color 0.5s;
+    .agent-card-desc {
+      font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5;
     }
-    .timeline-role {
-      font-family: var(--mono); font-size: 10px; color: var(--ink3);
-      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px;
-      transition: color 0.5s;
+    /* Bottom row: 2 cards centered */
+    .agents-grid-bottom {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;
+      max-width: 480px; margin: 0 auto 40px;
     }
-    .timeline-desc {
-      font-size: 14px; color: var(--ink2); line-height: 1.55;
-      transition: color 0.5s;
+    /* Dexter leader card */
+    .dexter-leader {
+      max-width: 400px; margin: 0 auto;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--r-lg); padding: 28px 32px;
+      display: flex; align-items: center; gap: 20px;
+      transition: all 0.3s;
     }
-    /* Dexter step at bottom — highlighted */
-    .timeline-step.dexter-step {
-      background: var(--accent-lo);
+    .dexter-leader:hover { border-color: rgba(255,255,255,0.25); }
+    .dexter-leader canvas { image-rendering: pixelated; flex-shrink: 0; }
+    .dexter-leader-text { flex: 1; }
+    .dexter-leader-name {
+      font-family: var(--display); font-size: 20px; color: #fff;
+      margin-bottom: 4px; transition: font-family 0.5s;
     }
-    .timeline-step.dexter-step::after {
-      width: 14px; height: 14px; left: -31px; top: 26px;
+    .dexter-leader-role {
+      font-family: var(--mono); font-size: 10px; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+    }
+    .dexter-leader-desc {
+      font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .agents-grid { grid-template-columns: repeat(2, 1fr); max-width: 480px; }
+      .agents-grid-bottom { grid-template-columns: 1fr; max-width: 280px; }
+    }
+    @media (max-width: 480px) {
+      .agents-grid { grid-template-columns: 1fr; max-width: 320px; }
+      .dexter-leader { flex-direction: column; text-align: center; padding: 24px; }
     }
 
     /* ── WIDGETS BENTO ── */
@@ -1314,55 +1325,53 @@
 
         <!-- Agent Timeline -->
         <div class="dexter-how">
-          <div class="agents-label">How Dexter answers your questions</div>
-          <div class="agent-timeline">
-            <div class="timeline-step" data-color="ruby">
-              <canvas class="agent-sphere" data-agent="typeScanner" width="48" height="48" style="width:48px;height:48px;"></canvas>
-              <div class="timeline-text">
-                <div class="timeline-name">Type Scanner</div>
-                <div class="timeline-role">Type Effectiveness</div>
-                <p class="timeline-desc">Calculates matchups, resistances, and immunities across all 18 types. Identifies 4x weaknesses and coverage gaps.</p>
-              </div>
+          <div class="agents-label">Specialized agents</div>
+
+          <!-- Top row: 3 agents -->
+          <div class="agents-grid">
+            <div class="agent-card" data-color="ruby">
+              <canvas class="agent-sphere" data-agent="typeScanner" width="56" height="56" style="width:56px;height:56px;"></canvas>
+              <div class="agent-card-name">Type Scanner</div>
+              <div class="agent-card-role">Type Effectiveness</div>
+              <div class="agent-card-desc">Matchups, resistances, immunities, and 4x weakness detection.</div>
             </div>
-            <div class="timeline-step" data-color="sapphire">
-              <canvas class="agent-sphere" data-agent="dataScout" width="48" height="48" style="width:48px;height:48px;"></canvas>
-              <div class="timeline-text">
-                <div class="timeline-name">Data Scout</div>
-                <div class="timeline-role">Data Retrieval</div>
-                <p class="timeline-desc">Fetches real-time stats, moves, abilities, and evolution data. Cross-references with your local cache for offline access.</p>
-              </div>
+            <div class="agent-card" data-color="sapphire">
+              <canvas class="agent-sphere" data-agent="dataScout" width="56" height="56" style="width:56px;height:56px;"></canvas>
+              <div class="agent-card-name">Data Scout</div>
+              <div class="agent-card-role">Data Retrieval</div>
+              <div class="agent-card-desc">Stats, moves, abilities, and evolution data from PokeAPI + local cache.</div>
             </div>
-            <div class="timeline-step" data-color="topaz">
-              <canvas class="agent-sphere" data-agent="strategyEngine" width="48" height="48" style="width:48px;height:48px;"></canvas>
-              <div class="timeline-text">
-                <div class="timeline-name">Strategy Engine</div>
-                <div class="timeline-role">Competitive Analysis</div>
-                <p class="timeline-desc">Analyzes Smogon tier data, usage stats, and damage calcs. Recommends optimal movesets and partner suggestions.</p>
-              </div>
+            <div class="agent-card" data-color="topaz">
+              <canvas class="agent-sphere" data-agent="strategyEngine" width="56" height="56" style="width:56px;height:56px;"></canvas>
+              <div class="agent-card-name">Strategy Engine</div>
+              <div class="agent-card-role">Competitive Analysis</div>
+              <div class="agent-card-desc">Smogon tiers, usage stats, damage calcs, and moveset recommendations.</div>
             </div>
-            <div class="timeline-step" data-color="emerald">
-              <canvas class="agent-sphere" data-agent="loreReader" width="48" height="48" style="width:48px;height:48px;"></canvas>
-              <div class="timeline-text">
-                <div class="timeline-name">Lore Reader</div>
-                <div class="timeline-role">Lore &amp; Trivia</div>
-                <p class="timeline-desc">Researches design origins, etymology, and cultural references. Surfaces facts most players never discover.</p>
-              </div>
+          </div>
+
+          <!-- Bottom row: 2 agents centered -->
+          <div class="agents-grid-bottom">
+            <div class="agent-card" data-color="emerald">
+              <canvas class="agent-sphere" data-agent="loreReader" width="56" height="56" style="width:56px;height:56px;"></canvas>
+              <div class="agent-card-name">Lore Reader</div>
+              <div class="agent-card-role">Lore &amp; Trivia</div>
+              <div class="agent-card-desc">Design origins, etymology, and cultural references most players miss.</div>
             </div>
-            <div class="timeline-step" data-color="globe">
-              <canvas class="agent-sphere" data-agent="webScout" width="48" height="48" style="width:48px;height:48px;"></canvas>
-              <div class="timeline-text">
-                <div class="timeline-name">Web Scout</div>
-                <div class="timeline-role">Live Web Research</div>
-                <p class="timeline-desc">Searches the web for tournament results, player teams, and current meta trends. The fastest agent — always up to date.</p>
-              </div>
+            <div class="agent-card" data-color="globe">
+              <canvas class="agent-sphere" data-agent="webScout" width="56" height="56" style="width:56px;height:56px;"></canvas>
+              <div class="agent-card-name">Web Scout</div>
+              <div class="agent-card-role">Live Web Research</div>
+              <div class="agent-card-desc">Tournament results, player teams, and current meta — always up to date.</div>
             </div>
-            <div class="timeline-step dexter-step" data-color="dexter">
-              <canvas class="dexter-sphere-canvas" width="48" height="48" style="width:48px;height:48px;"></canvas>
-              <div class="timeline-text">
-                <div class="timeline-name">Dexter</div>
-                <div class="timeline-role">Lead Analyst</div>
-                <p class="timeline-desc">Cross-validates all agent findings, resolves conflicts, and delivers a clear, accurate answer.</p>
-              </div>
+          </div>
+
+          <!-- Dexter leader card -->
+          <div class="dexter-leader">
+            <canvas class="dexter-sphere-canvas" width="64" height="64" style="width:64px;height:64px;"></canvas>
+            <div class="dexter-leader-text">
+              <div class="dexter-leader-name">Dexter</div>
+              <div class="dexter-leader-role">Lead Analyst</div>
+              <div class="dexter-leader-desc">Cross-validates all agent findings, resolves conflicts, and delivers a clear answer.</div>
             </div>
           </div>
         </div>
