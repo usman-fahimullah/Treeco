@@ -119,6 +119,22 @@
     .breadcrumb { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; letter-spacing: 0.02em; }
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-card {
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      flex: 1;
+    }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
+    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-card--next .nav-card__dir { text-align: right; }
+    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-card__inner--right { justify-content: flex-end; }
+    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
+    .nav-card--next .nav-card__num { text-align: right; }
+    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
+    .nav-card--next .nav-card__name { text-align: right; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
@@ -152,16 +168,26 @@
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Vulpix
     </div>
     <!-- Prev/Next Nav -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-      <a href="../clefable/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#036 Clefable</span>
+    <div style="display:flex;gap:12px;align-items:stretch;margin-bottom:24px;">
+      <a href="../clefable/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png" width="56" height="56" alt="Clefable" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#036</div>
+        <div class="nav-card__name">Clefable</div>
+      </div>
+    </div>
   </a>
-      <a href="../ninetales/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#038 Ninetales</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../ninetales/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#038</div>
+        <div class="nav-card__name">Ninetales</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png" width="56" height="56" alt="Ninetales" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
 
@@ -283,24 +309,24 @@
     <div class="section">
       <h2>Similar Fire-type Pokémon</h2>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
-        <a href="../delphox/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+        <a href="../larvesta/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/636.png" width="48" height="48" alt="Larvesta" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Larvesta</span>
+    </a><a href="../turtonator/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/776.png" width="48" height="48" alt="Turtonator" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Turtonator</span>
+    </a><a href="../armarouge/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/936.png" width="48" height="48" alt="Armarouge" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Armarouge</span>
+    </a><a href="../delphox/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/655.png" width="48" height="48" alt="Delphox" style="image-rendering:pixelated;" loading="lazy">
       <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Delphox</span>
-    </a><a href="../oricorio-baile/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/741.png" width="48" height="48" alt="Oricorio-baile" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Oricorio-baile</span>
-    </a><a href="../skeledirge/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/911.png" width="48" height="48" alt="Skeledirge" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Skeledirge</span>
-    </a><a href="../pignite/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/499.png" width="48" height="48" alt="Pignite" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Pignite</span>
-    </a><a href="../cyndaquil/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/155.png" width="48" height="48" alt="Cyndaquil" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Cyndaquil</span>
-    </a><a href="../pyroar-male/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/668.png" width="48" height="48" alt="Pyroar-male" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Pyroar-male</span>
+    </a><a href="../sizzlipede/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/850.png" width="48" height="48" alt="Sizzlipede" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Sizzlipede</span>
+    </a><a href="../iron-moth/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/994.png" width="48" height="48" alt="Iron-moth" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Iron-moth</span>
     </a>
       </div>
     </div>
@@ -335,16 +361,26 @@
     </div>
 
     <!-- Prev/Next Nav (bottom) -->
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
-      <a href="../clefable/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#036 Clefable</span>
+    <div style="display:flex;gap:12px;align-items:stretch;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../clefable/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png" width="56" height="56" alt="Clefable" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#036</div>
+        <div class="nav-card__name">Clefable</div>
+      </div>
+    </div>
   </a>
-      <a href="../ninetales/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#038 Ninetales</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../ninetales/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#038</div>
+        <div class="nav-card__name">Ninetales</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png" width="56" height="56" alt="Ninetales" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
   </div>

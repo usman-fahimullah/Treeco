@@ -119,6 +119,22 @@
     .breadcrumb { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; letter-spacing: 0.02em; }
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-card {
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      flex: 1;
+    }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
+    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-card--next .nav-card__dir { text-align: right; }
+    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-card__inner--right { justify-content: flex-end; }
+    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
+    .nav-card--next .nav-card__num { text-align: right; }
+    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
+    .nav-card--next .nav-card__name { text-align: right; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
@@ -152,16 +168,26 @@
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Glimmet
     </div>
     <!-- Prev/Next Nav -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-      <a href="../orthworm/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/968.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#968 Orthworm</span>
+    <div style="display:flex;gap:12px;align-items:stretch;margin-bottom:24px;">
+      <a href="../orthworm/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/968.png" width="56" height="56" alt="Orthworm" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#968</div>
+        <div class="nav-card__name">Orthworm</div>
+      </div>
+    </div>
   </a>
-      <a href="../glimmora/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#970 Glimmora</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/970.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../glimmora/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#970</div>
+        <div class="nav-card__name">Glimmora</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/970.png" width="56" height="56" alt="Glimmora" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
 
@@ -283,24 +309,24 @@
     <div class="section">
       <h2>Similar Rock-type Pokémon</h2>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
-        <a href="../rampardos/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/409.png" width="48" height="48" alt="Rampardos" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Rampardos</span>
-    </a><a href="../omanyte/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/138.png" width="48" height="48" alt="Omanyte" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Omanyte</span>
-    </a><a href="../iron-thorns/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/995.png" width="48" height="48" alt="Iron-thorns" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Iron-thorns</span>
-    </a><a href="../garganacl/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/934.png" width="48" height="48" alt="Garganacl" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Garganacl</span>
+        <a href="../sudowoodo/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/185.png" width="48" height="48" alt="Sudowoodo" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Sudowoodo</span>
+    </a><a href="../rolycoly/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/837.png" width="48" height="48" alt="Rolycoly" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Rolycoly</span>
     </a><a href="../magcargo/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
       <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/219.png" width="48" height="48" alt="Magcargo" style="image-rendering:pixelated;" loading="lazy">
       <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Magcargo</span>
-    </a><a href="../amaura/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/698.png" width="48" height="48" alt="Amaura" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Amaura</span>
+    </a><a href="../omanyte/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/138.png" width="48" height="48" alt="Omanyte" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Omanyte</span>
+    </a><a href="../terrakion/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/639.png" width="48" height="48" alt="Terrakion" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Terrakion</span>
+    </a><a href="../aurorus/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/699.png" width="48" height="48" alt="Aurorus" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Aurorus</span>
     </a>
       </div>
     </div>
@@ -335,16 +361,26 @@
     </div>
 
     <!-- Prev/Next Nav (bottom) -->
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
-      <a href="../orthworm/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/968.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#968 Orthworm</span>
+    <div style="display:flex;gap:12px;align-items:stretch;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../orthworm/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/968.png" width="56" height="56" alt="Orthworm" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#968</div>
+        <div class="nav-card__name">Orthworm</div>
+      </div>
+    </div>
   </a>
-      <a href="../glimmora/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#970 Glimmora</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/970.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../glimmora/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#970</div>
+        <div class="nav-card__name">Glimmora</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/970.png" width="56" height="56" alt="Glimmora" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
   </div>

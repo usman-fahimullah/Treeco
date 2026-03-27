@@ -119,6 +119,22 @@
     .breadcrumb { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; letter-spacing: 0.02em; }
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-card {
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      flex: 1;
+    }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
+    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-card--next .nav-card__dir { text-align: right; }
+    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-card__inner--right { justify-content: flex-end; }
+    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
+    .nav-card--next .nav-card__num { text-align: right; }
+    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
+    .nav-card--next .nav-card__name { text-align: right; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
@@ -152,16 +168,26 @@
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Dusknoir
     </div>
     <!-- Prev/Next Nav -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-      <a href="../probopass/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/476.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#476 Probopass</span>
+    <div style="display:flex;gap:12px;align-items:stretch;margin-bottom:24px;">
+      <a href="../probopass/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/476.png" width="56" height="56" alt="Probopass" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#476</div>
+        <div class="nav-card__name">Probopass</div>
+      </div>
+    </div>
   </a>
-      <a href="../froslass/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#478 Froslass</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/478.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../froslass/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#478</div>
+        <div class="nav-card__name">Froslass</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/478.png" width="56" height="56" alt="Froslass" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
 
@@ -286,24 +312,24 @@
     <div class="section">
       <h2>Similar Ghost-type Pokémon</h2>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
-        <a href="../duskull/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/355.png" width="48" height="48" alt="Duskull" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Duskull</span>
-    </a><a href="../cofagrigus/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/563.png" width="48" height="48" alt="Cofagrigus" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Cofagrigus</span>
-    </a><a href="../golurk/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/623.png" width="48" height="48" alt="Golurk" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Golurk</span>
-    </a><a href="../gourgeist-average/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/711.png" width="48" height="48" alt="Gourgeist-average" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Gourgeist-average</span>
-    </a><a href="../dreepy/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/885.png" width="48" height="48" alt="Dreepy" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Dreepy</span>
-    </a><a href="../gimmighoul/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/999.png" width="48" height="48" alt="Gimmighoul" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Gimmighoul</span>
+        <a href="../sinistea/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/854.png" width="48" height="48" alt="Sinistea" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Sinistea</span>
+    </a><a href="../golett/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/622.png" width="48" height="48" alt="Golett" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Golett</span>
+    </a><a href="../phantump/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/708.png" width="48" height="48" alt="Phantump" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Phantump</span>
+    </a><a href="../spiritomb/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/442.png" width="48" height="48" alt="Spiritomb" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Spiritomb</span>
+    </a><a href="../drifblim/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/426.png" width="48" height="48" alt="Drifblim" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Drifblim</span>
+    </a><a href="../gengar/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" width="48" height="48" alt="Gengar" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Gengar</span>
     </a>
       </div>
     </div>
@@ -338,16 +364,26 @@
     </div>
 
     <!-- Prev/Next Nav (bottom) -->
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
-      <a href="../probopass/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/476.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#476 Probopass</span>
+    <div style="display:flex;gap:12px;align-items:stretch;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../probopass/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/476.png" width="56" height="56" alt="Probopass" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#476</div>
+        <div class="nav-card__name">Probopass</div>
+      </div>
+    </div>
   </a>
-      <a href="../froslass/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#478 Froslass</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/478.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../froslass/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#478</div>
+        <div class="nav-card__name">Froslass</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/478.png" width="56" height="56" alt="Froslass" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
   </div>

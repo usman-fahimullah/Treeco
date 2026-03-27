@@ -119,6 +119,22 @@
     .breadcrumb { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; letter-spacing: 0.02em; }
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-card {
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      flex: 1;
+    }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
+    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-card--next .nav-card__dir { text-align: right; }
+    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-card__inner--right { justify-content: flex-end; }
+    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
+    .nav-card--next .nav-card__num { text-align: right; }
+    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
+    .nav-card--next .nav-card__name { text-align: right; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
@@ -152,16 +168,26 @@
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › Skeledirge
     </div>
     <!-- Prev/Next Nav -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
-      <a href="../crocalor/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/910.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#910 Crocalor</span>
+    <div style="display:flex;gap:12px;align-items:stretch;margin-bottom:24px;">
+      <a href="../crocalor/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/910.png" width="56" height="56" alt="Crocalor" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#910</div>
+        <div class="nav-card__name">Crocalor</div>
+      </div>
+    </div>
   </a>
-      <a href="../quaxly/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#912 Quaxly</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/912.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../quaxly/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#912</div>
+        <div class="nav-card__name">Quaxly</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/912.png" width="56" height="56" alt="Quaxly" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
 
@@ -286,24 +312,24 @@
     <div class="section">
       <h2>Similar Fire-type Pokémon</h2>
       <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding:8px 0;">
-        <a href="../ninetales/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png" width="48" height="48" alt="Ninetales" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Ninetales</span>
-    </a><a href="../pyroar-male/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/668.png" width="48" height="48" alt="Pyroar-male" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Pyroar-male</span>
-    </a><a href="../scovillain/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/952.png" width="48" height="48" alt="Scovillain" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Scovillain</span>
-    </a><a href="../fuecoco/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/909.png" width="48" height="48" alt="Fuecoco" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Fuecoco</span>
-    </a><a href="../quilava/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/156.png" width="48" height="48" alt="Quilava" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Quilava</span>
-    </a><a href="../chimchar/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/390.png" width="48" height="48" alt="Chimchar" style="image-rendering:pixelated;" loading="lazy">
-      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Chimchar</span>
+        <a href="../ho-oh/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png" width="48" height="48" alt="Ho-oh" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Ho-oh</span>
+    </a><a href="../salandit/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/757.png" width="48" height="48" alt="Salandit" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Salandit</span>
+    </a><a href="../tepig/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/498.png" width="48" height="48" alt="Tepig" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Tepig</span>
+    </a><a href="../magmar/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/126.png" width="48" height="48" alt="Magmar" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Magmar</span>
+    </a><a href="../charcadet/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/935.png" width="48" height="48" alt="Charcadet" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Charcadet</span>
+    </a><a href="../infernape/" style="display:flex;flex-direction:column;align-items:center;gap:4px;text-decoration:none;">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/392.png" width="48" height="48" alt="Infernape" style="image-rendering:pixelated;" loading="lazy">
+      <span style="font-family:var(--body);font-size:11px;color:var(--ink2);">Infernape</span>
     </a>
       </div>
     </div>
@@ -338,16 +364,26 @@
     </div>
 
     <!-- Prev/Next Nav (bottom) -->
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
-      <a href="../crocalor/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/910.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#910 Crocalor</span>
+    <div style="display:flex;gap:12px;align-items:stretch;padding:24px 0;border-top:1px solid var(--border);">
+      <a href="../crocalor/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/910.png" width="56" height="56" alt="Crocalor" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#910</div>
+        <div class="nav-card__name">Crocalor</div>
+      </div>
+    </div>
   </a>
-      <a href="../quaxly/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#912 Quaxly</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/912.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+      <a href="../quaxly/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#912</div>
+        <div class="nav-card__name">Quaxly</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/912.png" width="56" height="56" alt="Quaxly" style="image-rendering:pixelated;">
+    </div>
   </a>
     </div>
   </div>

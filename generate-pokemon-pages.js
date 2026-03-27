@@ -153,15 +153,25 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
   ).join('');
 
   // Prev/Next navigation
-  const prevLink = prevPoke ? `<a href="../${prevPoke.name}/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span style="font-size:18px;">←</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${prevPoke.id}.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span>#${pad(prevPoke.id)} ${capitalize(prevPoke.name)}</span>
+  const prevLink = prevPoke ? `<a href="../${prevPoke.name}/" class="nav-card nav-card--prev">
+    <span class="nav-card__dir">← Previous</span>
+    <div class="nav-card__inner">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${prevPoke.id}.png" width="56" height="56" alt="${capitalize(prevPoke.name)}" style="image-rendering:pixelated;">
+      <div>
+        <div class="nav-card__num">#${pad(prevPoke.id)}</div>
+        <div class="nav-card__name">${capitalize(prevPoke.name)}</div>
+      </div>
+    </div>
   </a>` : '<span></span>';
-  const nextLink = nextPoke ? `<a href="../${nextPoke.name}/" style="text-decoration:none;display:flex;align-items:center;gap:8px;color:var(--ink2);font-family:var(--body);font-size:14px;">
-    <span>#${pad(nextPoke.id)} ${capitalize(nextPoke.name)}</span>
-    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nextPoke.id}.png" width="32" height="32" style="image-rendering:pixelated;">
-    <span style="font-size:18px;">→</span>
+  const nextLink = nextPoke ? `<a href="../${nextPoke.name}/" class="nav-card nav-card--next">
+    <span class="nav-card__dir">Next →</span>
+    <div class="nav-card__inner nav-card__inner--right">
+      <div>
+        <div class="nav-card__num">#${pad(nextPoke.id)}</div>
+        <div class="nav-card__name">${capitalize(nextPoke.name)}</div>
+      </div>
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nextPoke.id}.png" width="56" height="56" alt="${capitalize(nextPoke.name)}" style="image-rendering:pixelated;">
+    </div>
   </a>` : '<span></span>';
 
   const weakStr = weaknesses.map(w => `${capitalize(w.type)} (${w.mult})`).join(', ') || 'None';
@@ -309,6 +319,22 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
     .breadcrumb { font-family: var(--mono); font-size: 12px; color: var(--ink3); margin-bottom: 16px; letter-spacing: 0.02em; }
     .breadcrumb a { color: var(--accent); text-decoration: none; }
     .breadcrumb a:hover { text-decoration: underline; }
+    .nav-card {
+      display: flex; flex-direction: column; gap: 4px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 16px; text-decoration: none;
+      transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+      flex: 1;
+    }
+    .nav-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 15%, transparent); transform: translateY(-1px); }
+    .nav-card__dir { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.06em; text-transform: uppercase; }
+    .nav-card--next .nav-card__dir { text-align: right; }
+    .nav-card__inner { display: flex; align-items: center; gap: 12px; margin-top: 6px; }
+    .nav-card__inner--right { justify-content: flex-end; }
+    .nav-card__num { font-family: var(--mono); font-size: 11px; color: var(--ink3); letter-spacing: 0.04em; }
+    .nav-card--next .nav-card__num { text-align: right; }
+    .nav-card__name { font-family: var(--display); font-size: 17px; color: var(--ink); letter-spacing: -0.02em; margin-top: 2px; }
+    .nav-card--next .nav-card__name { text-align: right; }
     .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; text-align: center; }
     .info-label { font-family: var(--mono); font-size: 11px; color: var(--ink3); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
     .info-value { font-family: var(--display); font-size: 20px; }
@@ -342,7 +368,7 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
       <a href="../../">Home</a> › <a href="../">Pokédex</a> › ${displayName}
     </div>
     <!-- Prev/Next Nav -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
+    <div style="display:flex;gap:12px;align-items:stretch;margin-bottom:24px;">
       ${prevLink}
       ${nextLink}
     </div>
@@ -451,7 +477,7 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
     </div>
 
     <!-- Prev/Next Nav (bottom) -->
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--border);">
+    <div style="display:flex;gap:12px;align-items:stretch;padding:24px 0;border-top:1px solid var(--border);">
       ${prevLink}
       ${nextLink}
     </div>
