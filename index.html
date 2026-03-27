@@ -1036,7 +1036,7 @@
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD",
-      "description": "Free to download with optional Pro subscription ($2.99/month or $19.99/year) for advanced features including unlimited AI queries, full team analysis, offline downloads, competitive profiles, and Living Dex import/export."
+      "description": "Free to download. Feature packs from $1.99 or Dexter Pro ($2.99/month or $19.99/year) for everything including cloud-enhanced AI."
     },
     "featureList": [
       "Complete Pokédex with all 1,025 Pokémon across 9 generations",
@@ -1044,12 +1044,13 @@
       "3 sprite styles: official artwork, pixel sprites, and Showdown sprites",
       "Competitive team builder with weakness heatmap and Smogon tier data",
       "Export teams to Pokémon Showdown in one tap",
-      "On-device AI assistant (Ask Dexter) with 4 specialized agents",
+      "On-device AI assistant (Ask Dexter) with 5 specialized agents including Web Scout",
       "Interactive 18x18 type effectiveness chart",
-      "Living Dex tracker with shiny hunting streak counters",
+      "Living Dex tracker with multi-game tracking and CSV export",
+      "Shiny hunting toolkit with 11 methods and live odds calculator",
       "Home screen widgets for Pokémon spotlight, team roster, and progress",
-      "Nuzlocke mode for hardcore challenge runs",
-      "TCG Card Binder with camera scanning",
+      "Nuzlocke mode with route tracking, graveyard, and badge progress",
+      "TCG card collection with wishlist, rarity tracking, and portfolio value",
       "6 visual eras: Modern, Game Boy, GB Pocket, GB Color, GB Advance, Nintendo DS",
       "Offline mode with 200MB cache",
       "Zero tracking: no ads, no analytics, no accounts"
@@ -1077,7 +1078,7 @@
         "name": "Is Tree Co. free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, Tree Co. is free to download with no account required. The free version includes the full Pokédex, type chart, team builder basics, and 3 daily AI queries. Pro ($2.99/month or $19.99/year) adds unlimited AI queries, full team analysis with Smogon data, offline downloads, competitive profiles, Living Dex import/export, and the shiny hunting toolkit."
+          "text": "Yes, Tree Co. is free to download with no account required. The free version includes the full Pokédex, type chart, team builder (up to 3 teams), and 3 daily AI queries. You can unlock more with individual feature packs — Competitive Pack ($4.99), Collection Pack ($3.99), Style Pack ($1.99), or Everything Bundle ($6.99). Dexter Pro ($2.99/month or $19.99/year) unlocks everything plus cloud-enhanced AI."
         }
       },
       {
@@ -1085,7 +1086,7 @@
         "name": "Does Tree Co. work offline?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, Tree Co. works fully offline. The app caches the complete Pokédex data (approximately 200MB) on your device, including all stats, moves, abilities, and evolution data. Pro users can trigger a full offline download. The on-device AI assistant (Dexter) also runs locally using Apple's Foundation Models framework — no internet needed."
+          "text": "Yes, Tree Co. works fully offline. The app caches the complete Pokédex data (approximately 200MB) on your device. The Collection Pack or Dexter Pro unlocks a full offline download of all data. The on-device AI assistant (Dexter) also runs locally using Apple's Foundation Models framework — no internet needed."
         }
       },
       {
@@ -1093,7 +1094,7 @@
         "name": "What is Ask Dexter?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Ask Dexter is Tree Co.'s on-device AI assistant, powered by Apple's Foundation Models framework. It uses 4 specialized agents — Type Scanner (type matchups), Data Scout (stats and moves), Strategy Engine (Smogon competitive analysis), and Lore Reader (design origins and trivia) — that research your question before Dexter synthesizes a final answer. It runs entirely on-device for privacy. Free users get 3 queries per day; Pro users get unlimited access."
+          "text": "Ask Dexter is Tree Co.'s AI assistant, powered by Apple's Foundation Models framework. It uses 5 specialized agents — Type Scanner (type matchups), Data Scout (stats and moves), Strategy Engine (Smogon competitive analysis), Lore Reader (design origins and trivia), and Web Scout (live tournament results and current meta) — that research your question before Dexter synthesizes a final answer. Runs on-device for privacy. Free: 3 queries/day. Pro subscribers also get cloud-enhanced AI."
         }
       },
       {
@@ -1118,6 +1119,14 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Tree Co. is available for iPhone and iPad running iOS 26 or later. It is currently iOS only. The app takes full advantage of iOS 26 features including Liquid Glass design, home screen widgets, and on-device AI via Apple's Foundation Models framework."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's included in each purchase?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Competitive Pack ($4.99): Unlimited Ask Dexter, team analysis with weakness heatmaps, and Smogon competitive profiles. Collection Pack ($3.99): Full offline dex, Living Dex pro tools with CSV export, lore deep dives, and card collection tracking. Style Pack ($1.99): Custom accent themes and all 6 retro visual eras. Everything Bundle ($6.99): All packs at a discount. Dexter Pro ($2.99/month or $19.99/year): Everything plus cloud-enhanced AI."
         }
       }
     ]
@@ -1270,7 +1279,7 @@
           </div>
           <div class="feature-tag">Ask Dexter</div>
           <h2 class="dexter-title" style="font-size:48px;">Ask anything.<br>Dexter knows.</h2>
-          <p class="dexter-oneliner" style="max-width:440px; margin: 0 auto;">Your AI Pokédex assistant — powered by specialized agents that research every question before answering.</p>
+          <p class="dexter-oneliner" style="max-width:440px; margin: 0 auto;">Your AI Pokédex assistant — 5 specialized agents research every question before Dexter delivers an answer.</p>
         </div>
 
         <!-- Screenshot -->
@@ -1314,6 +1323,14 @@
                 <p class="timeline-desc">Researches design origins, etymology, and cultural references. Surfaces facts most players never discover.</p>
               </div>
             </div>
+            <div class="timeline-step" data-color="globe">
+              <canvas class="agent-sphere" data-agent="webScout" width="48" height="48" style="width:48px;height:48px;"></canvas>
+              <div class="timeline-text">
+                <div class="timeline-name">Web Scout</div>
+                <div class="timeline-role">Live Web Research</div>
+                <p class="timeline-desc">Searches the web for tournament results, player teams, and current meta trends. The fastest agent — always up to date.</p>
+              </div>
+            </div>
             <div class="timeline-step dexter-step" data-color="dexter">
               <canvas class="dexter-sphere-canvas" width="48" height="48" style="width:48px;height:48px;"></canvas>
               <div class="timeline-text">
@@ -1353,28 +1370,35 @@
         <div class="extra-item bento-wide">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div>
           <h3>Living Dex Tracker</h3>
-          <p>Track every catch. Hunt shinies with streak counters and CSV export.</p>
-          <div class="extra-tag">Shiny hunting</div>
+          <p>Track every catch across multiple games. Smart sort, multi-game tracking, and CSV export for serious collectors.</p>
+          <div class="extra-tag">Multi-game</div>
         </div>
-        <!-- Card Binder (2x1 wide) -->
+        <!-- Shiny Hunting (2x1 wide) -->
         <div class="extra-item bento-wide">
+          <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <h3>Shiny Hunting</h3>
+          <p>11 hunting methods — Masuda, Chain Fishing, SOS, Radar, and more. Live odds calculator with Shiny Charm support and streak tracking.</p>
+          <div class="extra-tag">11 methods</div>
+        </div>
+        <!-- Card Collection (1x1) -->
+        <div class="extra-item">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-          <h3>Card Binder</h3>
-          <p>Scan and catalog your TCG collection with the camera.</p>
-          <div class="extra-tag">Camera scan</div>
+          <h3>Card Collection</h3>
+          <p>Track your TCG cards with wishlist, rarity, market price, and portfolio value.</p>
+          <div class="extra-tag">TCG tracker</div>
         </div>
         <!-- Nuzlocke (1x1) -->
         <div class="extra-item">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <h3>Nuzlocke Mode</h3>
-          <p>Track encounters and party for hardcore challenge runs.</p>
+          <p>Route-by-route encounter tracking, party &amp; graveyard management, and badge progress for challenge runs.</p>
           <div class="extra-tag">Challenge runs</div>
         </div>
         <!-- Visual Eras (1x1) -->
         <div class="extra-item">
           <div class="extra-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
           <h3>Visual Eras</h3>
-          <p>Modern, Game Boy, GBC, GBA, and DS styles.</p>
+          <p>6 themed styles — Modern, Game Boy, GB Pocket, GB Color, GB Advance, and Nintendo DS.</p>
           <div class="extra-tag">6 eras</div>
         </div>
         <!-- Zero Tracking (1x1) -->
@@ -1418,21 +1442,21 @@
             Is Tree Co. free?
             <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
-          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes — free to download, no account required. The free tier includes the full Pokédex, type chart, team builder basics, and 3 daily AI queries. <strong>Pro ($2.99/month or $19.99/year)</strong> adds unlimited AI, full team analysis with Smogon data, offline downloads, competitive profiles, Living Dex import/export, and the shiny hunting toolkit.</p></div></div>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes — free to download, no account required. The free tier includes the full Pokédex, type chart, team builder (up to 3 teams), and 3 daily AI queries. You can unlock more with <strong>Dexter Pro ($2.99/month or $19.99/year)</strong> for everything, or buy individual feature packs: Competitive Pack ($4.99), Collection Pack ($3.99), Style Pack ($1.99), or the Everything Bundle ($6.99).</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-summary">
             Does it work offline?
             <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
-          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device. Pro users can trigger a full offline download. The AI assistant (Dexter) also runs entirely on-device using Apple's Foundation Models — no internet needed.</p></div></div>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes. Tree Co. caches the complete Pokédex data (~200MB) on your device. The Collection Pack or Dexter Pro unlocks a full offline download of all data. The AI assistant (Dexter) also runs entirely on-device using Apple's Foundation Models — no internet needed.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-summary">
             What is Ask Dexter?
             <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </summary>
-          <div class="faq-answer-wrap"><div class="faq-answer"><p>Your on-device AI Pokédex assistant. It uses 4 specialized agents — Type Scanner, Data Scout, Strategy Engine, and Lore Reader — to research your question before synthesizing a clear answer. Runs locally for complete privacy. Free: 3 queries/day. Pro: unlimited.</p></div></div>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Your on-device AI Pokédex assistant. It uses 5 specialized agents — Type Scanner, Data Scout, Strategy Engine, Lore Reader, and Web Scout — to research every question before Dexter synthesizes a clear answer. Runs locally via Apple's Foundation Models for complete privacy. Free: 3 queries/day. Pro subscribers also get cloud-enhanced AI.</p></div></div>
         </details>
         <details class="faq-item">
           <summary class="faq-summary">
@@ -1455,6 +1479,13 @@
           </summary>
           <div class="faq-answer-wrap"><div class="faq-answer"><p>iPhone and iPad running iOS 26 or later. Currently iOS only. Built with Liquid Glass, home screen widgets, and on-device AI via Apple's Foundation Models framework.</p></div></div>
         </details>
+        <details class="faq-item">
+          <summary class="faq-summary">
+            What's included in each purchase?
+            <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p><strong>Competitive Pack ($4.99):</strong> Unlimited Ask Dexter, team analysis with weakness heatmaps, and Smogon competitive profiles. <strong>Collection Pack ($3.99):</strong> Full offline dex, Living Dex pro tools with CSV export, lore deep dives, and card collection tracking. <strong>Style Pack ($1.99):</strong> Custom accent themes and all 6 retro visual eras. <strong>Everything Bundle ($6.99):</strong> All packs at a discount. <strong>Dexter Pro ($2.99/mo or $19.99/yr):</strong> Everything plus cloud-enhanced AI.</p></div></div>
+        </details>
       </div>
     </section>
 
@@ -1468,7 +1499,7 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Download for iOS
       </button>
-      <div class="cta-sub">iOS 26+ required. Free with full Pokédex &amp; 3 daily AI queries. Pro: $2.99/month or $19.99/year.</div>
+      <div class="cta-sub">iOS 26+ required. Free with full Pokédex &amp; 3 daily AI queries. Feature packs from $1.99 or Dexter Pro from $2.99/month.</div>
     </section>
   </main>
 
@@ -2278,7 +2309,8 @@
         typeScanner:    { palette: [[199,20,115],[242,31,51],[255,71,31],[255,133,38],[255,179,46]], speed: 2.2 },
         dataScout:      { palette: [[92,20,184],[71,71,242],[31,128,255],[26,191,224],[38,235,235]], speed: 1.6 },
         strategyEngine: { palette: [[204,77,13],[255,140,20],[255,204,31],[255,240,46],[184,245,38]], speed: 2.8 },
-        loreReader:     { palette: [[13,97,128],[20,158,117],[31,217,102],[82,240,56],[148,250,64]], speed: 1.2 }
+        loreReader:     { palette: [[13,97,128],[20,158,117],[31,217,102],[82,240,56],[148,250,64]], speed: 1.2 },
+        webScout:       { palette: [[10,25,77],[30,90,200],[70,160,235],[160,210,245],[230,245,255]], speed: 3.5 }
       };
 
       var bayer = [
