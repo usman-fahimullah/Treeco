@@ -305,7 +305,7 @@
     .hero-cta:hover { background: var(--accent-hi); transform: translateY(-1px); }
     .hero-cta svg { width: 20px; height: 20px; }
     .phone {
-      width: 340px; height: 680px; border-radius: 44px;
+      width: 300px; height: 650px; border-radius: 44px;
       background: var(--surface); border: 3px solid var(--border);
       box-shadow: var(--shadow), 0 0 0 1px var(--border);
       display: flex; align-items: center; justify-content: center;
@@ -331,6 +331,8 @@
       position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       object-fit: cover; z-index: 1;
     }
+    /* Hide placeholder labels when real screenshot is loaded */
+    .phone img ~ .phone-label, .feature-visual img ~ span { display: none; }
 
     /* ── BIG FEATURE SECTION ── */
     .feature-section {
@@ -362,7 +364,7 @@
     .feature-detail span { display: flex; align-items: center; gap: 6px; }
     .feature-detail svg { width: 16px; height: 16px; color: var(--accent); flex-shrink: 0; }
     .feature-visual {
-      width: 280px; height: 560px; border-radius: 36px;
+      width: 260px; height: 564px; border-radius: 36px;
       background: var(--surface); border: 3px solid var(--border);
       box-shadow: var(--shadow), 0 0 0 1px var(--border);
       display: flex; align-items: center; justify-content: center;
@@ -1284,7 +1286,7 @@
     }
     @media (max-width: 480px) {
       .hero h1 { font-size: 40px; }
-      .phone { width: 280px; height: 560px; }
+      .phone { width: 240px; height: 520px; }
       nav { width: calc(100% - 24px); padding: 0 14px; top: 8px; }
       .nav-inner { height: 44px; }
       .logo { font-size: 16px; gap: 6px; }
