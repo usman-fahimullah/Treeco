@@ -913,9 +913,10 @@
     .waitlist-wrap.is-success .waitlist-success { display: inline-flex; }
     /* Stacked avatar social proof */
     .waitlist-proof {
-      display: inline-flex; align-items: center; gap: 10px;
+      display: none; align-items: center; gap: 10px;
       margin-top: 16px;
     }
+    .waitlist-proof.is-visible { display: inline-flex; }
     .wl-avatars { display: flex; }
     .wl-avatar {
       width: 28px; height: 28px; border-radius: 50%;
@@ -2584,20 +2585,26 @@
       var SHARE_URL = 'https://treeco.app';
       var SHARE_TEXT = "I just signed up for Tree Co. — the Pokédex you actually want to use. Get early access:";
 
-      // Load waitlist count
+      // Load waitlist count — only show social proof at 1,000+
+      var PROOF_THRESHOLD = 1000;
       function loadCount(animate) {
         sb.from('waitlist').select('*', { count: 'exact', head: true }).then(function(res) {
           if (res.count != null) {
-            counterEls.forEach(function(el) {
-              if (animate) {
-                gsap.to({ val: 0 }, {
-                  val: res.count, duration: 1.2, ease: 'power2.out',
-                  onUpdate: function() { el.textContent = Math.round(this.targets()[0].val); }
-                });
-              } else {
-                el.textContent = res.count;
-              }
-            });
+            if (res.count >= PROOF_THRESHOLD) {
+              counterEls.forEach(function(el) {
+                if (animate) {
+                  gsap.to({ val: 0 }, {
+                    val: res.count, duration: 1.2, ease: 'power2.out',
+                    onUpdate: function() { el.textContent = Math.round(this.targets()[0].val); }
+                  });
+                } else {
+                  el.textContent = res.count;
+                }
+              });
+              document.querySelectorAll('.waitlist-proof').forEach(function(el) {
+                el.classList.add('is-visible');
+              });
+            }
           }
         });
       }
