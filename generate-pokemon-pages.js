@@ -202,10 +202,15 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
   <title>${displayName} — Stats, Weaknesses, Moves | Tree Co. Pokédex</title>
   <meta name="description" content="${displayName} (#${pad(id)}) — ${typeNames.map(capitalize).join('/')} type. Base stat total: ${bst}. Weak to ${weaknesses.slice(0,3).map(w => capitalize(w.type)).join(', ')}. Full stats, moves, abilities, and type matchups in Tree Co. for iOS.">
   <link rel="canonical" href="https://www.treeco.app/pokemon/${name}/">
-  <meta property="og:title" content="${displayName} — Pokédex Entry | Tree Co.">
-  <meta property="og:description" content="${typeNames.map(capitalize).join('/')} type. BST ${bst}. Full stats, weaknesses, and competitive data.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="${displayName} — ${typeNames.map(capitalize).join('/')} Type Pokémon | Tree Co.">
+  <meta property="og:description" content="${displayName} (#${pad(id)}) is a ${typeNames.map(capitalize).join('/')} type Pokémon with a base stat total of ${bst}. Weak to ${weaknesses.slice(0,3).map(w => capitalize(w.type)).join(', ')}. View full stats, moves, abilities, evolution chain, and competitive builds in Tree Co. for iOS.">
   <meta property="og:image" content="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png">
   <meta property="og:url" content="https://www.treeco.app/pokemon/${name}/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${displayName} — ${typeNames.map(capitalize).join('/')} Type Pokémon | Tree Co.">
+  <meta name="twitter:description" content="${displayName} (#${pad(id)}) — ${typeNames.map(capitalize).join('/')} type, BST ${bst}. Weak to ${weaknesses.slice(0,3).map(w => capitalize(w.type)).join(', ')}. Full stats, moves, and competitive data.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png">
   <link rel="icon" href="../../icon-dark.png">
   <!-- Vercel Analytics -->
   <script defer src="/_vercel/insights/script.js"></script>
@@ -351,8 +356,6 @@ function generatePage(pokemon, { related = [], prevPoke, nextPoke } = {}) {
       .nav-logo { font-size: 16px; }
     }
   </style>
-  <!-- Vercel Analytics -->
-  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
   <nav>
