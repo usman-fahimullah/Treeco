@@ -179,9 +179,14 @@
     }
     .nav-logo { font-family: var(--display); font-weight: 400; font-size: 18px; color: var(--ink); text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
-    .nav-back { font-family: var(--body); font-size: 13px; font-weight: 500; color: var(--ink2); text-decoration: none; display: flex; align-items: center; gap: 6px; }
-    .nav-back:hover { color: var(--accent); }
-    .nav-back svg { width: 16px; height: 16px; }
+    .dl-btn {
+      display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px;
+      background: var(--ink); color: var(--bg); border-radius: 100px;
+      font-family: var(--body); font-size: 13px; font-weight: 600;
+      text-decoration: none; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .dl-btn svg { width: 14px; height: 14px; }
+    .dl-btn:hover { opacity: 0.85; }
 
     /* Layout */
     .container { max-width: 900px; margin: 0 auto; padding: 104px 24px 80px; }
@@ -203,15 +208,18 @@
     .contact-link:hover { border-color: var(--accent); color: var(--accent); }
     .contact-link svg { width: 15px; height: 15px; }
 
-    /* Category nav */
+    /* Filter chips */
     .cat-nav { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
     .cat-pill {
       padding: 8px 16px; border-radius: 100px;
       background: var(--surface); border: 1px solid var(--border);
       font-family: var(--body); font-size: 13px; font-weight: 500; color: var(--ink2);
-      text-decoration: none; transition: all 0.15s; cursor: pointer;
+      cursor: pointer; transition: all 0.15s; user-select: none;
     }
-    .cat-pill:hover, .cat-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .cat-pill:hover { border-color: var(--ink2); color: var(--ink); }
+    .cat-pill.active { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .faq-category { transition: opacity 0.15s; }
+    .faq-category.hidden { display: none; }
 
     /* Categories */
     .faq-category { margin-bottom: 48px; }
@@ -283,9 +291,9 @@
       <img src="../icon-dark.png" alt="Tree Co.">
       Tree Co.
     </a>
-    <a href="../" class="nav-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15,18 9,12 15,6"/></svg>
-      Back to home
+    <a href="../" class="dl-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Coming Soon
     </a>
   </nav>
 
@@ -301,16 +309,17 @@
       </a>
     </div>
 
-    <!-- Category jump nav -->
-    <nav class="cat-nav" aria-label="FAQ categories">
-      <a class="cat-pill" href="#general">General</a>
-      <a class="cat-pill" href="#pricing">Pricing</a>
-      <a class="cat-pill" href="#features">Features</a>
-      <a class="cat-pill" href="#competitive">Competitive</a>
-      <a class="cat-pill" href="#ai">Ask Dexter AI</a>
-      <a class="cat-pill" href="#privacy">Privacy</a>
-      <a class="cat-pill" href="#vs">vs. Other Apps</a>
-    </nav>
+    <!-- Filter chips -->
+    <div class="cat-nav" role="group" aria-label="Filter FAQ by category">
+      <button class="cat-pill active" data-filter="all">All</button>
+      <button class="cat-pill" data-filter="general">General</button>
+      <button class="cat-pill" data-filter="pricing">Pricing</button>
+      <button class="cat-pill" data-filter="features">Features</button>
+      <button class="cat-pill" data-filter="competitive">Competitive</button>
+      <button class="cat-pill" data-filter="ai">Ask Dexter AI</button>
+      <button class="cat-pill" data-filter="privacy">Privacy</button>
+      <button class="cat-pill" data-filter="vs">vs. Other Apps</button>
+    </div>
 
     <!-- ── GENERAL ── -->
     <section class="faq-category" id="general">
@@ -654,5 +663,28 @@
     <p>© 2025 Tree Co. · <a href="../privacy.html">Privacy Policy</a> · <a href="../">Back to Home</a></p>
   </footer>
 
+  <script>
+    (function () {
+      var chips = document.querySelectorAll('.cat-pill');
+      var sections = document.querySelectorAll('.faq-category');
+
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          var filter = chip.dataset.filter;
+
+          chips.forEach(function (c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+
+          sections.forEach(function (sec) {
+            if (filter === 'all' || sec.id === filter) {
+              sec.classList.remove('hidden');
+            } else {
+              sec.classList.add('hidden');
+            }
+          });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
